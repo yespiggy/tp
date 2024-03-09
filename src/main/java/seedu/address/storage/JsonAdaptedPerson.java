@@ -10,13 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.FundingStage;
-import seedu.address.model.person.Industry;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,6 +29,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String remark;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -44,13 +39,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("industry") String industry,
             @JsonProperty("fundingStage") String fundingStage, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("remark") String remark) {
         this.name = name;
         this.fundingStage = fundingStage;
         this.industry = industry;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.remark = remark;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -66,6 +62,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         industry = source.getIndustry().value;
         fundingStage = source.getFundingStage().value;
+        remark = source.getRemark().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -132,8 +129,10 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Remark modelRemark = new Remark("");
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelFundingStage, modelIndustry, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelFundingStage, modelIndustry, modelPhone, modelEmail, modelAddress, modelTags, modelRemark);
     }
 
 }
