@@ -42,7 +42,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane industryAndFundingStage;
+    private Label industry;
+    @FXML
+    private Label fundingStage;
 
     @FXML
     private Label note; // Add this field for note
@@ -60,9 +62,11 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        industryAndFundingStage.getChildren().addAll(
-                new Label(person.getIndustry().value),
-                new Label("SERIES " + person.getFundingStage().value));
+        industry.setText(person.getIndustry().value);
+
+        renderFundingStage(person);
+        fundingStage.setText("SERIES " + person.getFundingStage().value);
+
         createNoteSection();
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -91,6 +95,27 @@ public class PersonCard extends UiPart<Region> {
 
         // Add note section to cardPane
         cardPane.getChildren().add(noteSection);
+    }
+
+    /**
+     * Apply different css classes to different funding stages
+     *
+     * @param person
+     */
+    private void renderFundingStage(Person person) {
+        switch (person.getFundingStage().value) {
+        case "A":
+            fundingStage.getStyleClass().add("a_lbl");
+            break;
+        case "B":
+            fundingStage.getStyleClass().add("b_lbl");
+            break;
+        case "C":
+            fundingStage.getStyleClass().add("c_lbl");
+            break;
+        default:
+            fundingStage.getStyleClass().add("seed_lbl");
+        }
     }
 
 }

@@ -28,7 +28,16 @@
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <FlowPane fx:id="industryAndFundingStage" />
+      <HBox>
+        <Label fx:id="industry" styleClass="cell_small_label" text="\$industry">
+          <HBox.margin>
+            <Insets right="5.0" />
+          </HBox.margin>
+        </Label>
+        <Label fx:id="fundingStage" styleClass="cell_small_label" text="\$fundingStage">
+          <Insets left="5.0" right="5.0" />
+        </Label>
+      </HBox>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
