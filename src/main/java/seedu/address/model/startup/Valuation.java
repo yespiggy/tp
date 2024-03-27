@@ -9,7 +9,26 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Valuation {
 
+    public static final String MESSAGE_CONSTRAINTS =
+        "Valuation of a company must be a INTEGER "
+        + "(No decimal places, i.e. 1 is a integer, 1.1 is not)"
+        + " above -1 and "
+        + " below 5 trillion (the highest valued company in the world is only worth ~3T).";
+    public static final String VALIDATION_REGEX = "\\d+";
     private static char[] endOfNumber = new char[]{'k', 'm', 'b', 't'};
+
+    public final String value;
+
+    /**
+     * Constructs a {@code Valuation}.
+     *
+     * @param valuation A valid valuation.
+     */
+    public Valuation(String valuation) {
+        requireNonNull(valuation);
+        checkArgument(isValidValuation(valuation), MESSAGE_CONSTRAINTS);
+        value = valuation;
+    }
 
     /**
      * Reformats valuation for clean display on the UI, truncates to 4 characters.
@@ -42,32 +61,18 @@ public class Valuation {
     private static String reformatString(double n, int iteration) {
         double d = ((long) n / 100) / 10.0;
         //true if the decimal part is equal to 0 (then it's trimmed anyway)
-        boolean isRound = (d * 10) %10 == 0;
-        return (d < 1000? //this determines the class, i.e. 'k', 'm' etc
-          ((d > 99.9 || isRound || (!isRound && d > 9.99)? //this decides whether to trim the decimals
-            (int) d * 10 / 10 : d + "" // (int) d * 10 / 10 drops the decimal
-          ) + "" + Valuation.endOfNumber[iteration])
-          : reformatString(d, iteration+1));
+        boolean isRound = (d * 10) % 10 == 0;
+
+        //this determines the class, i.e. 'k', 'm' etc
+        return (d < 1000 ? ((
+                d > 99.9 || isRound || (
+                    !isRound && d > 9.99)
+            ? //this decides whether to trim the decimals
+            (int) d * 10 / 10 : d + "") + "" // (int) d * 10 / 10 drops the decimal
+             + Valuation.endOfNumber[iteration])
+            : reformatString(d, iteration + 1));
     }
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Valuation of a company must be a INTEGER " +
-            "(No decimal places, i.e. 1 is a integer, 1.1 is not)" +
-            " above -1 and " +
-            " below 5 trillion (the highest valued company in the world is only worth ~3T).";
-    public static final String VALIDATION_REGEX = "\\d+";
-    public final String value;
-
-    /**
-     * Constructs a {@code Valuation}.
-     *
-     * @param valuation A valid valuation.
-     */
-    public Valuation(String valuation) {
-        requireNonNull(valuation);
-        checkArgument(isValidValuation(valuation), MESSAGE_CONSTRAINTS);
-        value = valuation;
-    }
 
     /**
      * Returns true if a given string is a valid valuation amount.

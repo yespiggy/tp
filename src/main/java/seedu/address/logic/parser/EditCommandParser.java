@@ -69,7 +69,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_VALUATION).isPresent()) {
             editStartupDescriptor.setValuation(ParserUtil.parseValuation(
-              argMultimap.getValue(CliSyntax.PREFIX_VALUATION).get()));
+                argMultimap.getValue(CliSyntax.PREFIX_VALUATION).get()));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG)).ifPresent(editStartupDescriptor::setTags);
