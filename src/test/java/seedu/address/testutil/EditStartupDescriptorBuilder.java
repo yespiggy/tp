@@ -108,6 +108,9 @@ public class EditStartupDescriptorBuilder {
         return descriptor;
     }
 
+    /**
+     * Sets the {@code Valuation} of the {@code EditStartupDescriptor} that we are building.
+     */
     public EditStartupDescriptorBuilder withValuation(String valuation) {
         descriptor.setValuation(new Valuation(valuation));
         return this;

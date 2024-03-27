@@ -3,13 +3,13 @@ package seedu.address.model.startup;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStartups.ALICE;
 import static seedu.address.testutil.TypicalStartups.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.testutil.StartupBuilder;
 
 public class StartupTest {
@@ -29,20 +29,22 @@ public class StartupTest {
         assertFalse(ALICE.isSameStartup(null));
 
         // same name, all other attributes different -> returns true
-        Startup editedAlice = new StartupBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withValuation("0").withTags(VALID_TAG_HUSBAND).build();
+        Startup editedAlice = new StartupBuilder(ALICE).withPhone(CommandTestUtil.VALID_PHONE_BOB)
+                .withEmail(CommandTestUtil.VALID_EMAIL_BOB)
+                .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).withValuation("0")
+                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStartup(editedAlice));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new StartupBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        editedAlice = new StartupBuilder(ALICE).withName(CommandTestUtil.VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameStartup(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
-        Startup editedBob = new StartupBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        Startup editedBob = new StartupBuilder(BOB).withName(CommandTestUtil.VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSameStartup(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
+        String nameWithTrailingSpaces = CommandTestUtil.VALID_NAME_BOB + " ";
         editedBob = new StartupBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSameStartup(editedBob));
     }
@@ -66,19 +68,19 @@ public class StartupTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Startup editedAlice = new StartupBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Startup editedAlice = new StartupBuilder(ALICE).withName(CommandTestUtil.VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different phone -> returns false
-        editedAlice = new StartupBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        editedAlice = new StartupBuilder(ALICE).withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new StartupBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        editedAlice = new StartupBuilder(ALICE).withEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
-        editedAlice = new StartupBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        editedAlice = new StartupBuilder(ALICE).withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different funding stage -> returns false
@@ -90,11 +92,11 @@ public class StartupTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different valuation -> returns false
-        editedAlice = new StartupBuilder(ALICE).withValuation(VALID_VALUATION_AMY).build();
+        editedAlice = new StartupBuilder(ALICE).withValuation(CommandTestUtil.VALID_VALUATION_AMY).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new StartupBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new StartupBuilder(ALICE).withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
