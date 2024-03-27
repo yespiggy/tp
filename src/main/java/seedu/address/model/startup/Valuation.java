@@ -47,8 +47,10 @@ public class Valuation {
     }
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Valuation of a company must be a number above -1 and " +
-            " below 5 trillion (the highest valued company in the world as of now is only worth ~3T).";
+            "Valuation of a company must be a INTEGER " +
+            "(No decimal places, i.e. 1 is a integer, 1.1 is not)" +
+            " above -1 and " +
+            " below 5 trillion (the highest valued company in the world is only worth ~3T).";
     public static final String VALIDATION_REGEX = "\\d";
     public final String value;
 
