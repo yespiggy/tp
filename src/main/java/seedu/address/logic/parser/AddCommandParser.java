@@ -49,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-            PREFIX_FUNDING_STAGE, PREFIX_INDUSTRY);
+            PREFIX_FUNDING_STAGE, PREFIX_INDUSTRY, PREFIX_VALUATION);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         FundingStage fundingStage = ParserUtil.parseFundingStage(argMultimap.getValue(PREFIX_FUNDING_STAGE).get());
         Industry industry = ParserUtil.parseIndustry(argMultimap.getValue(PREFIX_INDUSTRY).get());

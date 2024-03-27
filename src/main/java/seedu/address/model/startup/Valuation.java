@@ -18,6 +18,10 @@ public class Valuation {
      */
     public static String reformatValuation(String valuation) {
         Double doubleValuation = Double.valueOf(valuation);
+        // If it's below 1000, we don't need to format it!
+        if (doubleValuation.compareTo((double) 1000) < 0) {
+            return valuation;
+        }
         return reformatString(doubleValuation, 0);
     }
 
