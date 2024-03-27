@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 
 /**
  * An UI component that displays information of a {@code Startup}.
@@ -45,6 +46,12 @@ public class StartupCard extends UiPart<Region> {
     private FlowPane industryAndFundingStage;
 
     @FXML
+    private FlowPane valuationDisplay;
+
+    @FXML
+    private Label valuation;
+
+    @FXML
     private Label note; // Add this field for note
     @FXML
     private FlowPane tags;
@@ -60,6 +67,7 @@ public class StartupCard extends UiPart<Region> {
         phone.setText(startup.getPhone().value);
         address.setText(startup.getAddress().value);
         email.setText(startup.getEmail().value);
+        valuation.setText(startup.getValuation().value);
 
         String fundingLevel = startup.getFundingStage().value;
         if (fundingLevel.equals("PS")) {
@@ -72,6 +80,9 @@ public class StartupCard extends UiPart<Region> {
         industryAndFundingStage.getChildren().addAll(
                 new Label(startup.getIndustry().value),
                 new Label(fundingLevel));
+        valuationDisplay.getChildren().addAll(
+                new Label(startup.getValuation().value)
+        );
         createNoteSection();
         startup.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
