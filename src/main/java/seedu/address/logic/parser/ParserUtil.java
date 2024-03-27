@@ -15,6 +15,7 @@ import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Phone;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,6 +97,21 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String valuation} into a {@code Valuation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Valuation} is invalid.
+     */
+    public static Valuation parseValuation(String valuation) throws ParseException {
+        requireNonNull(valuation);
+        String trimmedValuation = valuation.trim();
+        if (!Valuation.isValidValuation(trimmedValuation)) {
+            throw new ParseException(Valuation.MESSAGE_CONSTRAINTS);
+        }
+        return new Valuation(valuation);
     }
 
     /**

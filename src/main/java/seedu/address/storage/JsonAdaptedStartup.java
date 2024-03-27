@@ -10,14 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.startup.Address;
-import seedu.address.model.startup.Email;
-import seedu.address.model.startup.FundingStage;
-import seedu.address.model.startup.Industry;
-import seedu.address.model.startup.Name;
-import seedu.address.model.startup.Note;
-import seedu.address.model.startup.Phone;
-import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +29,7 @@ class JsonAdaptedStartup {
     private final String phone;
     private final String email;
     private final String address;
+    private final String valuation;
 
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -47,7 +41,7 @@ class JsonAdaptedStartup {
     public JsonAdaptedStartup(@JsonProperty("name") String name, @JsonProperty("industry") String industry,
                               @JsonProperty("fundingStage") String fundingStage, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("note") String note,
+                              @JsonProperty("valuation") String valuation, @JsonProperty("note") String note,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.fundingStage = fundingStage;
@@ -55,6 +49,7 @@ class JsonAdaptedStartup {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.valuation = valuation;
         this.note = note;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -71,6 +66,7 @@ class JsonAdaptedStartup {
         address = source.getAddress().value;
         note = source.getNote().value;
         industry = source.getIndustry().value;
+        valuation = source.getValuation().value;
         fundingStage = source.getFundingStage().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -114,6 +110,15 @@ class JsonAdaptedStartup {
         }
         final FundingStage modelFundingStage = new FundingStage(fundingStage);
 
+        if (valuation == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Valuation.class.getSimpleName()));
+        }
+        if (!Valuation.isValidValuation(valuation)) {
+            throw new IllegalValueException(Valuation.MESSAGE_CONSTRAINTS);
+        }
+        final Valuation modelValuation = new Valuation(valuation);
+
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -148,7 +153,7 @@ class JsonAdaptedStartup {
 
         final Set<Tag> modelTags = new HashSet<>(startupTags);
         return new Startup(modelName, modelFundingStage, modelIndustry,
-                modelPhone, modelEmail, modelAddress, modelTags, modelNote);
+                modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNote);
     }
 
 }
