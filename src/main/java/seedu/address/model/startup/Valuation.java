@@ -12,13 +12,25 @@ public class Valuation {
     private static char[] endOfNumber = new char[]{'k', 'm', 'b', 't'};
 
     /**
-     * This function helps us reformat the user's input into a short string representation.
+     * Reformats valuation for clean display on the UI, truncates to 4 characters.
+     * @param valuation The valuation to reformat
+     * @return The truncated, short-form version of the valuation.
+     */
+    public static String reformatValuation(String valuation) {
+        Double doubleValuation = Double.valueOf(valuation);
+        return reformatString(doubleValuation, 0);
+    }
+
+    /**
+     * This function helps us reformat the user's input into
+     * a short string representation (within 4 characters).
      * Credit to Ilya Saunkin, SWE from AWS, shared in the following stackoverflow discussion:
      * https://stackoverflow.com/questions/4753251/how-to-go-about-formatting-1200-to-1-2k-in-java
      *
      * Recursive implementation,
      * invokes itself for each factor of a thousand,
      * increasing the class on each invocation.
+     *
      * @param n the number to format
      * @param iteration in fact this is the class from the array c
      * @return a String representing the number n formatted in a cool looking way.
@@ -48,7 +60,7 @@ public class Valuation {
     public Valuation(String valuation) {
         requireNonNull(valuation);
         checkArgument(isValidValuation(valuation), MESSAGE_CONSTRAINTS);
-        value = this.reformatString(Double.valueOf(valuation), 0);
+        value = valuation;
     }
 
     /**

@@ -67,7 +67,7 @@ public class StartupCard extends UiPart<Region> {
         phone.setText(startup.getPhone().value);
         address.setText(startup.getAddress().value);
         email.setText(startup.getEmail().value);
-        valuation.setText(startup.getValuation().value);
+        valuation.setText(Valuation.reformatValuation(startup.getValuation().value));
 
         String fundingLevel = startup.getFundingStage().value;
         if (fundingLevel.equals("PS")) {
@@ -81,7 +81,7 @@ public class StartupCard extends UiPart<Region> {
                 new Label(startup.getIndustry().value),
                 new Label(fundingLevel));
         valuationDisplay.getChildren().addAll(
-                new Label(startup.getValuation().value)
+                new Label(Valuation.reformatValuation(startup.getValuation().value))
         );
         createNoteSection();
         startup.getTags().stream()
