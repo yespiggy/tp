@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
+import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Phone;
@@ -144,7 +145,7 @@ public class JsonAdaptedStartupTest {
         JsonAdaptedStartup startup =
             new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, INVALID_FUNDING,
             VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = Industry.MESSAGE_CONSTRAINTS;
+        String expectedMessage = FundingStage.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
 
@@ -152,7 +153,7 @@ public class JsonAdaptedStartupTest {
     public void toModelType_nullFundingStage_throwsIllegalValueException() {
         JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, null,
             VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTE, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Industry.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, FundingStage.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
 
