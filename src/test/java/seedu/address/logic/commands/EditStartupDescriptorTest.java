@@ -66,7 +66,8 @@ public class EditStartupDescriptorTest {
                 + editStartupDescriptor.getFundingStage().orElse(null) + ", phone="
                 + editStartupDescriptor.getPhone().orElse(null) + ", email="
                 + editStartupDescriptor.getEmail().orElse(null) + ", address="
-                + editStartupDescriptor.getAddress().orElse(null) + ", tags="
+                + editStartupDescriptor.getAddress().orElse(null) + ", valuation="
+                + editStartupDescriptor.getValuation().orElse(null) + ", tags="
                 + editStartupDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editStartupDescriptor.toString());
     }

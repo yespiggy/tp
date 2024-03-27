@@ -7,6 +7,7 @@
     "fundingStage": "A",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "valuation": "1000",
     "note": "Add a note!",
     "tags" : [ "friends" ]
   }, {
@@ -16,6 +17,7 @@
     "fundingStage": "A",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "valuation": "1000",
     "note": "Add a note!",
     "tags" : [ "owesMoney", "friends" ]
   }, {
@@ -25,6 +27,7 @@
     "fundingStage": "C",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "valuation": "1000",
     "note": "Add a note!",
     "tags" : [ ]
   }, {
@@ -34,6 +37,7 @@
     "fundingStage": "A",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "valuation": "1000",
     "note": "Add a note!",
     "tags" : [ "friends" ]
   }, {
@@ -43,6 +47,7 @@
     "fundingStage": "C",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "valuation": "0",
     "note": "Add a note!",
     "tags" : [ ]
   }, {
@@ -52,6 +57,7 @@
     "fundingStage": "C",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "valuation": "1000",
     "note": "Add a note!",
     "tags" : [ ]
   }, {
@@ -61,6 +67,7 @@
     "fundingStage": "A",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "valuation": "1000",
     "note": "Add a note!",
     "tags" : [ ]
   } ]

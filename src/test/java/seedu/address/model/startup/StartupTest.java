@@ -3,11 +3,7 @@ package seedu.address.model.startup;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStartups.ALICE;
 import static seedu.address.testutil.TypicalStartups.BOB;
@@ -34,7 +30,7 @@ public class StartupTest {
 
         // same name, all other attributes different -> returns true
         Startup editedAlice = new StartupBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withValuation("0").withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameStartup(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -85,6 +81,18 @@ public class StartupTest {
         editedAlice = new StartupBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different funding stage -> returns false
+        editedAlice = new StartupBuilder(ALICE).withFundingStage("PS").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different industry -> returns false
+        editedAlice = new StartupBuilder(ALICE).withIndustry("web3").build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different valuation -> returns false
+        editedAlice = new StartupBuilder(ALICE).withValuation(VALID_VALUATION_AMY).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new StartupBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -99,6 +107,7 @@ public class StartupTest {
                 + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail()
                 + ", address=" + ALICE.getAddress()
+                + ", valuation=" + ALICE.getValuation()
                 + ", note=" + ALICE.getNote()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
