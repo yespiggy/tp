@@ -50,9 +50,6 @@ public class StartupCard extends UiPart<Region> {
     private FlowPane valuationDisplay;
 
     @FXML
-    private Label valuation;
-
-    @FXML
     private Label note; // Add this field for note
     @FXML
     private FlowPane tags;
