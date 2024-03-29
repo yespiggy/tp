@@ -366,6 +366,14 @@
     -fx-font-size: 11;
 }
 
+.note-section {
+    -fx-background-color: #333;
+}
+
+#noteListPanelPlaceholder {
+    -fx-background-color: #333;
+}
+
 #valuationDisplay {
     -fx-hgap: 7;
     -fx-vgap: 3;

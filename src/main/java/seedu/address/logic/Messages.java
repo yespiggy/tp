@@ -47,11 +47,21 @@ public class Messages {
                 .append(startup.getEmail())
                 .append("; Address: ")
                 .append(startup.getAddress())
-                .append("; Note: ")
-                .append(startup.getNote())
-                .append("; Tags: ");
-        startup.getTags().forEach(builder::append);
-        return builder.toString();
+                .append("; Notes: ");
+
+        if (startup.getNotes().isEmpty()) {
+            builder.append("No notes added.");
+        } else {
+            startup.getNotes().forEach(note ->
+                    builder.append(note.toString())
+                            .append(System.lineSeparator())); // Each note on a new line for readability
+        }
+
+        builder.append("; Tags: ");
+        startup.getTags().forEach(tag -> builder.append(tag).append(" ")); // Assuming Tag has a sensible toString()
+
+        return builder.toString().trim(); // Trim to remove any trailing spaces
     }
+
 
 }

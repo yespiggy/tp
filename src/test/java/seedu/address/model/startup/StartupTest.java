@@ -110,8 +110,13 @@ public class StartupTest {
                 + ", email=" + ALICE.getEmail()
                 + ", address=" + ALICE.getAddress()
                 + ", valuation=" + ALICE.getValuation()
+<<<<<<< HEAD
                 + ", note=" + ALICE.getNote()
                 + ", tags=" + ALICE.getTags() + "}";
+=======
+                + ", tags=" + ALICE.getTags()
+                + ", notes=" + ALICE.getNotes() + "}";
+>>>>>>> dwangwk-branch-note-command
         assertEquals(expected, ALICE.toString());
     }
 }

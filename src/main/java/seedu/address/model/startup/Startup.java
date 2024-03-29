@@ -2,8 +2,10 @@ package seedu.address.model.startup;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,32 +30,32 @@ public class Startup {
     private final Valuation valuation;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Note note;
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Startup(Name name, FundingStage fundingStage, Industry industry,
-                   Phone phone, Email email, Address address, Valuation valuation, Set<Tag> tags) {
-        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags, valuation);
-        this.name = name;
-        this.fundingStage = fundingStage;
-        this.valuation = valuation;
-        this.industry = industry;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.note = new Note("Add a note!");
-    }
+    private List<Note> notes = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
-                   Set<Tag> tags, Note note) {
-        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags, valuation);
+                   Set<Tag> tags) {
+        requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
+        this.name = name;
+        this.fundingStage = fundingStage;
+        this.valuation = valuation;
+        this.industry = industry;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor for notes.
+     */
+    public Startup(Name name, FundingStage fundingStage, Industry industry,
+                   Phone phone, Email email, Address address, Valuation valuation,
+                   Set<Tag> tags, List<Note> notes) {
+        requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
         this.name = name;
         this.fundingStage = fundingStage;
         this.industry = industry;
@@ -62,7 +64,7 @@ public class Startup {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.note = note;
+        this.notes = new ArrayList<>(notes); // Defensive copy
     }
 
     public FundingStage getFundingStage() {
@@ -93,8 +95,9 @@ public class Startup {
         return address;
     }
 
-    public Note getNote() {
-        return note;
+    // Getters and setters
+    public List<Note> getNotes() {
+        return notes;
     }
 
     /**
@@ -141,18 +144,19 @@ public class Startup {
                 && email.equals(otherStartup.email)
                 && address.equals(otherStartup.address)
                 && tags.equals(otherStartup.tags)
+                && notes.equals(otherStartup.notes)
                 && valuation.equals(otherStartup.valuation);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, notes);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("industry", industry)
                 .add("funding stage", fundingStage)
@@ -160,9 +164,14 @@ public class Startup {
                 .add("email", email)
                 .add("address", address)
                 .add("valuation", valuation)
-                .add("note", note)
-                .add("tags", tags)
-                .toString();
+                .add("tags", tags);
+
+        if (notes.isEmpty()) {
+            builder.add("notes", "No notes added");
+        } else {
+            builder.add("notes", notes);
+        }
+        return builder.toString();
     }
 
 }

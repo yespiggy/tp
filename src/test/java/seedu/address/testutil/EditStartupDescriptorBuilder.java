@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -10,6 +12,7 @@ import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
 import seedu.address.model.startup.Valuation;
@@ -43,7 +46,7 @@ public class EditStartupDescriptorBuilder {
         descriptor.setAddress(startup.getAddress());
         descriptor.setValuation(startup.getValuation());
         descriptor.setTags(startup.getTags());
-
+        descriptor.setNotes(startup.getNotes());
     }
 
     /**
@@ -101,6 +104,16 @@ public class EditStartupDescriptorBuilder {
     public EditStartupDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code notes} into a {@code List<Note>} and set it to the {@code EditStartupDescriptor}
+     * that we are building.
+     */
+    public EditStartupDescriptorBuilder withNotes(String... notes) {
+        List<Note> noteList = Arrays.stream(notes).map(Note::new).collect(Collectors.toList());
+        descriptor.setNotes(noteList);
         return this;
     }
 

@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.startup.Address;
@@ -30,9 +32,12 @@ public class StartupBuilder {
     public static final String DEFAULT_FUNDING = "A";
 
     public static final String DEFAULT_VALUATION = "1000";
+<<<<<<< HEAD
 
     public static final String DEFAULT_NOTE = "Add a note!";
 
+=======
+>>>>>>> dwangwk-branch-note-command
     private Name name;
     private Phone phone;
 
@@ -43,9 +48,15 @@ public class StartupBuilder {
     private Email email;
     private Address address;
 
+<<<<<<< HEAD
     private Valuation valuation;
 
     private Note note;
+=======
+    private List<Note> notes;
+    private Valuation valuation;
+
+>>>>>>> dwangwk-branch-note-command
     private Set<Tag> tags;
 
     /**
@@ -59,7 +70,11 @@ public class StartupBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+<<<<<<< HEAD
         note = new Note(DEFAULT_NOTE);
+=======
+        notes = new ArrayList<>();
+>>>>>>> dwangwk-branch-note-command
         valuation = new Valuation(DEFAULT_VALUATION);
     }
 
@@ -73,7 +88,7 @@ public class StartupBuilder {
         phone = startupToCopy.getPhone();
         email = startupToCopy.getEmail();
         address = startupToCopy.getAddress();
-        note = startupToCopy.getNote();
+        notes = startupToCopy.getNotes();
         tags = new HashSet<>(startupToCopy.getTags());
         valuation = startupToCopy.getValuation();
     }
@@ -121,8 +136,8 @@ public class StartupBuilder {
     /**
      * Sets the {@code Note} of the {@code Startup} that we are building.
      */
-    public StartupBuilder withNote(String note) {
-        this.note = new Note(note);
+    public StartupBuilder withNotes(String ... notes) {
+        this.notes = SampleDataUtil.getNoteList(notes);
         return this;
     }
 
@@ -152,7 +167,11 @@ public class StartupBuilder {
 
 
     public Startup build() {
+<<<<<<< HEAD
         return new Startup(name, fundingStage, industry, phone, email, address, valuation, tags, note);
+=======
+        return new Startup(name, fundingStage, industry, phone, email, address, valuation, tags, notes);
+>>>>>>> dwangwk-branch-note-command
     }
 
 }

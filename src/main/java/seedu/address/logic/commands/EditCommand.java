@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STARTUPS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
 import seedu.address.model.startup.Valuation;
@@ -106,9 +108,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editStartupDescriptor.getAddress().orElse(startupToEdit.getAddress());
         Valuation updatedValuation = editStartupDescriptor.getValuation().orElse(startupToEdit.getValuation());
         Set<Tag> updatedTags = editStartupDescriptor.getTags().orElse(startupToEdit.getTags());
-
+        List<Note> notes = startupToEdit.getNotes();
         return new Startup(updatedName, updatedFundingStage, updatedIndustry,
-            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags);
+            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, notes);
     }
 
     @Override
@@ -152,6 +154,8 @@ public class EditCommand extends Command {
         private Valuation valuation;
         private Set<Tag> tags;
 
+        private List<Note> notes;
+
         public EditStartupDescriptor() {}
 
         /**
@@ -167,6 +171,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setValuation(toCopy.valuation);
             setTags(toCopy.tags);
+            setNotes(toCopy.notes);
         }
 
         /**
@@ -248,6 +253,18 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code notes} to this object's {@code notes}.
+         * A defensive copy of {@code notes} is used internally.
+         */
+        public void setNotes(List<Note> notes) {
+            this.notes = (notes != null) ? new ArrayList<>(notes) : null;
+        }
+
+        public Optional<List<Note>> getNotes() {
+            return (notes != null) ? Optional.of(Collections.unmodifiableList(notes)) : Optional.empty();
         }
 
         @Override
