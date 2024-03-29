@@ -5,7 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.startup.*;
+import seedu.address.model.startup.Address;
+import seedu.address.model.startup.Email;
+import seedu.address.model.startup.FundingStage;
+import seedu.address.model.startup.Industry;
+import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Note;
+import seedu.address.model.startup.Phone;
+import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

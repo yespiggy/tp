@@ -16,6 +16,7 @@ import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Note;
+import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Valuation;
 
@@ -126,9 +127,42 @@ public class JsonAdaptedStartupTest {
     }
 
     @Test
-    public void toModelType_invalidValuation_throwsIllegalValueException() {
+    public void toModelType_invalidIndustry_throwsIllegalValueException() {
         JsonAdaptedStartup startup =
-          new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
+            new JsonAdaptedStartup(VALID_NAME, INVALID_INDUSTRY, VALID_FUNDING,
+            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTES, VALID_TAGS);
+        String expectedMessage = Industry.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullIndustry_throwsIllegalValueException() {
+        JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, null, VALID_FUNDING,
+            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTES, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Industry.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidFundingStage_throwsIllegalValueException() {
+        JsonAdaptedStartup startup =
+            new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, INVALID_FUNDING,
+            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTES, VALID_TAGS);
+        String expectedMessage = Industry.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullFundingStage_throwsIllegalValueException() {
+        JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, null,
+            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTES, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Industry.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidValuation_throwsIllegalValueException() {
+        JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
             VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_VALUATION, VALID_NOTES, VALID_TAGS);
         String expectedMessage = Valuation.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
@@ -137,7 +171,7 @@ public class JsonAdaptedStartupTest {
     @Test
     public void toModelType_nullValuation_throwsIllegalValueException() {
         JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-          VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_NOTES, VALID_TAGS);
+            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_NOTES, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Valuation.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }

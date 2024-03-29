@@ -18,7 +18,13 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStartupDescriptor;
-import seedu.address.model.startup.*;
+import seedu.address.model.startup.Address;
+import seedu.address.model.startup.Email;
+import seedu.address.model.startup.FundingStage;
+import seedu.address.model.startup.Industry;
+import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Phone;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditStartupDescriptorBuilder;
 
@@ -71,11 +77,11 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1"
             + CommandTestUtil.INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1"
-          + CommandTestUtil.INVALID_INDUSTRY_DESC, Industry.MESSAGE_CONSTRAINTS); // invalid industry
+            + CommandTestUtil.INVALID_INDUSTRY_DESC, Industry.MESSAGE_CONSTRAINTS); // invalid industry
         assertParseFailure(parser, "1"
-          + CommandTestUtil.INVALID_FUNDING_DESC, FundingStage.MESSAGE_CONSTRAINTS); // invalid funding stage
+            + CommandTestUtil.INVALID_FUNDING_DESC, FundingStage.MESSAGE_CONSTRAINTS); // invalid funding stage
         assertParseFailure(parser, "1"
-          + CommandTestUtil.INVALID_VALUATION_DESC, Valuation.MESSAGE_CONSTRAINTS); // invalid valuation
+            + CommandTestUtil.INVALID_VALUATION_DESC, Valuation.MESSAGE_CONSTRAINTS); // invalid valuation
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1"

@@ -11,7 +11,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.model.startup.*;
+import seedu.address.model.startup.Address;
+import seedu.address.model.startup.Email;
+import seedu.address.model.startup.FundingStage;
+import seedu.address.model.startup.Industry;
+import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Phone;
+import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StartupBuilder;
 
@@ -78,7 +85,7 @@ public class AddCommandParserTest {
 
         // multiple valuations
         assertParseFailure(parser, CommandTestUtil.VALUATION_DESC_AMY + validExpectedStartupString,
-          Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_VALUATION));
+            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_VALUATION));
 
         // multiple fields repeated
         assertParseFailure(parser,
@@ -142,7 +149,7 @@ public class AddCommandParserTest {
 
         // invalid valuation
         assertParseFailure(parser, validExpectedStartupString + CommandTestUtil.INVALID_VALUATION_DESC,
-          Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_VALUATION));
+            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_VALUATION));
     }
 
     @Test
@@ -207,7 +214,7 @@ public class AddCommandParserTest {
             + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
             + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
             + CommandTestUtil.VALID_ADDRESS_BOB + CommandTestUtil.FUNDING_DESC_BOB,
-          expectedMessage);
+            expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, CommandTestUtil.VALID_NAME_BOB
@@ -269,11 +276,11 @@ public class AddCommandParserTest {
 
         // invalid valuation
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
-          + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-          + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.INVALID_VALUATION_DESC
-          + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-          + CommandTestUtil.TAG_DESC_HUSBAND
-          + CommandTestUtil.TAG_DESC_FRIEND, Valuation.MESSAGE_CONSTRAINTS);
+              + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+              + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.INVALID_VALUATION_DESC
+              + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
+              + CommandTestUtil.TAG_DESC_HUSBAND
+              + CommandTestUtil.TAG_DESC_FRIEND, Valuation.MESSAGE_CONSTRAINTS);
 
 
         // invalid tag
@@ -296,7 +303,8 @@ public class AddCommandParserTest {
                 + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
                 + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
+                + CommandTestUtil.TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
