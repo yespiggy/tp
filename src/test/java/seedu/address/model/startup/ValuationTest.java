@@ -2,59 +2,106 @@ package seedu.address.model.startup;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import javax.xml.validation.Validator;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 public class ValuationTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Phone(null));
+        assertThrows(NullPointerException.class, () -> new Valuation(null));
     }
 
     @Test
-    public void constructor_invalidPhone_throwsIllegalArgumentException() {
-        String invalidPhone = "";
-        assertThrows(IllegalArgumentException.class, () -> new Phone(invalidPhone));
+    public void constructor_invalidValuation_throwsIllegalArgumentException() {
+        String invalidValuation = "";
+        assertThrows(IllegalArgumentException.class, () -> new Valuation(invalidValuation));
     }
 
     @Test
-    public void isValidPhone() {
-        // null phone number
+    public void isValidValuation() {
+        // null valuation
         assertThrows(NullPointerException.class, () -> Phone.isValidPhone(null));
 
-        // invalid phone numbers
-        assertFalse(Phone.isValidPhone("")); // empty string
-        assertFalse(Phone.isValidPhone(" ")); // spaces only
-        assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Phone.isValidPhone("phone")); // non-numeric
-        assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
+        // invalid valuation
+        assertFalse(Valuation.isValidValuation("")); // empty string
+        assertFalse(Valuation.isValidValuation(" ")); // spaces only
 
-        // valid phone numbers
-        assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Phone.isValidPhone("93121534"));
-        assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
+        assertFalse(Valuation.isValidValuation("-1")); // negative numbers
+        assertFalse(Valuation.isValidValuation("-1000"));
+
+        // numbers above & equal to 5 trillion
+        assertFalse(Valuation.isValidValuation("8200000000000"));
+        assertFalse(Valuation.isValidValuation("5000000000000"));
+
+        // valid valuations
+        assertTrue(Valuation.isValidValuation("911"));
+        assertTrue(Valuation.isValidValuation("93121534"));
+
+        // Above a trillion, less than 5 trillion
+        assertTrue(Valuation.isValidValuation("3000000000000"));
+        assertTrue(Valuation.isValidValuation("100000500000"));
+    }
+
+    @Test
+    public void testValuationRepresentation() {
+
+        // Below 1000
+        assertEquals("0", Valuation.reformatValuation("0"));
+        assertEquals("1", Valuation.reformatValuation("1"));
+        assertEquals("1k", Valuation.reformatValuation("1000"));
+        assertEquals("999", Valuation.reformatValuation("999"));
+
+        // Above 1000
+        assertEquals("2k", Valuation.reformatValuation("2000"));
+
+        // Drop the decimal to maintain 4 characters, i.e. not 21.1k but 21k.
+        assertEquals("21k", Valuation.reformatValuation("21100"));
+
+        // Can be represented in 4 characters.
+        assertEquals("5.8k", Valuation.reformatValuation("5800"));
+
+        // Above 1000, breach 4 characters.
+        assertEquals("101k", Valuation.reformatValuation("101800"));
+
+        // Above 1m no breach in character.
+        assertEquals("2m", Valuation.reformatValuation("2000000"));
+        assertEquals("7.8m", Valuation.reformatValuation("7800000"));
+
+        // Above 1m, breach in character.
+        assertEquals("92m", Valuation.reformatValuation("92150000"));
+        assertEquals("9.9m", Valuation.reformatValuation("9999999"));
+
+        // Above 100m, no breach in character.
+        assertEquals("123m", Valuation.reformatValuation("123200000"));
+
+        // Above 1 trillion, no breach in characters.
+        assertEquals("1t", Valuation.reformatValuation("1000000000000"));
+        assertEquals("2.2t", Valuation.reformatValuation("2200000000000"));
+
+        // Above 1 trillion, breach in characters.
+        assertEquals("3.2t", Valuation.reformatValuation("3200011100000"));
     }
 
     @Test
     public void equals() {
-        Phone phone = new Phone("999");
+        Valuation valuation = new Valuation("999");
 
         // same values -> returns true
-        assertTrue(phone.equals(new Phone("999")));
+        assertTrue(valuation.equals(new Valuation("999")));
 
         // same object -> returns true
-        assertTrue(phone.equals(phone));
+        assertTrue(valuation.equals(valuation));
 
         // null -> returns false
-        assertFalse(phone.equals(null));
+        assertFalse(valuation.equals(null));
 
         // different types -> returns false
-        assertFalse(phone.equals(5.0f));
+        assertFalse(valuation.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(phone.equals(new Phone("995")));
+        assertFalse(valuation.equals(new Valuation("995")));
     }
 }

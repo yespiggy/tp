@@ -5,14 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.model.startup.Address;
-import seedu.address.model.startup.Email;
-import seedu.address.model.startup.FundingStage;
-import seedu.address.model.startup.Industry;
-import seedu.address.model.startup.Name;
-import seedu.address.model.startup.Note;
-import seedu.address.model.startup.Phone;
-import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.*;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -30,6 +23,13 @@ public class StartupBuilder {
 
     public static final String DEFAULT_FUNDING = "A";
 
+<<<<<<< HEAD
+=======
+    public static final String DEFAULT_VALUATION = "1000";
+
+    public static final String DEFAULT_NOTE = "Add a note!";
+
+>>>>>>> b911d8bf (test: Correct test to work with valuation)
     private Name name;
     private Phone phone;
 
@@ -40,7 +40,13 @@ public class StartupBuilder {
     private Email email;
     private Address address;
 
+<<<<<<< HEAD
     private List<Note> notes;
+=======
+    private Valuation valuation;
+
+    private Note note;
+>>>>>>> b911d8bf (test: Correct test to work with valuation)
     private Set<Tag> tags;
 
     /**
@@ -54,7 +60,12 @@ public class StartupBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+<<<<<<< HEAD
         notes = new ArrayList<>();
+=======
+        note = new Note(DEFAULT_NOTE);
+        valuation = new Valuation(DEFAULT_VALUATION);
+>>>>>>> b911d8bf (test: Correct test to work with valuation)
     }
 
     /**
@@ -69,6 +80,7 @@ public class StartupBuilder {
         address = startupToCopy.getAddress();
         notes = startupToCopy.getNotes();
         tags = new HashSet<>(startupToCopy.getTags());
+        valuation = startupToCopy.getValuation();
     }
 
     /**
@@ -135,9 +147,21 @@ public class StartupBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code valuation} of the {@code Startup} that we are building.
+     */
+    public StartupBuilder withValuation(String valuation) {
+        this.valuation = new Valuation(valuation);
+        return this;
+    }
+
 
     public Startup build() {
+<<<<<<< HEAD
         return new Startup(name, fundingStage, industry, phone, email, address, tags, notes);
+=======
+        return new Startup(name, fundingStage, industry, phone, email, address, valuation, tags, note);
+>>>>>>> b911d8bf (test: Correct test to work with valuation)
     }
 
 }

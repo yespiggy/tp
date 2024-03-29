@@ -27,6 +27,11 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
+
+    public static final String VALID_VALUATION_AMY = "0";
+
+    public static final String VALID_VALUATION_BOB = "1000";
+
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
@@ -54,6 +59,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + CliSyntax.PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + CliSyntax.PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String VALUATION_DESC_AMY = " " + CliSyntax.PREFIX_VALUATION + VALID_VALUATION_AMY;
+    public static final String VALUATION_DESC_BOB = " " + CliSyntax.PREFIX_VALUATION + VALID_VALUATION_BOB;
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -68,6 +75,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " "
         + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String INVALID_VALUATION_DESC = " " + CliSyntax.PREFIX_VALUATION + "-1";
+
     public static final String INVALID_INDUSTRY_DESC = " " + CliSyntax.PREFIX_INDUSTRY + "";
 
     public static final String INVALID_FUNDING_DESC = " " + CliSyntax.PREFIX_FUNDING_STAGE + "D";
@@ -81,12 +90,18 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStartupDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withIndustry(VALID_INDUSTRY_AMY)
+                .withTags(VALID_TAG_FRIEND).withIndustry(VALID_INDUSTRY_AMY).withValuation(VALID_VALUATION_AMY)
                 .withFundingStage(VALID_FUNDING_AMY).build();
         DESC_BOB = new EditStartupDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withFundingStage(VALID_FUNDING_BOB).withIndustry(VALID_INDUSTRY_BOB)
+                .withValuation(VALID_VALUATION_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+<<<<<<< HEAD
+=======
+        DESC_AMY_N = new NoteStartupDescriptorBuilder().withNote("Add a note for Amy!").build();
+        DESC_BOB_N = new NoteStartupDescriptorBuilder().withNote("Add a note for Bob!").build();
+>>>>>>> b911d8bf (test: Correct test to work with valuation)
     }
 
     /**

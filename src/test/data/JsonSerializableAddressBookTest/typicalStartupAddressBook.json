@@ -8,6 +8,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "notes": [ "Innovative project ideas", "Looking into Series A funding" ],
+    "valuation": "1000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "notes": [ "Strong technical team", "Consider for next investment round" ],
+    "valuation": "1000",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "notes": [ "Potential for high ROI", "Needs better marketing strategy" ],
+    "valuation": "1000",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "notes": [ "Solid business model", "Expansion into new markets" ],
+    "valuation": "1000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "notes": [ "Revolutionary technology", "Needs additional funding" ],
+    "valuation": "0",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "notes": [ "High user engagement", "Exploring partnership opportunities" ],
+    "valuation": "1000",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "notes": [ "Experienced management team", "Profitable quarter reported" ],
+    "valuation": "1000",
     "tags" : [ ]
   } ]
 }
