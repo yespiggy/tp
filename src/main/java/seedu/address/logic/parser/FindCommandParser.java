@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         } else if (argMultimap.getValue(CliSyntax.PREFIX_INDUSTRY).isPresent()) {
             findCommand = parseIndustryKeywords(argMultimap);
         } else if (argMultimap.getValue(CliSyntax.PREFIX_FUNDING_STAGE).isPresent()) {
-           findCommand = parseFundingStageKeywords(argMultimap);
+            findCommand = parseFundingStageKeywords(argMultimap);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
