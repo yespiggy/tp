@@ -61,6 +61,7 @@ public class AddNoteCommand extends Command {
                 startupToEdit.getPhone(),
                 startupToEdit.getEmail(),
                 startupToEdit.getAddress(),
+                startupToEdit.getValuation(),
                 startupToEdit.getTags(),
                 updatedNotes
         );

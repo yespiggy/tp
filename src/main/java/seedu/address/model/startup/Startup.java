@@ -32,6 +32,20 @@ public class Startup {
     private final Set<Tag> tags = new HashSet<>();
     private List<Note> notes = new ArrayList<>();
 
+    public Startup(Name name, FundingStage fundingStage, Industry industry,
+                   Phone phone, Email email, Address address, Valuation valuation,
+                   Set<Tag> tags) {
+        requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
+        this.name = name;
+        this.fundingStage = fundingStage;
+        this.industry = industry;
+        this.phone = phone;
+        this.valuation = valuation;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+    }
+
     /**
      * Every field must be present and not null.
      */
@@ -82,7 +96,6 @@ public class Startup {
     public List<Note> getNotes() {
         return notes;
     }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

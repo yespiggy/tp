@@ -97,11 +97,6 @@ public class CommandTestUtil {
                 .withFundingStage(VALID_FUNDING_BOB).withIndustry(VALID_INDUSTRY_BOB)
                 .withValuation(VALID_VALUATION_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-<<<<<<< HEAD
-=======
-        DESC_AMY_N = new NoteStartupDescriptorBuilder().withNote("Add a note for Amy!").build();
-        DESC_BOB_N = new NoteStartupDescriptorBuilder().withNote("Add a note for Bob!").build();
->>>>>>> b911d8bf (test: Correct test to work with valuation)
     }
 
     /**

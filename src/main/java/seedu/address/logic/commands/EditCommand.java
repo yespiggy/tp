@@ -17,10 +17,7 @@ import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
-<<<<<<< HEAD
 import seedu.address.model.startup.Note;
-=======
->>>>>>> dcb07730 (style: Fix checkstyle for main)
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
 import seedu.address.model.startup.Valuation;
