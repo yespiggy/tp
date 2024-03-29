@@ -25,6 +25,10 @@ public class NoteListPanel extends UiPart<Region> {
     @FXML
     private VBox noteContainer; // Direct reference to the VBox containing the notes
 
+    /**
+     * Displays the note list panel.
+     * @param notes The note list to update.
+     */
     public NoteListPanel(ObservableList<Note> notes) {
         super(FXML);
         String style = "-fx-background-color: #333;";

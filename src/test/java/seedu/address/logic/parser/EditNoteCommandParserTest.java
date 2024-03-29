@@ -21,7 +21,8 @@ public class EditNoteCommandParserTest {
         Index targetIndex = Index.fromOneBased(1);
         String noteContent = "Updated note content";
         String userInput = startupIndex.getOneBased() + " " + targetIndex.getOneBased() + " " + noteContent;
-        EditNoteCommand expectedCommand = new EditNoteCommand(startupIndex, targetIndex.getOneBased(), new Note(noteContent));
+        EditNoteCommand expectedCommand = new EditNoteCommand(startupIndex, targetIndex.getOneBased(),
+            new Note(noteContent));
 
         CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
     }

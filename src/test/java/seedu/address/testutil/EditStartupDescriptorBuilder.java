@@ -107,6 +107,10 @@ public class EditStartupDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code notes} into a {@code List<Note>} and set it to the {@code EditStartupDescriptor}
+     * that we are building.
+     */
     public EditStartupDescriptorBuilder withNotes(String... notes) {
         List<Note> noteList = Arrays.stream(notes).map(Note::new).collect(Collectors.toList());
         descriptor.setNotes(noteList);

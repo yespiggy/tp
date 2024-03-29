@@ -1,8 +1,12 @@
 package seedu.address.model.util;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
@@ -14,10 +18,6 @@ import seedu.address.model.startup.Startup;
 import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
-import java.util.stream.Collectors;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

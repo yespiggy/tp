@@ -39,16 +39,19 @@ public class TypicalStartups {
             .withNotes("Potential for high ROI", "Needs better marketing strategy").withAddress("wall street").build();
     public static final Startup DANIEL = new StartupBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withIndustry("finance").withFundingStage("A")
-            .withNotes("Solid business model", "Expansion into new markets" ).withAddress("10th street").withTags("friends").build();
+            .withNotes("Solid business model", "Expansion into new markets")
+            .withAddress("10th street").withTags("friends").build();
     public static final Startup ELLE = new StartupBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withIndustry("web3").withFundingStage("C")
             .withNotes("Revolutionary technology", "Needs additional funding").withAddress("michegan ave").build();
     public static final Startup FIONA = new StartupBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withIndustry("web3").withFundingStage("C")
-            .withNotes("High user engagement", "Exploring partnership opportunities").withAddress("little tokyo").build();
+            .withNotes("High user engagement", "Exploring partnership opportunities")
+            .withAddress("little tokyo").build();
     public static final Startup GEORGE = new StartupBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withIndustry("finance").withValuation("1000")
-            .withFundingStage("A").withNotes("Experienced management team", "Profitable quarter reported" )
+            .withFundingStage("A")
+            .withNotes("Experienced management team", "Profitable quarter reported")
             .withAddress("4th street").build();
 
     // Manually added
