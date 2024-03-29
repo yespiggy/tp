@@ -66,5 +66,21 @@ public class EditNoteCommand extends Command {
         model.setStartup(startupToEdit, editedStartup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedStartup));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) { // same object instance
+            return true;
+        }
+
+        if (!(other instanceof EditNoteCommand)) { // not the same type
+            return false;
+        }
+
+        EditNoteCommand e = (EditNoteCommand) other;
+        return index.equals(e.index)
+                && noteIndex == e.noteIndex
+                && newNote.equals(e.newNote);
+    }
 }
 

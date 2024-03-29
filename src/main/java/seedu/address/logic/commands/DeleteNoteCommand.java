@@ -63,6 +63,22 @@ public class DeleteNoteCommand extends Command {
         model.setStartup(startupToEdit, editedStartup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedStartup));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) { // same object instance
+            return true;
+        }
+
+        if (!(other instanceof DeleteNoteCommand)) { // not the same type
+            return false;
+        }
+
+        DeleteNoteCommand e = (DeleteNoteCommand) other;
+        return index.equals(e.index)
+                && noteIndex == e.noteIndex; // Compare both the startup index and the note index within that startup
+    }
+
 }
 
 

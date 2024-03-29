@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 
 public class JsonAdaptedStartupTest {
@@ -37,7 +38,10 @@ public class JsonAdaptedStartupTest {
 
     private static final String VALID_INDUSTRY = BENSON.getIndustry().toString();
 
-    private static final String VALID_NOTE = BENSON.getNote().toString();
+    private static final List<String> VALID_NOTES = BENSON.getNotes().stream()
+            .map(Note::toString)
+            .collect(Collectors.toList());
+
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -52,7 +56,7 @@ public class JsonAdaptedStartupTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedStartup startup =
                 new JsonAdaptedStartup(INVALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-                    VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTE, VALID_TAGS);
+                    VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTES, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -60,7 +64,7 @@ public class JsonAdaptedStartupTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedStartup startup = new JsonAdaptedStartup(null, VALID_INDUSTRY, VALID_FUNDING,
-            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTE, VALID_TAGS);
+            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTES, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -69,7 +73,7 @@ public class JsonAdaptedStartupTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedStartup startup =
                 new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-                    INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTE, VALID_TAGS);
+                    INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTES, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -77,7 +81,7 @@ public class JsonAdaptedStartupTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-            null, VALID_EMAIL, VALID_ADDRESS, VALID_NOTE, VALID_TAGS);
+            null, VALID_EMAIL, VALID_ADDRESS, VALID_NOTES, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -86,7 +90,7 @@ public class JsonAdaptedStartupTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedStartup startup =
                 new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-                    VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_NOTE, VALID_TAGS);
+                    VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_NOTES, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -94,7 +98,7 @@ public class JsonAdaptedStartupTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-            VALID_PHONE, null, VALID_ADDRESS, VALID_NOTE, VALID_TAGS);
+            VALID_PHONE, null, VALID_ADDRESS, VALID_NOTES, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -103,7 +107,7 @@ public class JsonAdaptedStartupTest {
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedStartup startup =
                 new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-                    VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_NOTE, VALID_TAGS);
+                    VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_NOTES, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -111,7 +115,7 @@ public class JsonAdaptedStartupTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-            VALID_PHONE, VALID_EMAIL, null, VALID_NOTE, VALID_TAGS);
+            VALID_PHONE, VALID_EMAIL, null, VALID_NOTES, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -122,7 +126,7 @@ public class JsonAdaptedStartupTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedStartup startup =
                 new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-                    VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTE, invalidTags);
+                    VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_NOTES, invalidTags);
         assertThrows(IllegalValueException.class, startup::toModelType);
     }
 

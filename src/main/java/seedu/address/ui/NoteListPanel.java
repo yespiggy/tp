@@ -64,5 +64,4 @@ public class NoteListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

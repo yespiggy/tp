@@ -10,12 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STARTUPS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -28,6 +23,7 @@ import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
 import seedu.address.model.tag.Tag;
@@ -109,9 +105,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editStartupDescriptor.getEmail().orElse(startupToEdit.getEmail());
         Address updatedAddress = editStartupDescriptor.getAddress().orElse(startupToEdit.getAddress());
         Set<Tag> updatedTags = editStartupDescriptor.getTags().orElse(startupToEdit.getTags());
-
+        List<Note> notes = startupToEdit.getNotes();
         return new Startup(updatedName, updatedFundingStage, updatedIndustry,
-            updatedPhone, updatedEmail, updatedAddress, updatedTags);
+            updatedPhone, updatedEmail, updatedAddress, updatedTags, notes);
     }
 
     @Override
@@ -154,6 +150,8 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
 
+        private List<Note> notes;
+
         public EditStartupDescriptor() {}
 
         /**
@@ -168,6 +166,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setNotes(toCopy.notes);
         }
 
         /**
@@ -240,6 +239,18 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code notes} to this object's {@code notes}.
+         * A defensive copy of {@code notes} is used internally.
+         */
+        public void setNotes(List<Note> notes) {
+            this.notes = (notes != null) ? new ArrayList<>(notes) : null;
+        }
+
+        public Optional<List<Note>> getNotes() {
+            return (notes != null) ? Optional.of(Collections.unmodifiableList(notes)) : Optional.empty();
         }
 
         @Override
