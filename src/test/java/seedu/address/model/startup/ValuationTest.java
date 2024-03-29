@@ -32,6 +32,13 @@ public class ValuationTest {
         assertFalse(Valuation.isValidValuation("-1")); // negative numbers
         assertFalse(Valuation.isValidValuation("-1000"));
 
+        assertFalse(Valuation.isValidValuation("0.01")); // Decimals
+        assertFalse(Valuation.isValidValuation("109.01"));
+
+        // Valid numbers with leading zeros in front
+        assertTrue(Valuation.isValidValuation("0100"));
+        assertTrue(Valuation.isValidValuation("000100"));
+
         // numbers above & equal to 5 trillion
         assertFalse(Valuation.isValidValuation("8200000000000"));
         assertFalse(Valuation.isValidValuation("5000000000000"));
@@ -53,9 +60,11 @@ public class ValuationTest {
         assertEquals("1", Valuation.reformatValuation("1"));
         assertEquals("1k", Valuation.reformatValuation("1000"));
         assertEquals("999", Valuation.reformatValuation("999"));
+        assertEquals("999", Valuation.reformatValuation("0999"));
 
         // Above 1000
         assertEquals("2k", Valuation.reformatValuation("2000"));
+        assertEquals("2k", Valuation.reformatValuation("02000"));
 
         // Drop the decimal to maintain 4 characters, i.e. not 21.1k but 21k.
         assertEquals("21k", Valuation.reformatValuation("21100"));
@@ -69,6 +78,7 @@ public class ValuationTest {
         // Above 1m no breach in character.
         assertEquals("2m", Valuation.reformatValuation("2000000"));
         assertEquals("7.8m", Valuation.reformatValuation("7800000"));
+        assertEquals("7.8m", Valuation.reformatValuation("00007800000"));
 
         // Above 1m, breach in character.
         assertEquals("92m", Valuation.reformatValuation("92150000"));
