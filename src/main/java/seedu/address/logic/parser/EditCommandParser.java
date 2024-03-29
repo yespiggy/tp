@@ -29,7 +29,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME,
                 CliSyntax.PREFIX_INDUSTRY, CliSyntax.PREFIX_FUNDING_STAGE, CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_TAG);
+                CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_ADDRESS,
+                CliSyntax.PREFIX_VALUATION, CliSyntax.PREFIX_TAG);
 
         Index index;
 
@@ -66,6 +67,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             editStartupDescriptor.setAddress(ParserUtil.parseAddress(
                 argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(CliSyntax.PREFIX_VALUATION).isPresent()) {
+            editStartupDescriptor.setValuation(ParserUtil.parseValuation(
+              argMultimap.getValue(CliSyntax.PREFIX_VALUATION).get()));
+        }
+
         parseTagsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_TAG)).ifPresent(editStartupDescriptor::setTags);
 
         if (!editStartupDescriptor.isAnyFieldEdited()) {

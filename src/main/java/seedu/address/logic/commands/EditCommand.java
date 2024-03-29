@@ -1,13 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FUNDING_STAGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STARTUPS;
 
 import java.util.*;
@@ -26,6 +20,7 @@ import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,6 +40,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_VALUATION + "VALUATION] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -104,10 +100,11 @@ public class EditCommand extends Command {
         Industry updatedIndustry = editStartupDescriptor.getIndustry().orElse(startupToEdit.getIndustry());
         Email updatedEmail = editStartupDescriptor.getEmail().orElse(startupToEdit.getEmail());
         Address updatedAddress = editStartupDescriptor.getAddress().orElse(startupToEdit.getAddress());
+        Valuation updatedValuation = editStartupDescriptor.getValuation().orElse(startupToEdit.getValuation());
         Set<Tag> updatedTags = editStartupDescriptor.getTags().orElse(startupToEdit.getTags());
         List<Note> notes = startupToEdit.getNotes();
         return new Startup(updatedName, updatedFundingStage, updatedIndustry,
-            updatedPhone, updatedEmail, updatedAddress, updatedTags, notes);
+            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, notes);
     }
 
     @Override
@@ -148,6 +145,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Valuation valuation;
         private Set<Tag> tags;
 
         private List<Note> notes;
@@ -165,6 +163,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setValuation(toCopy.valuation);
             setTags(toCopy.tags);
             setNotes(toCopy.notes);
         }
@@ -173,11 +172,20 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, industry, fundingStage, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, industry, fundingStage,
+                    phone, email, address, tags, valuation);
         }
 
         public void setIndustry(Industry industry) {
             this.industry = industry;
+        }
+
+        public void setValuation(Valuation valuation) {
+            this.valuation = valuation;
+        }
+
+        public Optional<Valuation> getValuation() {
+            return Optional.ofNullable(valuation);
         }
 
         public void setFundingStage(FundingStage fundingStage) {
@@ -271,7 +279,8 @@ public class EditCommand extends Command {
                     && Objects.equals(industry, otherEditStartupDescriptor.industry)
                     && Objects.equals(email, otherEditStartupDescriptor.email)
                     && Objects.equals(address, otherEditStartupDescriptor.address)
-                    && Objects.equals(tags, otherEditStartupDescriptor.tags);
+                    && Objects.equals(tags, otherEditStartupDescriptor.tags)
+                    && Objects.equals(valuation, otherEditStartupDescriptor.valuation);
         }
 
         @Override
@@ -283,6 +292,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("valuation", valuation)
                     .add("tags", tags)
                     .toString();
         }
