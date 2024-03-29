@@ -1,23 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Startup;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STARTUPS;
-
 /**
- * Edits a Note of a startup in the address book!
+ * Adds a Note of a startup in the address book!
  */
 public class AddNoteCommand extends Command {
     public static final String COMMAND_WORD = "addnote";
@@ -31,6 +27,10 @@ public class AddNoteCommand extends Command {
     private final Index index;
     private final Note note;
 
+    /**
+     * @param index of the startup in the filtered startup list to edit
+     * @param note note object to be stored in the notes list
+     */
     public AddNoteCommand(Index index, Note note) {
         requireNonNull(index);
         requireNonNull(note);
