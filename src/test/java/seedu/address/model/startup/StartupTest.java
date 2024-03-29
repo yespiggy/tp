@@ -110,7 +110,7 @@ public class StartupTest {
                 + ", email=" + ALICE.getEmail()
                 + ", address=" + ALICE.getAddress()
                 + ", valuation=" + ALICE.getValuation()
-                + ", tags=" + ALICE.getTags() + "}"
+                + ", tags=" + ALICE.getTags()
                 + ", notes=" + ALICE.getNotes() + "}";
         assertEquals(expected, ALICE.toString());
     }

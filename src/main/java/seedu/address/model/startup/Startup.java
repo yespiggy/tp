@@ -32,6 +32,9 @@ public class Startup {
     private final Set<Tag> tags = new HashSet<>();
     private List<Note> notes = new ArrayList<>();
 
+    /**
+     * Every field must be present and not null.
+     */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
                    Set<Tag> tags) {
@@ -47,7 +50,7 @@ public class Startup {
     }
 
     /**
-     * Every field must be present and not null.
+     * Constructor for notes.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,

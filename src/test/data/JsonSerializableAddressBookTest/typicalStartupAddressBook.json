@@ -48,7 +48,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "notes": [ "Revolutionary technology", "Needs additional funding" ],
-    "valuation": "0",
+    "valuation": "1000",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
