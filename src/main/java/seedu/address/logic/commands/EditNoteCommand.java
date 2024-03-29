@@ -28,6 +28,12 @@ public class EditNoteCommand extends Command {
     private final int noteIndex;
     private final Note newNote;
 
+    /**
+     * @param index of the startup in the filtered startup list to edit
+     * @param noteIndex of the note to be edited
+     * @param newNote new note object to be stored in the notes list
+     */
+
     public EditNoteCommand(Index index, int noteIndex, Note newNote) {
         requireNonNull(index);
         requireNonNull(newNote);
