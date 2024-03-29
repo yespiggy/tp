@@ -51,7 +51,7 @@ public class Valuation {
             "(No decimal places, i.e. 1 is a integer, 1.1 is not)" +
             " above -1 and " +
             " below 5 trillion (the highest valued company in the world is only worth ~3T).";
-    public static final String VALIDATION_REGEX = "\\d";
+    public static final String VALIDATION_REGEX = "\\d+";
     public final String value;
 
     /**
