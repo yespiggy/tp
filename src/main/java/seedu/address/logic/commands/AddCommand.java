@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "allium@gmail.com "
             + PREFIX_ADDRESS + "420, 23rd Street, #02-25 "
-            + PREFIX_VALUATION + "100000"
+            + PREFIX_VALUATION + "100000 "
             + PREFIX_TAG + "competitive "
             + PREFIX_TAG + "owesMoney";
 
