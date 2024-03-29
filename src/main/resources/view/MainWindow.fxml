@@ -46,12 +46,23 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="startupList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="startupListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+        <SplitPane fx:id="mainSplitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
+          <VBox fx:id="startupList" styleClass="pane-with-border" minWidth="340" prefWidth="340">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <StackPane fx:id="startupListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+
+          <StackPane fx:id="noteListPanelPlaceholder" styleClass="pane-with-border"
+          style="-fx-padding: 0 10 0 0;"
+          >
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+          </StackPane>
+        </SplitPane>
+
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

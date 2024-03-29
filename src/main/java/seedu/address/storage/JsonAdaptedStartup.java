@@ -37,7 +37,7 @@ class JsonAdaptedStartup {
     private final String email;
     private final String address;
 
-    private final String note;
+    private final List<String> notes;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -47,15 +47,15 @@ class JsonAdaptedStartup {
     public JsonAdaptedStartup(@JsonProperty("name") String name, @JsonProperty("industry") String industry,
                               @JsonProperty("fundingStage") String fundingStage, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("note") String note,
+                              @JsonProperty("notes") List<String> notes, // Now accepts a list of note strings
                               @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
-        this.fundingStage = fundingStage;
         this.industry = industry;
+        this.fundingStage = fundingStage;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.note = note;
+        this.notes = notes != null ? new ArrayList<>(notes) : new ArrayList<>();
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -66,12 +66,14 @@ class JsonAdaptedStartup {
      */
     public JsonAdaptedStartup(Startup source) {
         name = source.getName().fullName;
+        industry = source.getIndustry().value;
+        fundingStage = source.getFundingStage().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        note = source.getNote().value;
-        industry = source.getIndustry().value;
-        fundingStage = source.getFundingStage().value;
+        notes = source.getNotes().stream() // Assuming getNotes() returns List<Note>
+                .map(Note::toString) // Assuming Note class has a toString that returns the note content
+                .collect(Collectors.toList());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -138,17 +140,17 @@ class JsonAdaptedStartup {
         }
         final Address modelAddress = new Address(address);
 
-        if (note == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        final List<Note> modelNotes = new ArrayList<>();
+        for (String noteString : notes) {
+            if (!Note.isValidNote(noteString)) {
+                throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+            }
+            modelNotes.add(new Note(noteString));
         }
-        if (!Note.isValidNote(note)) {
-            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
-        }
-        final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(startupTags);
         return new Startup(modelName, modelFundingStage, modelIndustry,
-                modelPhone, modelEmail, modelAddress, modelTags, modelNote);
+                modelPhone, modelEmail, modelAddress, modelTags, modelNotes);
     }
 
 }
