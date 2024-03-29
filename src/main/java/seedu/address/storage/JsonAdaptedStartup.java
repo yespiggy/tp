@@ -49,27 +49,17 @@ class JsonAdaptedStartup {
     public JsonAdaptedStartup(@JsonProperty("name") String name, @JsonProperty("industry") String industry,
                               @JsonProperty("fundingStage") String fundingStage, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-<<<<<<< HEAD
-                              @JsonProperty("valuation") String valuation, @JsonProperty("note") String note,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-=======
                               @JsonProperty("valuation") String valuation,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
                               @JsonProperty("notes") List<String> notes) {
->>>>>>> dwangwk-branch-note-command
         this.name = name;
         this.industry = industry;
         this.fundingStage = fundingStage;
         this.phone = phone;
         this.email = email;
         this.address = address;
-<<<<<<< HEAD
-        this.valuation = valuation;
-        this.note = note;
-=======
         this.notes = notes != null ? new ArrayList<>(notes) : new ArrayList<>();
         this.valuation = valuation;
->>>>>>> dwangwk-branch-note-command
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -85,17 +75,10 @@ class JsonAdaptedStartup {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-<<<<<<< HEAD
-        note = source.getNote().value;
-        industry = source.getIndustry().value;
-        valuation = source.getValuation().value;
-        fundingStage = source.getFundingStage().value;
-=======
         notes = source.getNotes().stream() // Assuming getNotes() returns List<Note>
                 .map(Note::toString) // Assuming Note class has a toString that returns the note content
                 .collect(Collectors.toList());
         valuation = source.getValuation().value;
->>>>>>> dwangwk-branch-note-command
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -181,11 +164,7 @@ class JsonAdaptedStartup {
 
         final Set<Tag> modelTags = new HashSet<>(startupTags);
         return new Startup(modelName, modelFundingStage, modelIndustry,
-<<<<<<< HEAD
-                modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNote);
-=======
                 modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes);
->>>>>>> dwangwk-branch-note-command
     }
 
 }

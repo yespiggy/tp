@@ -88,11 +88,7 @@ public class JsonAdaptedStartupTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedStartup startup = new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, VALID_FUNDING,
-<<<<<<< HEAD
-            null, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTE, VALID_TAGS);
-=======
             null, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_TAGS, VALID_NOTES);
->>>>>>> dwangwk-branch-note-command
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }
@@ -152,11 +148,7 @@ public class JsonAdaptedStartupTest {
     public void toModelType_invalidFundingStage_throwsIllegalValueException() {
         JsonAdaptedStartup startup =
             new JsonAdaptedStartup(VALID_NAME, VALID_INDUSTRY, INVALID_FUNDING,
-<<<<<<< HEAD
-            VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_NOTE, VALID_TAGS);
-=======
             VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_VALUATION, VALID_TAGS, VALID_NOTES);
->>>>>>> dwangwk-branch-note-command
         String expectedMessage = FundingStage.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, startup::toModelType);
     }

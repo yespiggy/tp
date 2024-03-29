@@ -76,10 +76,6 @@ public class StartupCard extends UiPart<Region> {
         valuationDisplay.getChildren().addAll(
                 new Label("Valuation: " + Valuation.reformatValuation(startup.getValuation().value))
         );
-<<<<<<< HEAD
-        createNoteSection();
-=======
->>>>>>> dwangwk-branch-note-command
         startup.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

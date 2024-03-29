@@ -32,12 +32,6 @@ public class StartupBuilder {
     public static final String DEFAULT_FUNDING = "A";
 
     public static final String DEFAULT_VALUATION = "1000";
-<<<<<<< HEAD
-
-    public static final String DEFAULT_NOTE = "Add a note!";
-
-=======
->>>>>>> dwangwk-branch-note-command
     private Name name;
     private Phone phone;
 
@@ -48,15 +42,9 @@ public class StartupBuilder {
     private Email email;
     private Address address;
 
-<<<<<<< HEAD
-    private Valuation valuation;
-
-    private Note note;
-=======
     private List<Note> notes;
     private Valuation valuation;
 
->>>>>>> dwangwk-branch-note-command
     private Set<Tag> tags;
 
     /**
@@ -70,11 +58,7 @@ public class StartupBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-<<<<<<< HEAD
-        note = new Note(DEFAULT_NOTE);
-=======
         notes = new ArrayList<>();
->>>>>>> dwangwk-branch-note-command
         valuation = new Valuation(DEFAULT_VALUATION);
     }
 
@@ -167,11 +151,7 @@ public class StartupBuilder {
 
 
     public Startup build() {
-<<<<<<< HEAD
-        return new Startup(name, fundingStage, industry, phone, email, address, valuation, tags, note);
-=======
         return new Startup(name, fundingStage, industry, phone, email, address, valuation, tags, notes);
->>>>>>> dwangwk-branch-note-command
     }
 
 }
