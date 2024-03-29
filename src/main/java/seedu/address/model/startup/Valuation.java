@@ -39,7 +39,9 @@ public class Valuation {
         Double doubleValuation = Double.valueOf(valuation);
         // If it's below 1000, we don't need to format it!
         if (doubleValuation.compareTo((double) 1000) < 0) {
-            return valuation;
+            // We can safely use integer here because we know decimals will not be an output.
+            // And since it's value < 1000, it will not overflow on integer.
+            return Integer.valueOf(valuation).toString();
         }
         return reformatString(doubleValuation, 0);
     }
