@@ -36,22 +36,6 @@ public class Startup {
      * Every field must be present and not null.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
-                   Phone phone, Email email, Address address, Valuation valuation, Set<Tag> tags) {
-        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags, valuation);
-        this.name = name;
-        this.fundingStage = fundingStage;
-        this.valuation = valuation;
-        this.industry = industry;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
                    Set<Tag> tags, List<Note> notes) {
         requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);

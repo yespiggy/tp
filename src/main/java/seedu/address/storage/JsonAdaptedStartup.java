@@ -49,8 +49,8 @@ class JsonAdaptedStartup {
     public JsonAdaptedStartup(@JsonProperty("name") String name, @JsonProperty("industry") String industry,
                               @JsonProperty("fundingStage") String fundingStage, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("valuation") String valuation, @JsonProperty("notes") List<String> notes,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("valuation") String valuation, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("notes") List<String> notes) {
         this.name = name;
         this.industry = industry;
         this.fundingStage = fundingStage;
