@@ -6,6 +6,7 @@
     "fundingStage": "A",
     "email": "invalid@email!3e",
     "address": "4th street",
+    "valuation": "1000",
     "note": "Add a note!"
   } ]
 }

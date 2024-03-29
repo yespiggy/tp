@@ -12,6 +12,7 @@ import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,6 +41,7 @@ public class EditStartupDescriptorBuilder {
         descriptor.setPhone(startup.getPhone());
         descriptor.setEmail(startup.getEmail());
         descriptor.setAddress(startup.getAddress());
+        descriptor.setValuation(startup.getValuation());
         descriptor.setTags(startup.getTags());
 
     }
@@ -104,5 +106,13 @@ public class EditStartupDescriptorBuilder {
 
     public EditStartupDescriptor build() {
         return descriptor;
+    }
+
+    /**
+     * Sets the {@code Valuation} of the {@code EditStartupDescriptor} that we are building.
+     */
+    public EditStartupDescriptorBuilder withValuation(String valuation) {
+        descriptor.setValuation(new Valuation(valuation));
+        return this;
     }
 }

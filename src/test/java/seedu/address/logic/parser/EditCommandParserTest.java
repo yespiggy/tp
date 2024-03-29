@@ -20,8 +20,11 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStartupDescriptor;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
+import seedu.address.model.startup.FundingStage;
+import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Phone;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditStartupDescriptorBuilder;
 
@@ -73,6 +76,12 @@ public class EditCommandParserTest {
             + CommandTestUtil.INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1"
             + CommandTestUtil.INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1"
+            + CommandTestUtil.INVALID_INDUSTRY_DESC, Industry.MESSAGE_CONSTRAINTS); // invalid industry
+        assertParseFailure(parser, "1"
+            + CommandTestUtil.INVALID_FUNDING_DESC, FundingStage.MESSAGE_CONSTRAINTS); // invalid funding stage
+        assertParseFailure(parser, "1"
+            + CommandTestUtil.INVALID_VALUATION_DESC, Valuation.MESSAGE_CONSTRAINTS); // invalid valuation
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1"
@@ -168,6 +177,13 @@ public class EditCommandParserTest {
         userInput = targetIndex.getOneBased() + CommandTestUtil.FUNDING_DESC_AMY;
         descriptor = new EditStartupDescriptorBuilder().withFundingStage(
             CommandTestUtil.VALID_FUNDING_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // valuation
+        userInput = targetIndex.getOneBased() + CommandTestUtil.VALUATION_DESC_AMY;
+        descriptor = new EditStartupDescriptorBuilder().withValuation(
+          CommandTestUtil.VALID_VALUATION_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

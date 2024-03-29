@@ -25,6 +25,7 @@ public class Startup {
 
     private final FundingStage fundingStage;
     private final Industry industry;
+    private final Valuation valuation;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
@@ -33,10 +34,11 @@ public class Startup {
      * Every field must be present and not null.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
-                   Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags);
+                   Phone phone, Email email, Address address, Valuation valuation, Set<Tag> tags) {
+        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags, valuation);
         this.name = name;
         this.fundingStage = fundingStage;
+        this.valuation = valuation;
         this.industry = industry;
         this.phone = phone;
         this.email = email;
@@ -49,12 +51,14 @@ public class Startup {
      * Every field must be present and not null.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
-                   Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
-        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags);
+                   Phone phone, Email email, Address address, Valuation valuation,
+                   Set<Tag> tags, Note note) {
+        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags, valuation);
         this.name = name;
         this.fundingStage = fundingStage;
         this.industry = industry;
         this.phone = phone;
+        this.valuation = valuation;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
@@ -63,6 +67,10 @@ public class Startup {
 
     public FundingStage getFundingStage() {
         return this.fundingStage;
+    }
+
+    public Valuation getValuation() {
+        return this.valuation;
     }
 
     public Industry getIndustry() {
@@ -132,7 +140,8 @@ public class Startup {
                 && phone.equals(otherStartup.phone)
                 && email.equals(otherStartup.email)
                 && address.equals(otherStartup.address)
-                && tags.equals(otherStartup.tags);
+                && tags.equals(otherStartup.tags)
+                && valuation.equals(otherStartup.valuation);
     }
 
     @Override
@@ -150,6 +159,7 @@ public class Startup {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("valuation", valuation)
                 .add("note", note)
                 .add("tags", tags)
                 .toString();

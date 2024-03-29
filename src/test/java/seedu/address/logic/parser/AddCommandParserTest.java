@@ -18,6 +18,7 @@ import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StartupBuilder;
 
@@ -33,7 +34,7 @@ public class AddCommandParserTest {
                 + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
                 + CommandTestUtil.EMAIL_DESC_BOB
                 + CommandTestUtil.INDUSTRY_DESC_BOB + CommandTestUtil.FUNDING_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.TAG_DESC_FRIEND, new AddCommand(expectedStartup));
 
 
@@ -44,6 +45,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
                 + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.INDUSTRY_DESC_BOB + CommandTestUtil.FUNDING_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
                 new AddCommand(expectedStartupMultipleTags));
@@ -53,6 +55,7 @@ public class AddCommandParserTest {
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedStartupString = CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.INDUSTRY_DESC_BOB + CommandTestUtil.FUNDING_DESC_BOB
+                + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
                 + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.TAG_DESC_FRIEND;
 
@@ -79,6 +82,10 @@ public class AddCommandParserTest {
         // multiple industry
         assertParseFailure(parser, CommandTestUtil.INDUSTRY_DESC_AMY + validExpectedStartupString,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_INDUSTRY));
+
+        // multiple valuations
+        assertParseFailure(parser, CommandTestUtil.VALUATION_DESC_AMY + validExpectedStartupString,
+            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_VALUATION));
 
         // multiple fields repeated
         assertParseFailure(parser,
@@ -139,6 +146,10 @@ public class AddCommandParserTest {
         // invalid funding stage
         assertParseFailure(parser, validExpectedStartupString + CommandTestUtil.INVALID_FUNDING_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_FUNDING_STAGE));
+
+        // invalid valuation
+        assertParseFailure(parser, validExpectedStartupString + CommandTestUtil.INVALID_VALUATION_DESC,
+            Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_VALUATION));
     }
 
     @Test
@@ -146,8 +157,8 @@ public class AddCommandParserTest {
         // zero tags
         Startup expectedStartup = new StartupBuilder(AMY).withTags().build();
         assertParseSuccess(parser, CommandTestUtil.NAME_DESC_AMY
-                + CommandTestUtil.INDUSTRY_DESC_AMY
-                + CommandTestUtil.FUNDING_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
+                + CommandTestUtil.INDUSTRY_DESC_AMY + CommandTestUtil.FUNDING_DESC_AMY
+                + CommandTestUtil.PHONE_DESC_AMY + CommandTestUtil.VALUATION_DESC_AMY
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY,
                 new AddCommand(expectedStartup));
     }
@@ -160,13 +171,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, CommandTestUtil.VALID_NAME_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB,
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB,
                 expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-                + CommandTestUtil.VALID_PHONE_BOB
+                + CommandTestUtil.VALID_PHONE_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB,
                 expectedMessage);
 
@@ -174,28 +185,35 @@ public class AddCommandParserTest {
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.VALID_EMAIL_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB,
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB,
                 expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.VALID_ADDRESS_BOB,
+                + CommandTestUtil.VALID_ADDRESS_BOB + CommandTestUtil.VALUATION_DESC_BOB,
                 expectedMessage);
 
         // missing industry prefix
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
             + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.ADDRESS_DESC_BOB
             + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-            + CommandTestUtil.VALID_ADDRESS_BOB,
+            + CommandTestUtil.VALID_ADDRESS_BOB + CommandTestUtil.VALUATION_DESC_BOB,
             expectedMessage);
 
         // missing funding stage prefix
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
             + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
             + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-            + CommandTestUtil.VALID_ADDRESS_BOB,
+            + CommandTestUtil.VALID_ADDRESS_BOB + CommandTestUtil.VALUATION_DESC_BOB,
+            expectedMessage);
+
+        // missing valuation prefix
+        assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
+            + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
+            + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+            + CommandTestUtil.VALID_ADDRESS_BOB + CommandTestUtil.FUNDING_DESC_BOB,
             expectedMessage);
 
         // all prefixes missing
@@ -211,7 +229,7 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND
                 + CommandTestUtil.TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
@@ -219,7 +237,7 @@ public class AddCommandParserTest {
         // invalid phone
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.INVALID_PHONE_DESC + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND
                 + CommandTestUtil.TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
@@ -227,7 +245,7 @@ public class AddCommandParserTest {
         // invalid email
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.INVALID_EMAIL_DESC
-                + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND
                 + CommandTestUtil.TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
@@ -235,7 +253,7 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.INVALID_ADDRESS_DESC
+                + CommandTestUtil.INVALID_ADDRESS_DESC + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.TAG_DESC_HUSBAND
                 + CommandTestUtil.TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
@@ -244,30 +262,38 @@ public class AddCommandParserTest {
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
               + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
               + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.INVALID_FUNDING_DESC
-                + CommandTestUtil.INDUSTRY_DESC_BOB
+                + CommandTestUtil.INDUSTRY_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
               + CommandTestUtil.TAG_DESC_HUSBAND
               + CommandTestUtil.TAG_DESC_FRIEND, FundingStage.MESSAGE_CONSTRAINTS);
 
         // invalid industry
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
               + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-              + CommandTestUtil.ADDRESS_DESC_BOB
+              + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
               + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INVALID_INDUSTRY_DESC
               + CommandTestUtil.TAG_DESC_HUSBAND
               + CommandTestUtil.TAG_DESC_FRIEND, Industry.MESSAGE_CONSTRAINTS);
+
+        // invalid valuation
+        assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
+              + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
+              + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.INVALID_VALUATION_DESC
+              + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
+              + CommandTestUtil.TAG_DESC_HUSBAND
+              + CommandTestUtil.TAG_DESC_FRIEND, Valuation.MESSAGE_CONSTRAINTS);
 
 
         // invalid tag
         assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
                 + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.INVALID_TAG_DESC
                 + CommandTestUtil.VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC
-                + CommandTestUtil.PHONE_DESC_BOB
+                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
                 + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC,
                 Name.MESSAGE_CONSTRAINTS);
@@ -275,9 +301,10 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, CommandTestUtil.PREAMBLE_NON_EMPTY
                 + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                + CommandTestUtil.EMAIL_DESC_BOB
+                + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
                 + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND + CommandTestUtil.TAG_DESC_FRIEND,
+                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
+                + CommandTestUtil.TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

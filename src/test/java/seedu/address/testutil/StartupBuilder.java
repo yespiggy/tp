@@ -11,6 +11,7 @@ import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -28,6 +29,8 @@ public class StartupBuilder {
 
     public static final String DEFAULT_FUNDING = "A";
 
+    public static final String DEFAULT_VALUATION = "1000";
+
     public static final String DEFAULT_NOTE = "Add a note!";
 
     private Name name;
@@ -39,6 +42,8 @@ public class StartupBuilder {
 
     private Email email;
     private Address address;
+
+    private Valuation valuation;
 
     private Note note;
     private Set<Tag> tags;
@@ -55,6 +60,7 @@ public class StartupBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         note = new Note(DEFAULT_NOTE);
+        valuation = new Valuation(DEFAULT_VALUATION);
     }
 
     /**
@@ -69,6 +75,7 @@ public class StartupBuilder {
         address = startupToCopy.getAddress();
         note = startupToCopy.getNote();
         tags = new HashSet<>(startupToCopy.getTags());
+        valuation = startupToCopy.getValuation();
     }
 
     /**
@@ -135,9 +142,17 @@ public class StartupBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code valuation} of the {@code Startup} that we are building.
+     */
+    public StartupBuilder withValuation(String valuation) {
+        this.valuation = new Valuation(valuation);
+        return this;
+    }
+
 
     public Startup build() {
-        return new Startup(name, fundingStage, industry, phone, email, address, tags, note);
+        return new Startup(name, fundingStage, industry, phone, email, address, valuation, tags, note);
     }
 
 }

@@ -75,8 +75,10 @@ public class NoteCommand extends Command {
 
         Note updatedNote = noteStartupDescriptor.getNote().orElse(startupToEdit.getNote());
 
-        return new Startup(startupToEdit.getName(), startupToEdit.getFundingStage(), startupToEdit.getIndustry(),
-                startupToEdit.getPhone(), startupToEdit.getEmail(), startupToEdit.getAddress(),
+        return new Startup(startupToEdit.getName(),
+                startupToEdit.getFundingStage(), startupToEdit.getIndustry(),
+                startupToEdit.getPhone(), startupToEdit.getEmail(),
+                startupToEdit.getAddress(), startupToEdit.getValuation(),
                 startupToEdit.getTags(), updatedNote);
     }
 
