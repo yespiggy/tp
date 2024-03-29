@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import seedu.address.model.startup.Startup;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.FundingStage;
@@ -21,6 +22,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+=======
+import seedu.address.model.startup.Address;
+import seedu.address.model.startup.Email;
+import seedu.address.model.startup.FundingStage;
+import seedu.address.model.startup.Industry;
+import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Phone;
+import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
+import seedu.address.model.tag.Tag;
+
+
+/**
+ * Contains utility methods for populating {@code AddressBook} with sample data.
+ */
+>>>>>>> dcb07730 (style: Fix checkstyle for main)
 public class SampleDataUtil {
     public static Startup[] getSampleStartups() {
         return new Startup[] {

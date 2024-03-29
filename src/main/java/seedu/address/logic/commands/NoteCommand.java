@@ -73,11 +73,13 @@ public class NoteCommand extends Command {
     private static Startup createEditedStartup(Startup startupToEdit, NoteStartupDescriptor noteStartupDescriptor) {
         assert startupToEdit != null;
 
-        Note updatedNote = noteStartupDescriptor.getNote().orElse(startupToEdit.getNotes());
+        List<Note> updatedNotes = noteStartupDescriptor.getNotes().orElse(startupToEdit.getNotes());
 
-        return new Startup(startupToEdit.getName(), startupToEdit.getFundingStage(), startupToEdit.getIndustry(),
-                startupToEdit.getPhone(), startupToEdit.getEmail(), startupToEdit.getAddress(), startupToEdit.getValuation(),
-                startupToEdit.getTags(), updatedNote);
+        return new Startup(startupToEdit.getName(),
+                startupToEdit.getFundingStage(), startupToEdit.getIndustry(),
+                startupToEdit.getPhone(), startupToEdit.getEmail(),
+                startupToEdit.getAddress(), startupToEdit.getValuation(),
+                startupToEdit.getTags(), updatedNotes);
     }
 
     @Override
