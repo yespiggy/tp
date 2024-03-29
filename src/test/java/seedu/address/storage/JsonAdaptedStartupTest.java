@@ -14,11 +14,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
-<<<<<<< HEAD
-=======
-import seedu.address.model.startup.FundingStage;
-import seedu.address.model.startup.Industry;
->>>>>>> 1f3bb83c (test: Update test for industry and FS)
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Industry;
