@@ -4,7 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.startup.FundingStageContainsKeywordsPredicate;
@@ -22,7 +21,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        FindCommand findCommand = null;
+        FindCommand findCommand;
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -35,25 +34,73 @@ public class FindCommandParser implements Parser<FindCommand> {
                         CliSyntax.PREFIX_FUNDING_STAGE
                 );
 
-        String[] nameKeywords = new String[0];
-        String[] industryKeywords = new String[0];
-        String[] fundingStageKeywords = new String[0];
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
-            nameKeywords = argMultimap.getValue(CliSyntax.PREFIX_NAME).get().split("\\s+");
-            findCommand = new FindCommand(new NameContainsKeywordsPredicate((Arrays.asList(nameKeywords))));
+            findCommand = parseNameKeywords(argMultimap);
         } else if (argMultimap.getValue(CliSyntax.PREFIX_INDUSTRY).isPresent()) {
-            industryKeywords = argMultimap.getValue(CliSyntax.PREFIX_INDUSTRY).get().split("\\s+");
-            findCommand = new FindCommand(new IndustryContainsKeywordsPredicate((Arrays.asList(industryKeywords))));
+            findCommand = parseIndustryKeywords(argMultimap);
         } else if (argMultimap.getValue(CliSyntax.PREFIX_FUNDING_STAGE).isPresent()) {
-            fundingStageKeywords = argMultimap.getValue(CliSyntax.PREFIX_FUNDING_STAGE).get().split("\\s+");
-            findCommand = new FindCommand(
-                    new FundingStageContainsKeywordsPredicate((Arrays.asList(fundingStageKeywords))));
+            findCommand = parseFundingStageKeywords(argMultimap);
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditCommand.MESSAGE_USAGE));
+                    FindCommand.MESSAGE_USAGE));
         }
 
         return findCommand;
+    }
+
+    /**
+     * Parses predicate for find by name command.
+     * If the names are empty, ParseException will be thrown.
+     *
+     * @param argMultimap ArgumentMultimap that contains the predicate.
+     * @return A FindCommand object for execution.
+     * @throws ParseException If the predicate is empty.
+     */
+    public FindCommand parseNameKeywords(ArgumentMultimap argMultimap) throws ParseException {
+        String[] nameKeywords = argMultimap.getValue(CliSyntax.PREFIX_NAME).get().split("\\s+");
+        assert nameKeywords != null;
+        if (nameKeywords[0].isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+        return new FindCommand(new NameContainsKeywordsPredicate((Arrays.asList(nameKeywords))));
+    }
+
+    /**
+     * Parses predicate for find by industry command.
+     * If the industries are empty, ParseException will be thrown.
+     *
+     * @param argMultimap ArgumentMultimap that contains the predicate.
+     * @return A FindCommand object for execution.
+     * @throws ParseException If the predicate is empty.
+     */
+    public FindCommand parseIndustryKeywords(ArgumentMultimap argMultimap) throws ParseException {
+        String[] industryKeywords = argMultimap.getValue(CliSyntax.PREFIX_INDUSTRY).get().split("\\s+");
+        assert industryKeywords != null;
+        if (industryKeywords[0].isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+        return new FindCommand(new IndustryContainsKeywordsPredicate((Arrays.asList(industryKeywords))));
+    }
+
+    /**
+     * Parses predicate for find by funding stage command.
+     * If the funding stages are empty, ParseException will be thrown.
+     *
+     * @param argMultimap ArgumentMultimap that contains the predicate.
+     * @return A FindCommand object for execution.
+     * @throws ParseException If the predicate is empty.
+     */
+    public FindCommand parseFundingStageKeywords(ArgumentMultimap argMultimap) throws ParseException {
+        String[] fundingStageKeywords = argMultimap.getValue(CliSyntax.PREFIX_FUNDING_STAGE).get().split("\\s+");
+        assert fundingStageKeywords != null;
+        if (fundingStageKeywords[0].isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
+        }
+        return new FindCommand(
+                new FundingStageContainsKeywordsPredicate((Arrays.asList(fundingStageKeywords))));
     }
 
 }

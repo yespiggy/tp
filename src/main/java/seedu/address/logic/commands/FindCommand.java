@@ -27,7 +27,8 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/ Names \n"
             + "Example: " + COMMAND_WORD + " i/ Industries \n"
             + "Example: " + COMMAND_WORD + " f/ Funding Stages \n"
-            + "Example: " + COMMAND_WORD + " f/ B C";;
+            + "Note that funding stage SEED is only searchable by entering S \n"
+            + "Similarly, Pre-seed is searchable with PS. SERIES A/B/C is searchable using A/B/C";
 
     private final Predicate<Startup> predicate;
 
