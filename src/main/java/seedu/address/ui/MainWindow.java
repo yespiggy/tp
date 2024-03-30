@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.startup.Note;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,6 +35,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StartupListPanel startupListPanel;
+
+    private NoteListPanel noteListPanel;
+
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane startupListPanelPlaceholder;
+
+    @FXML
+    private StackPane noteListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,8 +119,22 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        startupListPanel = new StartupListPanel(logic.getFilteredStartupList());
+        noteListPanelPlaceholder.setStyle("-fx-background-color: #333;");
+        startupListPanel = new StartupListPanel(logic.getFilteredStartupList(), selectedStartup -> {
+            // When a startup is selected, update NoteListPanel with its notes
+            if (selectedStartup != null) {
+                ObservableList<Note> notes = FXCollections.observableArrayList(selectedStartup.getNotes());
+                noteListPanel.displayNotes(notes);
+            } else {
+                // Clear the NoteListPanel if no startup is selected
+                noteListPanel.displayNotes(FXCollections.observableArrayList());
+            }
+        });
         startupListPanelPlaceholder.getChildren().add(startupListPanel.getRoot());
+
+        // Initialize NoteListPanel with an empty list (until a startup is selected)
+        noteListPanel = new NoteListPanel(FXCollections.observableArrayList());
+        noteListPanelPlaceholder.getChildren().add(noteListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

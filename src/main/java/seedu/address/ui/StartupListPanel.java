@@ -17,16 +17,28 @@ public class StartupListPanel extends UiPart<Region> {
     private static final String FXML = "StartupListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(StartupListPanel.class);
 
+    private StartupSelectionHandler selectionHandler;
+
     @FXML
     private ListView<Startup> startupListView;
 
     /**
      * Creates a {@code StartupListPanel} with the given {@code ObservableList}.
      */
-    public StartupListPanel(ObservableList<Startup> startupList) {
+    public StartupListPanel(ObservableList<Startup> startupList, StartupSelectionHandler selectionHandler) {
         super(FXML);
+        this.selectionHandler = selectionHandler;
         startupListView.setItems(startupList);
         startupListView.setCellFactory(listView -> new StartupListViewCell());
+        setupSelectionListener();
+    }
+
+    private void setupSelectionListener() {
+        startupListView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                selectionHandler.handle(newSelection);
+            }
+        });
     }
 
     /**
@@ -47,3 +59,5 @@ public class StartupListPanel extends UiPart<Region> {
     }
 
 }
+
+

@@ -7,8 +7,8 @@
     "fundingStage": "A",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "notes": [ "Innovative project ideas", "Looking into Series A funding" ],
     "valuation": "1000",
-    "note": "Add a note!",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,8 +17,8 @@
     "fundingStage": "A",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "notes": [ "Strong technical team", "Consider for next investment round" ],
     "valuation": "1000",
-    "note": "Add a note!",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -27,8 +27,8 @@
     "fundingStage": "C",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "notes": [ "Potential for high ROI", "Needs better marketing strategy" ],
     "valuation": "1000",
-    "note": "Add a note!",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -37,8 +37,8 @@
     "fundingStage": "A",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "notes": [ "Solid business model", "Expansion into new markets" ],
     "valuation": "1000",
-    "note": "Add a note!",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -47,8 +47,8 @@
     "fundingStage": "C",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "valuation": "0",
-    "note": "Add a note!",
+    "notes": [ "Revolutionary technology", "Needs additional funding" ],
+    "valuation": "1000",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -57,8 +57,8 @@
     "fundingStage": "C",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "notes": [ "High user engagement", "Exploring partnership opportunities" ],
     "valuation": "1000",
-    "note": "Add a note!",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -67,8 +67,9 @@
     "fundingStage": "A",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "notes": [ "Experienced management team", "Profitable quarter reported" ],
     "valuation": "1000",
-    "note": "Add a note!",
     "tags" : [ ]
   } ]
 }
+
