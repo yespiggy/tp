@@ -35,20 +35,22 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-//    @Test
-//    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-//        Startup editedStartup = new StartupBuilder().build();
-//        EditStartupDescriptor descriptor = new EditStartupDescriptorBuilder(editedStartup).build();
-//        EditCommand editCommand = new EditCommand(INDEX_FIRST_STARTUP, descriptor);
-//
-//        String expectedMessage = String.format(
-//                EditCommand.MESSAGE_EDIT_STARTUP_SUCCESS, Messages.format(editedStartup));
-//
-//        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-//        expectedModel.setStartup(model.getFilteredStartupList().get(0), editedStartup);
-//
-//        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-//    }
+    /*
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Startup editedStartup = new StartupBuilder().build();
+        EditStartupDescriptor descriptor = new EditStartupDescriptorBuilder(editedStartup).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_STARTUP, descriptor);
+
+        String expectedMessage = String.format(
+                EditCommand.MESSAGE_EDIT_STARTUP_SUCCESS, Messages.format(editedStartup));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStartup(model.getFilteredStartupList().get(0), editedStartup);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+     */
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
