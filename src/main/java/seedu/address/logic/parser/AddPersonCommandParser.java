@@ -7,16 +7,18 @@ import seedu.address.model.person.Description;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonEmail;
 import seedu.address.model.person.PersonName;
-import seedu.address.model.tag.Tag;
 
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_NAME;
 
 /**
  * Parses input arguments and creates a new AddPersonCommand object
