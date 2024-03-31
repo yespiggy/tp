@@ -57,6 +57,7 @@ public class PersonListPanel extends UiPart<Region> {
         personContainer.getChildren().clear(); // Clear existing persons
         Label title = new Label("Key Employees");
         title.setStyle("-fx-font-size: 20px; -fx-text-fill: white; -fx-label-padding: 10;");
+        personContainer.getChildren().add(title);
 
         if (persons.isEmpty()) {
             // Add a placeholder to fill the background color
