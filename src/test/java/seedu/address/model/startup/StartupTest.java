@@ -111,6 +111,7 @@ public class StartupTest {
                 + ", address=" + ALICE.getAddress()
                 + ", valuation=" + ALICE.getValuation()
                 + ", tags=" + ALICE.getTags()
+                + ", persons=" + ALICE.getPersons()
                 + ", notes=" + ALICE.getNotes() + "}";
         assertEquals(expected, ALICE.toString());
     }
