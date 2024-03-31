@@ -19,8 +19,8 @@ public class AddNoteCommand extends Command {
     public static final String COMMAND_WORD = "addnote";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the startup identified "
             + "by the index number used in the displayed startup list. "
-            + "Parameters: INDEX (must be a positive integer) n/NOTE\n"
-            + "Example: " + COMMAND_WORD + " 1 n/New note for startup";
+            + "Parameters: INDEX (must be a positive integer) NOTE\n"
+            + "Example: " + COMMAND_WORD + " 1 New note for startup";
 
     public static final String MESSAGE_SUCCESS = "New note added to Startup: %1$s";
 
@@ -63,7 +63,8 @@ public class AddNoteCommand extends Command {
                 startupToEdit.getAddress(),
                 startupToEdit.getValuation(),
                 startupToEdit.getTags(),
-                updatedNotes
+                updatedNotes,
+                startupToEdit.getPersons()
         );
 
         model.setStartup(startupToEdit, editedStartup);

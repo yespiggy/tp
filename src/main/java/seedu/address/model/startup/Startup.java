@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ public class Startup {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private List<Note> notes = new ArrayList<>();
+    private Set<Person> persons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -65,6 +67,25 @@ public class Startup {
         this.address = address;
         this.tags.addAll(tags);
         this.notes = new ArrayList<>(notes); // Defensive copy
+    }
+
+    /**
+     * Constructor for persons.
+     */
+    public Startup(Name name, FundingStage fundingStage, Industry industry,
+                   Phone phone, Email email, Address address, Valuation valuation,
+                   Set<Tag> tags, List<Note> notes, Set<Person> persons) {
+        requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
+        this.name = name;
+        this.fundingStage = fundingStage;
+        this.industry = industry;
+        this.phone = phone;
+        this.valuation = valuation;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.notes = new ArrayList<>(notes); // Defensive copy
+        this.persons.addAll(persons);
     }
 
     public FundingStage getFundingStage() {
@@ -109,6 +130,14 @@ public class Startup {
     }
 
     /**
+     * Returns an immutable person set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Person> getPersons() {
+        return Collections.unmodifiableSet(persons);
+    }
+
+    /**
      * Returns true if both startups have the same name.
      * This defines a weaker notion of equality between two startups.
      */
@@ -145,13 +174,14 @@ public class Startup {
                 && address.equals(otherStartup.address)
                 && tags.equals(otherStartup.tags)
                 && notes.equals(otherStartup.notes)
-                && valuation.equals(otherStartup.valuation);
+                && valuation.equals(otherStartup.valuation)
+                && persons.equals(otherStartup.persons);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, notes);
+        return Objects.hash(name, phone, email, address, tags, notes, persons);
     }
 
     @Override
@@ -164,7 +194,8 @@ public class Startup {
                 .add("email", email)
                 .add("address", address)
                 .add("valuation", valuation)
-                .add("tags", tags);
+                .add("tags", tags)
+                .add("persons", persons);
 
         if (notes.isEmpty()) {
             builder.add("notes", "No notes added");

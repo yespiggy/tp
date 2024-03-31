@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
@@ -41,6 +42,7 @@ class JsonAdaptedStartup {
 
     private final List<String> notes;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStartup} with the given startup details.
@@ -51,7 +53,8 @@ class JsonAdaptedStartup {
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("valuation") String valuation,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                              @JsonProperty("notes") List<String> notes) {
+                              @JsonProperty("notes") List<String> notes,
+                              @JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.name = name;
         this.industry = industry;
         this.fundingStage = fundingStage;
@@ -62,6 +65,9 @@ class JsonAdaptedStartup {
         this.valuation = valuation;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (persons != null) {
+            this.persons.addAll(persons);
         }
     }
 
@@ -82,6 +88,9 @@ class JsonAdaptedStartup {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        persons.addAll(source.getPersons().stream()
+                .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -93,6 +102,11 @@ class JsonAdaptedStartup {
         final List<Tag> startupTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             startupTags.add(tag.toModelType());
+        }
+
+        final List<Person> startupPersons = new ArrayList<>();
+        for (JsonAdaptedPerson person : persons) {
+            startupPersons.add(person.toModelType());
         }
 
         if (name == null) {
@@ -163,8 +177,10 @@ class JsonAdaptedStartup {
         }
 
         final Set<Tag> modelTags = new HashSet<>(startupTags);
+        final Set<Person> modelPersons = new HashSet<>(startupPersons);
         return new Startup(modelName, modelFundingStage, modelIndustry,
-                modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes);
+                modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes,
+                modelPersons);
     }
 
 }
