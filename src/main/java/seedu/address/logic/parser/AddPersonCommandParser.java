@@ -1,5 +1,16 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_NAME;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -8,17 +19,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonEmail;
 import seedu.address.model.person.PersonName;
 
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Set;
-import java.util.stream.Stream;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_NAME;
 
 /**
  * Parses input arguments and creates a new AddPersonCommand object
@@ -75,15 +75,16 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> description} into a {@code Set<Description>} if {@code descriptions} is non-empty.
+     * Parses {@code Collection<String> description} into a {@code Set<Description>}
+     * if {@code descriptions} is non-empty.
      * If {@code descriptions} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Description>} containing zero descriptions.
      */
     private Set<Description> parseDescriptionsForAddPerson(Collection<String> descriptions) throws ParseException {
         assert descriptions != null;
 
-        Collection<String> descriptionSet = descriptions.size() == 1 && descriptions.contains("") ?
-                Collections.emptySet() : descriptions;
+        Collection<String> descriptionSet = descriptions.size() == 1 && descriptions.contains("")
+                ? Collections.emptySet() : descriptions;
         return ParserUtil.parseDescriptions(descriptionSet);
     }
 }

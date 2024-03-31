@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import javax.print.attribute.standard.PresentationDirection;
 
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
