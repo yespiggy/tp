@@ -177,8 +177,10 @@ class JsonAdaptedStartup {
         }
 
         final Set<Tag> modelTags = new HashSet<>(startupTags);
+        final Set<Person> modelPersons = new HashSet<>(startupPersons);
         return new Startup(modelName, modelFundingStage, modelIndustry,
-                modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes);
+                modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes,
+                modelPersons);
     }
 
 }
