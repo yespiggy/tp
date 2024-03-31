@@ -43,6 +43,9 @@ public class NoteListPanel extends UiPart<Region> {
      */
     public void displayNotes(ObservableList<Note> notes) {
         noteContainer.getChildren().clear(); // Clear existing notes
+        Label title = new Label("Notes");
+        title.setStyle("-fx-font-size: 20px; -fx-text-fill: white;");
+        noteContainer.getChildren().add(title);
 
         if (notes.isEmpty()) {
             // Add a placeholder to fill the background color

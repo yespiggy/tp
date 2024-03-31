@@ -64,6 +64,9 @@ public class Messages {
         return builder.toString().trim(); // Trim to remove any trailing spaces
     }
 
+    /**
+     * Formats the {@code person} for display to the user.
+     */
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
