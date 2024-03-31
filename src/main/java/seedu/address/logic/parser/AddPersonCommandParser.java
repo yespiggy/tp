@@ -36,8 +36,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_PERSON_NAME,
                         CliSyntax.PREFIX_PERSON_EMAIL, CliSyntax.PREFIX_PERSON_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_NAME, PREFIX_PERSON_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_PERSON_NAME, PREFIX_PERSON_EMAIL)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
         }
 

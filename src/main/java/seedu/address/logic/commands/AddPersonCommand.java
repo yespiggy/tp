@@ -29,10 +29,12 @@ public class AddPersonCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the startup "
             + "key persons section in CapitalConnect. "
             + "Parameters: "
+            + "INDEX "
             + CliSyntax.PREFIX_PERSON_NAME + "NAME "
-            + CliSyntax.PREFIX_EMAIL + "EMAIL  "
-            + CliSyntax.PREFIX_PERSON_DESCRIPTION + "DESCRIPTION "
-            + "Example: " + COMMAND_WORD
+            + PREFIX_PERSON_EMAIL + "EMAIL  "
+            + CliSyntax.PREFIX_PERSON_DESCRIPTION + "DESCRIPTION \n"
+            + "Example: " + COMMAND_WORD + " "
+            + "1 "
             + CliSyntax.PREFIX_PERSON_NAME + "John "
             + CliSyntax.PREFIX_PERSON_EMAIL + "johndoe@example.com "
             + CliSyntax.PREFIX_PERSON_DESCRIPTION + "founder";
