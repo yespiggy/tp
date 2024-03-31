@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
@@ -46,6 +47,7 @@ public class StartupBuilder {
     private Valuation valuation;
 
     private Set<Tag> tags;
+    private Set<Person> persons;
 
     /**
      * Creates a {@code StartupBuilder} with the default details.
@@ -59,6 +61,7 @@ public class StartupBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         notes = new ArrayList<>();
+        persons = new HashSet<>();
         valuation = new Valuation(DEFAULT_VALUATION);
     }
 
@@ -74,6 +77,7 @@ public class StartupBuilder {
         address = startupToCopy.getAddress();
         notes = startupToCopy.getNotes();
         tags = new HashSet<>(startupToCopy.getTags());
+        persons = new HashSet<>(startupToCopy.getPersons());
         valuation = startupToCopy.getValuation();
     }
 
@@ -90,6 +94,14 @@ public class StartupBuilder {
      */
     public StartupBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code persons} into a {@code Set<Person>} and set it to the {@code Startup} that we are building.
+     */
+    public StartupBuilder withPersons(Person ... persons) {
+        this.persons = SampleDataUtil.getPersonSet(persons);
         return this;
     }
 
