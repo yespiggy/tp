@@ -16,8 +16,8 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Email email;
+    private final PersonName personName;
+    private final PersonEmail personEmail;
 
     // Data fields
     private final Set<Description> descriptions = new HashSet<>();
@@ -25,19 +25,19 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Set<Description> descriptions) {
-        requireAllNonNull(name, email, descriptions);
-        this.name = name;
-        this.email = email;
+    public Person(PersonName personName, PersonEmail personEmail, Set<Description> descriptions) {
+        requireAllNonNull(personName, personEmail);
+        this.personName = personName;
+        this.personEmail = personEmail;
         this.descriptions.addAll(descriptions);
     }
 
-    public Name getName() {
-        return name;
+    public PersonName getName() {
+        return personName;
     }
 
-    public Email getEmail() {
-        return email;
+    public PersonEmail getEmail() {
+        return personEmail;
     }
     /**
      * Returns an immutable description set, which throws {@code UnsupportedOperationException}
@@ -76,22 +76,22 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && email.equals(otherPerson.email)
+        return personName.equals(otherPerson.personName)
+                && personEmail.equals(otherPerson.personEmail)
                 && descriptions.equals(otherPerson.descriptions);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, descriptions);
+        return Objects.hash(personName, personEmail, descriptions);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("email", email)
+                .add("name", personName)
+                .add("email", personEmail)
                 .add("descriptions", descriptions)
                 .toString();
     }
