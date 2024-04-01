@@ -108,9 +108,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editStartupDescriptor.getAddress().orElse(startupToEdit.getAddress());
         Valuation updatedValuation = editStartupDescriptor.getValuation().orElse(startupToEdit.getValuation());
         Set<Tag> updatedTags = editStartupDescriptor.getTags().orElse(startupToEdit.getTags());
-        List<Note> notes = startupToEdit.getNotes();
+        List<Note> updatedNotes = editStartupDescriptor.getNotes().orElse(startupToEdit.getNotes());
         return new Startup(updatedName, updatedFundingStage, updatedIndustry,
-            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, notes);
+            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, updatedNotes);
     }
 
     @Override
