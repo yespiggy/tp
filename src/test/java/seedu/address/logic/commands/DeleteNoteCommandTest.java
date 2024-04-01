@@ -1,17 +1,18 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STARTUP;
+import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Startup;
 import seedu.address.testutil.StartupBuilder;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STARTUP;
-import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
 
 
 public class DeleteNoteCommandTest {

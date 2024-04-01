@@ -1,16 +1,17 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STARTUP;
+import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Startup;
-import seedu.address.model.UserPrefs;
 import seedu.address.testutil.StartupBuilder;
 
 
@@ -25,7 +26,8 @@ public class AddNoteCommandTest {
         Note newNote = new Note("New note content");
         AddNoteCommand addNoteCommand = new AddNoteCommand(INDEX_FIRST_STARTUP, newNote);
 
-        Startup expectedStartup = new StartupBuilder(startupToEdit).withNotes("Innovative project ideas", "Looking into Series A funding", newNote.toString()).build();
+        Startup expectedStartup = new StartupBuilder(startupToEdit).withNotes("Innovative project ideas",
+                "Looking into Series A funding", newNote.toString()).build();
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         expectedModel.setStartup(startupToEdit, expectedStartup);
