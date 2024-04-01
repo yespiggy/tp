@@ -49,6 +49,7 @@ public class Startup {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.notes = new ArrayList<>();
     }
 
     /**
