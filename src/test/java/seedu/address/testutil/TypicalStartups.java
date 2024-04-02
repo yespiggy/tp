@@ -36,7 +36,7 @@ public class TypicalStartups {
             .withTags("owesMoney", "friends").build();
     public static final Startup CARL = new StartupBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withIndustry("web3").withFundingStage("C")
-            .withNotes("Potential for high ROI", "Needs better marketing strategy").withAddress("wall street").build();
+            .withAddress("wall street").build();
     public static final Startup DANIEL = new StartupBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withIndustry("finance").withFundingStage("A")
             .withNotes("Solid business model", "Expansion into new markets")

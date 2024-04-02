@@ -27,7 +27,7 @@
     "fundingStage": "C",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "notes": [ "Potential for high ROI", "Needs better marketing strategy" ],
+    "notes": [],
     "valuation": "1000",
     "tags" : [ ]
   }, {
