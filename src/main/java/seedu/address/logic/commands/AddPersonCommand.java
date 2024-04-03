@@ -66,6 +66,7 @@ public class AddPersonCommand extends Command {
 
         // Creates a new list from the existing persons and adds the new person
         ArrayList<Person> updatedPersons = new ArrayList<>(startupToEdit.getPersons());
+        updatedPersons.add(toAdd);
 
 
         // Now directly use the updated constructor
