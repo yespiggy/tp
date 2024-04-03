@@ -104,11 +104,6 @@ class JsonAdaptedStartup {
             startupTags.add(tag.toModelType());
         }
 
-        final List<Person> startupPersons = new ArrayList<>();
-        for (JsonAdaptedPerson person : persons) {
-            startupPersons.add(person.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -176,8 +171,13 @@ class JsonAdaptedStartup {
             modelNotes.add(new Note(noteString));
         }
 
+        final List<Person> startupPersons = new ArrayList<>();
+        for (JsonAdaptedPerson person : persons) {
+            startupPersons.add(person.toModelType());
+        }
+
         final Set<Tag> modelTags = new HashSet<>(startupTags);
-        final Set<Person> modelPersons = new HashSet<>(startupPersons);
+        final ArrayList<Person> modelPersons = new ArrayList<>(startupPersons);
         return new Startup(modelName, modelFundingStage, modelIndustry,
                 modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes,
                 modelPersons);

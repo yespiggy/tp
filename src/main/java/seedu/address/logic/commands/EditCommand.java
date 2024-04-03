@@ -18,6 +18,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
@@ -109,8 +110,9 @@ public class EditCommand extends Command {
         Valuation updatedValuation = editStartupDescriptor.getValuation().orElse(startupToEdit.getValuation());
         Set<Tag> updatedTags = editStartupDescriptor.getTags().orElse(startupToEdit.getTags());
         List<Note> updatedNotes = editStartupDescriptor.getNotes().orElse(startupToEdit.getNotes());
+        List<Person> persons = startupToEdit.getPersons();
         return new Startup(updatedName, updatedFundingStage, updatedIndustry,
-            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, updatedNotes);
+            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, updatedNotes, persons);
     }
 
     @Override

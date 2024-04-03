@@ -32,7 +32,7 @@ public class Startup {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private List<Note> notes = new ArrayList<>();
-    private Set<Person> persons = new HashSet<>();
+    private List<Person> persons;
 
     /**
      * Every field must be present and not null.
@@ -75,7 +75,7 @@ public class Startup {
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
-                   Set<Tag> tags, List<Note> notes, Set<Person> persons) {
+                   Set<Tag> tags, List<Note> notes, List<Person> persons) {
         requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
         this.name = name;
         this.fundingStage = fundingStage;
@@ -86,7 +86,7 @@ public class Startup {
         this.address = address;
         this.tags.addAll(tags);
         this.notes = new ArrayList<>(notes); // Defensive copy
-        this.persons.addAll(persons);
+        this.persons = new ArrayList<>(persons);
     }
 
     public FundingStage getFundingStage() {
@@ -134,8 +134,8 @@ public class Startup {
      * Returns an immutable person set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getPersons() {
-        return Collections.unmodifiableSet(persons);
+    public List<Person> getPersons() {
+        return persons;
     }
 
     /**
