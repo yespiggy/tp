@@ -183,7 +183,7 @@ public class ParserUtil {
     public static PersonName parsePersonName(String personName) throws ParseException {
         requireNonNull(personName);
         String trimmedPersonName = personName.trim();
-        if (!Name.isValidName(trimmedPersonName)) {
+        if (!PersonName.isValidName(trimmedPersonName)) {
             throw new ParseException(PersonName.MESSAGE_CONSTRAINTS);
         }
         return new PersonName(trimmedPersonName);
