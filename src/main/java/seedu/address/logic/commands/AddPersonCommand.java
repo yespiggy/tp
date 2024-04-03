@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -68,7 +66,7 @@ public class AddPersonCommand extends Command {
 
         // Creates a new list from the existing persons and adds the new person
         ArrayList<Person> updatedPersons = new ArrayList<>(startupToEdit.getPersons());
-        updatedPersons.add(toAdd);
+
 
         // Now directly use the updated constructor
         Startup editedStartup = new Startup(

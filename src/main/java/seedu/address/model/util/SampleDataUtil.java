@@ -73,9 +73,9 @@ public class SampleDataUtil {
     /**
      * Returns a tag set containing the list of strings given.
      */
-    public static Set<Person> getPersonSet(Person... persons) {
+    public static List<Person> getPersonList(Person... persons) {
         return Arrays.stream(persons)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     /**

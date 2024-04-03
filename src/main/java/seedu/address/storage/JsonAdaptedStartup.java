@@ -178,6 +178,7 @@ class JsonAdaptedStartup {
 
         final Set<Tag> modelTags = new HashSet<>(startupTags);
         final ArrayList<Person> modelPersons = new ArrayList<>(startupPersons);
+
         return new Startup(modelName, modelFundingStage, modelIndustry,
                 modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes,
                 modelPersons);

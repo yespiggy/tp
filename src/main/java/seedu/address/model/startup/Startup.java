@@ -1,5 +1,6 @@
 package seedu.address.model.startup;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class Startup {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private List<Note> notes = new ArrayList<>();
-    private List<Person> persons;
+    private List<Person> persons = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -206,4 +207,9 @@ public class Startup {
         return builder.toString();
     }
 
+
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return persons.contains(person);
+    }
 }

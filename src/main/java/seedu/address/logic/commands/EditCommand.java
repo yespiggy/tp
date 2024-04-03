@@ -110,9 +110,9 @@ public class EditCommand extends Command {
         Valuation updatedValuation = editStartupDescriptor.getValuation().orElse(startupToEdit.getValuation());
         Set<Tag> updatedTags = editStartupDescriptor.getTags().orElse(startupToEdit.getTags());
         List<Note> updatedNotes = editStartupDescriptor.getNotes().orElse(startupToEdit.getNotes());
-        List<Person> persons = startupToEdit.getPersons();
+        List<Person> updatedPersons = editStartupDescriptor.getPersons().orElse(startupToEdit.getPersons());
         return new Startup(updatedName, updatedFundingStage, updatedIndustry,
-            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, updatedNotes, persons);
+            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, updatedNotes, updatedPersons);
     }
 
     @Override
@@ -157,6 +157,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
 
         private List<Note> notes;
+        private List<Person> persons;
 
         public EditStartupDescriptor() {}
 
@@ -174,6 +175,7 @@ public class EditCommand extends Command {
             setValuation(toCopy.valuation);
             setTags(toCopy.tags);
             setNotes(toCopy.notes);
+            setPersons(toCopy.persons);
         }
 
         /**
@@ -267,6 +269,14 @@ public class EditCommand extends Command {
 
         public Optional<List<Note>> getNotes() {
             return (notes != null) ? Optional.of(Collections.unmodifiableList(notes)) : Optional.empty();
+        }
+
+        public void setPersons(List<Person> persons) {
+            this.persons = (persons != null) ? new ArrayList<>(persons) : null;
+        }
+
+        public Optional<List<Person>> getPersons() {
+            return (persons != null) ? Optional.of(Collections.unmodifiableList(persons)) : Optional.empty();
         }
 
         @Override

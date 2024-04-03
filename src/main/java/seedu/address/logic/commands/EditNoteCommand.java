@@ -67,7 +67,8 @@ public class EditNoteCommand extends Command {
                 startupToEdit.getAddress(),
                 startupToEdit.getValuation(),
                 startupToEdit.getTags(),
-                updatedNotes
+                updatedNotes,
+                startupToEdit.getPersons()
         );
 
         model.setStartup(startupToEdit, editedStartup);

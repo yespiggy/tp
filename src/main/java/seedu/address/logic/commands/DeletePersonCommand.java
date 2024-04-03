@@ -1,41 +1,43 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.startup.Note;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Startup;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static java.util.Objects.requireNonNull;
+
 /**
- * Edits a Note of a startup in the address book!
+ * Delete a Person of a startup in the address book!
  */
-public class DeleteNoteCommand extends Command {
-    public static final String COMMAND_WORD = "deletenote";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a note from the startup identified "
+public class DeletePersonCommand extends Command {
+    public static final String COMMAND_WORD = "delete-p";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a key employee from the startup identified "
             + "by the index number used in the displayed startup list. "
-            + "Parameters: INDEX (must be a positive integer) noteIndex (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer) personIndex (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 1";
 
-    public static final String MESSAGE_SUCCESS = "Note deleted from Startup: %1$s";
+    public static final String MESSAGE_SUCCESS = "Employee deleted from Startup: %1$s";
 
     private final Index index;
-    private final int noteIndex;
+    private final int personIndex;
 
     /**
      * Deletes a command for a startup.
      * @param index Index of the startup
-     * @param noteIndex Index of the note within the startup
+     * @param personIndex Index of the person within the startup
      */
-    public DeleteNoteCommand(Index index, int noteIndex) {
+    public DeletePersonCommand(Index index, int personIndex) {
         requireNonNull(index);
         this.index = index;
-        this.noteIndex = noteIndex - 1; // User input is 1-based, internal storage is 0-based.
+        this.personIndex = personIndex - 1; // User input is 1-based, internal storage is 0-based.
     }
 
     @Override
@@ -48,12 +50,12 @@ public class DeleteNoteCommand extends Command {
         }
 
         Startup startupToEdit = lastShownList.get(index.getZeroBased());
-        if (noteIndex >= startupToEdit.getNotes().size()) {
-            throw new CommandException("The note index provided is invalid.");
+        if (personIndex >= startupToEdit.getPersons().size()) {
+            throw new CommandException("The person index provided is invalid.");
         }
 
-        ArrayList<Note> updatedNotes = new ArrayList<>(startupToEdit.getNotes());
-        updatedNotes.remove(noteIndex);
+        List<Person> updatedPersons = new ArrayList<>(startupToEdit.getPersons());
+        updatedPersons.remove(personIndex);
         Startup editedStartup = new Startup(
                 startupToEdit.getName(),
                 startupToEdit.getFundingStage(),
@@ -63,8 +65,8 @@ public class DeleteNoteCommand extends Command {
                 startupToEdit.getAddress(),
                 startupToEdit.getValuation(),
                 startupToEdit.getTags(),
-                updatedNotes,
-                startupToEdit.getPersons()
+                startupToEdit.getNotes(),
+                updatedPersons
         );
 
         model.setStartup(startupToEdit, editedStartup);
@@ -77,13 +79,13 @@ public class DeleteNoteCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof DeleteNoteCommand)) { // not the same type
+        if (!(other instanceof DeletePersonCommand)) { // not the same type
             return false;
         }
 
-        DeleteNoteCommand e = (DeleteNoteCommand) other;
+        DeletePersonCommand e = (DeletePersonCommand) other;
         return index.equals(e.index)
-                && noteIndex == e.noteIndex; // Compare both the startup index and the note index within that startup
+                && personIndex == e.personIndex; // Compare both the startup index and the note index within that startup
     }
 
 }
