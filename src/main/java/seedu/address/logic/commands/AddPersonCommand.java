@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.startup.Startup;
 
 /**
@@ -70,18 +71,24 @@ public class AddPersonCommand extends Command {
 
 
         // Now directly use the updated constructor
-        Startup editedStartup = new Startup(
-                startupToEdit.getName(),
-                startupToEdit.getFundingStage(),
-                startupToEdit.getIndustry(),
-                startupToEdit.getPhone(),
-                startupToEdit.getEmail(),
-                startupToEdit.getAddress(),
-                startupToEdit.getValuation(),
-                startupToEdit.getTags(),
-                startupToEdit.getNotes(),
-                updatedPersons
-        );
+        Startup editedStartup;
+        try {
+            editedStartup = new Startup(
+                    startupToEdit.getName(),
+                    startupToEdit.getFundingStage(),
+                    startupToEdit.getIndustry(),
+                    startupToEdit.getPhone(),
+                    startupToEdit.getEmail(),
+                    startupToEdit.getAddress(),
+                    startupToEdit.getValuation(),
+                    startupToEdit.getTags(),
+                    startupToEdit.getNotes(),
+                    updatedPersons
+            );
+        } catch (DuplicatePersonException exc) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
 
         model.setStartup(startupToEdit, editedStartup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedStartup.getName(), Messages.format(toAdd)));
