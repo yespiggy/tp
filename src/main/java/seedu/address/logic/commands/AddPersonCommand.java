@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.startup.Startup;
 
 /**
- * Adds a startup to the address book.
+ * Adds a startup to CapitalConnect.
  */
 public class AddPersonCommand extends Command {
 

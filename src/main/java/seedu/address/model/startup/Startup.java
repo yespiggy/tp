@@ -53,7 +53,7 @@ public class Startup {
     }
 
     /**
-     * Constructor for notes.
+     * Constructor for Startup with notes.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
@@ -71,7 +71,7 @@ public class Startup {
     }
 
     /**
-     * Constructor for persons.
+     * Constructor for Startup with persons.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
