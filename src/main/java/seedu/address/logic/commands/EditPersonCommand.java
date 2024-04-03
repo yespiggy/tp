@@ -1,5 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,15 +23,6 @@ import seedu.address.model.person.PersonEmail;
 import seedu.address.model.person.PersonName;
 import seedu.address.model.startup.Startup;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -112,7 +113,8 @@ public class EditPersonCommand extends Command {
 
         PersonName updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         PersonEmail updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Description> updatedDescriptions = editPersonDescriptor.getDescriptions().orElse(personToEdit.getDescriptions());
+        Set<Description> updatedDescriptions = editPersonDescriptor.getDescriptions()
+                        .orElse(personToEdit.getDescriptions());
         return new Person(updatedName, updatedEmail, updatedDescriptions);
     }
 

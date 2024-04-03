@@ -47,7 +47,7 @@ public class StartupBuilder {
     private Valuation valuation;
 
     private Set<Tag> tags;
-    private Set<Person> persons;
+    private List<Person> persons;
 
     /**
      * Creates a {@code StartupBuilder} with the default details.
@@ -61,7 +61,7 @@ public class StartupBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         notes = new ArrayList<>();
-        persons = new HashSet<>();
+        persons = new ArrayList<>();
         valuation = new Valuation(DEFAULT_VALUATION);
     }
 
@@ -77,7 +77,7 @@ public class StartupBuilder {
         address = startupToCopy.getAddress();
         notes = startupToCopy.getNotes();
         tags = new HashSet<>(startupToCopy.getTags());
-        persons = new HashSet<>(startupToCopy.getPersons());
+        persons = startupToCopy.getPersons();
         valuation = startupToCopy.getValuation();
     }
 
@@ -101,7 +101,7 @@ public class StartupBuilder {
      * Parses the {@code persons} into a {@code Set<Person>} and set it to the {@code Startup} that we are building.
      */
     public StartupBuilder withPersons(Person ... persons) {
-        this.persons = SampleDataUtil.getPersonSet(persons);
+        this.persons = SampleDataUtil.getPersonList(persons);
         return this;
     }
 

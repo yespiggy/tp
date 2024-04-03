@@ -1,18 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.startup.Startup;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Delete a Person of a startup in the address book!
@@ -84,8 +82,9 @@ public class DeletePersonCommand extends Command {
         }
 
         DeletePersonCommand e = (DeletePersonCommand) other;
+        // Compare both the startup index and the note index within that startup
         return index.equals(e.index)
-                && personIndex == e.personIndex; // Compare both the startup index and the note index within that startup
+                && personIndex == e.personIndex;
     }
 
 }

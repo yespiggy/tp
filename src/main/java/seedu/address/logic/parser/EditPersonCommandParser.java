@@ -1,5 +1,13 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPersonCommand;
@@ -7,13 +15,7 @@ import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Description;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -43,7 +45,8 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
             startupIndex = ParserUtil.parseIndex(indexParts[0]);
             personIndex = ParserUtil.parseIndex(indexParts[1]);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditPersonCommand.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_PERSON_NAME, CliSyntax.PREFIX_PERSON_EMAIL);
@@ -51,13 +54,17 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
         if (argMultimap.getValue(CliSyntax.PREFIX_PERSON_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parsePersonName(argMultimap.getValue(CliSyntax.PREFIX_PERSON_NAME).get()));
+            editPersonDescriptor.setName(ParserUtil
+                    .parsePersonName(argMultimap.getValue(CliSyntax.PREFIX_PERSON_NAME).get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_PERSON_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parsePersonEmail(argMultimap.getValue(CliSyntax.PREFIX_PERSON_EMAIL).get()));
+            editPersonDescriptor.setEmail(ParserUtil
+                    .parsePersonEmail(argMultimap.getValue(CliSyntax.PREFIX_PERSON_EMAIL).get()));
         }
 
-        parseDescriptionsForEdit(argMultimap.getAllValues(CliSyntax.PREFIX_PERSON_DESCRIPTION)).ifPresent(editPersonDescriptor::setDescriptions);
+        parseDescriptionsForEdit(argMultimap
+                .getAllValues(CliSyntax.PREFIX_PERSON_DESCRIPTION))
+                .ifPresent(editPersonDescriptor::setDescriptions);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -71,7 +78,8 @@ public class EditPersonCommandParser implements Parser<EditPersonCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Description>> parseDescriptionsForEdit(Collection<String> descriptions) throws ParseException {
+    private Optional<Set<Description>> parseDescriptionsForEdit(Collection<String> descriptions)
+            throws ParseException {
         assert descriptions != null;
 
         if (descriptions.isEmpty()) {

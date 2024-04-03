@@ -222,6 +222,9 @@ public class Startup {
     }
 
 
+    /**
+     * Returns true if a startup with the same identity as {@code startup} exists in the address book.
+     */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
