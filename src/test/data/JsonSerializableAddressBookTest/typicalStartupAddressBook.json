@@ -74,7 +74,18 @@
     "address" : "4th street",
     "notes": [ "Experienced management team", "Profitable quarter reported" ],
     "valuation": "1000",
-    "tags" : [ ]
+    "tags" : [ ],
+    "persons" : [
+      {
+        "name" : "Amy Bee",
+        "email" : "amy@example.com",
+        "descriptions" : [ "founder" ]
+      }, {
+        "name" : "George Best",
+        "email" : "george@example.com",
+        "descriptions" : [ ]
+      }
+    ]
   } ]
 }
 
