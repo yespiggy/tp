@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
@@ -67,6 +68,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a description set containing the list of strings given.
+     */
+    public static Set<Description> getDescriptionSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Description::new)
                 .collect(Collectors.toSet());
     }
 
