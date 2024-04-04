@@ -119,6 +119,10 @@ public class EditStartupDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code persons} into a {@code List<Person>} and set it to the {@code EditStartupDescriptor}
+     * that we are building.
+     */
     public EditStartupDescriptorBuilder withPersons(Person... persons) {
         List<Person> personList = Arrays.stream(persons).collect(Collectors.toList());
         descriptor.setPersons(personList);
