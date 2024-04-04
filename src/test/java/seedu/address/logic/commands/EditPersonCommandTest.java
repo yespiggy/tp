@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FOUNDER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStartupAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STARTUP;
@@ -60,10 +60,10 @@ public class EditPersonCommandTest {
         Startup startupToEdit = model.getFilteredStartupList().get(indexLastStartup.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(startupToEdit.getPersons().get(1));
-        Person editedPerson = personInList.withName(VALID_NAME_BOB)
+        Person editedPerson = personInList.withName(VALID_NAME_B)
                 .withDescriptions(VALID_DESCRIPTION_FOUNDER).build();
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_B)
                 .withDescriptions(VALID_DESCRIPTION_FOUNDER).build();
         EditPersonCommand editPersonCommand = new EditPersonCommand(indexLastStartup, 2, descriptor);
 

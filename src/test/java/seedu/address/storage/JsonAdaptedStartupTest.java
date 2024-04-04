@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedStartup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStartups.BENSON;
+import static seedu.address.testutil.TypicalStartups.STARTUP2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,33 +34,33 @@ public class JsonAdaptedStartupTest {
 
     private static final String INVALID_INDUSTRY = " ";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
+    private static final String VALID_NAME = STARTUP2.getName().toString();
+    private static final String VALID_PHONE = STARTUP2.getPhone().toString();
+    private static final String VALID_EMAIL = STARTUP2.getEmail().toString();
+    private static final String VALID_ADDRESS = STARTUP2.getAddress().toString();
 
-    private static final String VALID_VALUATION = BENSON.getValuation().toString();
+    private static final String VALID_VALUATION = STARTUP2.getValuation().toString();
 
-    private static final String VALID_FUNDING = BENSON.getFundingStage().toString();
+    private static final String VALID_FUNDING = STARTUP2.getFundingStage().toString();
 
-    private static final String VALID_INDUSTRY = BENSON.getIndustry().toString();
+    private static final String VALID_INDUSTRY = STARTUP2.getIndustry().toString();
 
-    private static final List<String> VALID_NOTES = BENSON.getNotes().stream()
+    private static final List<String> VALID_NOTES = STARTUP2.getNotes().stream()
             .map(Note::toString)
             .collect(Collectors.toList());
 
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final List<JsonAdaptedTag> VALID_TAGS = STARTUP2.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
-    private static final List<JsonAdaptedPerson> VALID_PERSONS = BENSON.getPersons().stream()
+    private static final List<JsonAdaptedPerson> VALID_PERSONS = STARTUP2.getPersons().stream()
             .map(JsonAdaptedPerson::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validStartupDetails_returnsStartup() throws Exception {
-        JsonAdaptedStartup startup = new JsonAdaptedStartup(BENSON);
-        assertEquals(BENSON, startup.toModelType());
+        JsonAdaptedStartup startup = new JsonAdaptedStartup(STARTUP2);
+        assertEquals(STARTUP2, startup.toModelType());
     }
 
     @Test

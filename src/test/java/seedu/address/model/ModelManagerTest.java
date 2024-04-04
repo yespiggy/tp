@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STARTUPS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStartups.ALICE;
-import static seedu.address.testutil.TypicalStartups.BENSON;
+import static seedu.address.testutil.TypicalStartups.STARTUP1;
+import static seedu.address.testutil.TypicalStartups.STARTUP2;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasStartup_startupNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasStartup(ALICE));
+        assertFalse(modelManager.hasStartup(STARTUP1));
     }
 
     @Test
     public void hasStartup_startupInAddressBook_returnsTrue() {
-        modelManager.addStartup(ALICE);
-        assertTrue(modelManager.hasStartup(ALICE));
+        modelManager.addStartup(STARTUP1);
+        assertTrue(modelManager.hasStartup(STARTUP1));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withStartup(ALICE).withStartup(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withStartup(STARTUP1).withStartup(STARTUP2).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = STARTUP1.getName().fullName.split("\\s+");
         modelManager.updateFilteredStartupList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
