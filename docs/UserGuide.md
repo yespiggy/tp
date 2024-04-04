@@ -151,28 +151,6 @@ Shows a list of all startups in the address book.
 
 Format: `list`
 
-### Adding or Editing a Startup Note: `note`
-
-Adds or edits a note for an existing startup in the address book.
-
-Format: `note INDEX NOTE`
-
-- Adds or edits the note of the startup at the specified `INDEX`. The index refers to the index number shown in the displayed startup list. The index **must be a positive integer** 1, 2, 3, …​
-- The `NOTE` field must be provided and cannot be empty.
-- Existing note will be updated to the input value.
-
-Examples:
-- `note 1 Innovative e-commerce platform` Adds or edits the note of the 1st startup to be "Innovative e-commerce platform".
-- `note 2 Expanding to new markets in Q3` Adds or edits the note of the 2nd startup with the information about its expansion plans. <br>
-
-
-  ![result for 'note 1 Innovative e-commerce platform'](images/tracing/NoteCommand.png)
-
-<box type="tip" seamless>
-
-**Tip:** Indexes are taken with respect to the list! Warnings might show up if you give us a invalid index.
-</box>
-
 ### Editing a startup : `edit`
 
 Edits an existing startup in the address book.
@@ -264,6 +242,61 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd startup in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st startup in the results of the `find` command.
 
+### Adding a Note to a Startup: `addnote`
+
+Adds a note to an existing startup in the address book.
+
+Format: `addnote INDEX NOTE`
+
+- Adds a note to the startup at the specified `INDEX`. The index refers to the index number shown in the displayed startup list. The index **must be a positive integer** 1, 2, 3, …​
+- The `NOTE` field must be provided and cannot be empty.
+
+Examples:
+- `addnote 1 Secured Series A funding` Adds a note about securing Series A funding to the 1st startup.
+- `addnote 2 Launching new product in Q2` Adds a note about a product launch in Q2 to the 2nd startup.
+
+![result for 'addnote 1 Secured Series A funding'](images/tracing/AddNoteCommand.png)
+
+**Tip:** Use specific and concise notes to effectively capture important information about each startup.
+
+---
+
+### Editing a Note of a Startup: `editnote`
+
+Edits an existing note of a startup in the address book.
+
+Format: `editnote INDEX noteIndex NOTE`
+
+- Edits the note at `noteIndex` of the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+- The `NOTE` field must be provided and cannot be empty.
+
+Examples:
+- `editnote 1 1 Revised Series A valuation` Edits the first note of the 1st startup to "Revised Series A valuation".
+- `editnote 2 2 Updated market expansion strategy` Edits the second note of the 2nd startup with updated expansion strategy details.
+
+![result for 'editnote 1 1 Revised Series A valuation'](images/tracing/EditNoteCommand.png)
+
+**Tip:** Editing notes allows you to keep information about startups up to date with the latest developments.
+
+---
+
+### Deleting a Note from a Startup: `deletenote`
+
+Deletes a note from an existing startup in the address book.
+
+Format: `deletenote INDEX noteIndex`
+
+- Deletes the note at `noteIndex` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+
+Examples:
+- `deletenote 1 1` Deletes the first note of the 1st startup.
+- `deletenote 2 2` Deletes the second note of the 2nd startup.
+
+![result for 'deletenote 1 1'](images/tracing/DeleteNoteCommand.png)
+
+**Tip:** Use the `deletenote` command cautiously to ensure important notes are not accidentally removed.
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from CapitalConnect.
@@ -323,3 +356,6 @@ _Details coming soon ..._
 | **Find by Industry**      | `find i/INDUSTRY [MORE_INDUSTRIES]`<br> e.g., `find i/AI`, `find i/AI Robotics`                                                                                                                  |
 | **List**                  | `list`                                                                                                                                                                                           |
 | **Help**                  | `help`                                                                                                                                                                                           |
+| **Add Note**              | `addnote 1 Secured Series A funding`                                                                                                                                                             |
+| **Edit Note**             | `editnote 1 1 Revised Series A valuation`                                                                                                                                                        |
+| **Delete Note**           | `deletenote 1 1`                                                                                                                                                                                 |
