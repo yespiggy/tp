@@ -5,12 +5,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_A;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_B;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POTENTIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POTENTIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VALUATION_A;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VALUATION_B;
 

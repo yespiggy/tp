@@ -37,7 +37,8 @@ public class EditStartupDescriptorTest {
         assertFalse(DESC_STARTUP_A.equals(DESC_STARTUP_B));
 
         // different name -> returns false
-        EditStartupDescriptor editedAmy = new EditStartupDescriptorBuilder(DESC_STARTUP_A).withName(VALID_NAME_B).build();
+        EditStartupDescriptor editedAmy = new EditStartupDescriptorBuilder(DESC_STARTUP_A)
+                .withName(VALID_NAME_B).build();
         assertFalse(DESC_STARTUP_A.equals(editedAmy));
 
         // different phone -> returns false

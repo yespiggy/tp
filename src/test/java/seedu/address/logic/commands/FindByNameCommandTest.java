@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_STARTUPS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStartups.STARTUP3;
 import static seedu.address.testutil.TypicalStartups.STARTUP5;
 import static seedu.address.testutil.TypicalStartups.STARTUP6;
 import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
