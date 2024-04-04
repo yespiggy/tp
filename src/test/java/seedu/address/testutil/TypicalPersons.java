@@ -31,7 +31,7 @@ public class TypicalPersons {
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withEmail("lydia@example.com").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withEmail("anna@example.com").build();
+            .withEmail("george@example.com").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
