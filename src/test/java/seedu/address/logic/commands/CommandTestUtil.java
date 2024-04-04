@@ -49,8 +49,11 @@ public class CommandTestUtil {
     public static final String NAME_DESC_A = " " + CliSyntax.PREFIX_NAME + VALID_NAME_A;
     public static final String NAME_DESC_B = " " + CliSyntax.PREFIX_NAME + VALID_NAME_B;
 
-    public static final String PERSONNAME_DESC_AMY = " " + CliSyntax.PREFIX_PERSON_NAME + VALID_NAME_A;
-    public static final String PERSONNAME_DESC_BOB = " " + CliSyntax.PREFIX_PERSON_NAME + VALID_NAME_B;
+    public static final String VALID_PERSONNAME_AMY = "Amy Bee";
+    public static final String VALID_PERSONNAME_BOB = "Bob Choo";
+
+    public static final String PERSONNAME_DESC_AMY = " " + CliSyntax.PREFIX_PERSON_NAME + VALID_PERSONNAME_AMY;
+    public static final String PERSONNAME_DESC_BOB = " " + CliSyntax.PREFIX_PERSON_NAME + VALID_PERSONNAME_BOB;
 
     public static final String PERSONEMAIL_DESC_AMY = " " + CliSyntax.PREFIX_PERSON_EMAIL + VALID_EMAIL_A;
     public static final String PERSONEMAIL_DESC_BOB = " " + CliSyntax.PREFIX_PERSON_EMAIL + VALID_EMAIL_B;

@@ -1,17 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CTO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FOUNDER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_A;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_A;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_B;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.person.Person;
+
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -40,9 +35,9 @@ public class TypicalPersons {
             .withEmail("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_A)
+    public static final Person AMY = new PersonBuilder().withName(VALID_PERSONNAME_AMY)
             .withEmail(VALID_EMAIL_A).withDescriptions(VALID_DESCRIPTION_FOUNDER).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_B)
+    public static final Person BOB = new PersonBuilder().withName(VALID_PERSONNAME_BOB)
             .withEmail(VALID_EMAIL_B).withDescriptions(VALID_DESCRIPTION_FOUNDER, VALID_DESCRIPTION_CTO)
             .build();
 
