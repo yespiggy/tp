@@ -155,7 +155,7 @@ public class EditPersonCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code EditPersonDescriptor} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -187,17 +187,17 @@ public class EditPersonCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code descriptions} to this object's {@code descriptions}.
+         * A defensive copy of {@code descriptions} is used internally.
          */
         public void setDescriptions(Set<Description> descriptions) {
             this.descriptions = (descriptions != null) ? new HashSet<>(descriptions) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable description set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code descriptions} is null.
          */
         public Optional<Set<Description>> getDescriptions() {
             return (descriptions != null) ? Optional.of(Collections.unmodifiableSet(descriptions)) : Optional.empty();
