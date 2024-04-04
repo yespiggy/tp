@@ -64,9 +64,9 @@ startup investments!
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all startups.
 
-   * `add n/Pichu p/98765432 i/finance v/10 f/B e/pichuhr@example.com a/pichu street, block 123, #01-01` : Adds a start up called `Pichu` to CapitalConnect.
+   * `add n/Pichu p/98765432 i/finance v/10 f/B e/pichuhr@example.com a/pichu street, block 123, #01-01` : Adds a startup called `Pichu` to CapitalConnect.
 
    * `delete 3` : Deletes the 3rd startup shown in the current list.
 
@@ -265,9 +265,9 @@ Examples:
 
 Edits an existing note of a startup in the address book.
 
-Format: `editnote INDEX noteIndex NOTE`
+Format: `editnote INDEX NOTE_INDEX NOTE`
 
-- Edits the note at `noteIndex` of the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+- Edits the note at `NOTE_INDEX` of the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 - The `NOTE` field must be provided and cannot be empty.
 
 Examples:
@@ -284,9 +284,9 @@ Examples:
 
 Deletes a note from an existing startup in the address book.
 
-Format: `deletenote INDEX noteIndex`
+Format: `deletenote INDEX NOTE_INDEX`
 
-- Deletes the note at `noteIndex` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+- Deletes the note at `NOTE_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 
 Examples:
 - `deletenote 1 1` Deletes the first note of the 1st startup.
@@ -311,20 +311,22 @@ Format: `exit`
 
 ### Adding a person to a startup: `add-p`
 
-Adds a person to the address book.
+* Adds a person to the specified startup in CapitalConnect.
+* Click on the startup card that contains your new person to see the changes.
 
-Format: `add-p INDEX pn/NAME pe/EMAIL pd/DESCRIPTION`
+Format: `add-p INDEX pn/NAME pe/EMAIL [pd/DESCRIPTION]…​`
 
 ### Editing a person from a startup: `edit-p`
 
-* Edits the person at the specified `PersonIndex` of startup at index `StartupIndex`. The index refers to the index number shown in the displayed startup and key employees list respectively. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided, either `pn/`, `pe/`, or `pd/`.
+* Edits the person at the specified `PERSON_INDEX` of startup at index `INDEX`. The index refers to the index number shown in the displayed key employees and startup list respectively. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing descriptions, the existing descriptions of the startup will be removed i.e adding of descriptions is not cumulative.
 * You can remove all the person’s descriptions by typing `pd/` without
   specifying any descriptions after it.
+* Click on the startup card that contains your edited person to see the changes.
 
-Format: `edit-p INDEX personIndex pn/NAME pe/EMAIL pd/DESCRIPTION`
+Format: `edit-p INDEX PERSON_INDEX [pn/NAME] [pe/EMAIL] [pd/DESCRIPTION]…​`
 
 Examples:
 *  `edit-p 1 1 pn/John pe/johndoe@example.com` Edits the name and email address of the 1st person in the 1st startup to be `John` and `johndoe@example.com` respectively.
@@ -332,9 +334,10 @@ Examples:
 
 ### Deleting a person from a startup: `delete-p`
 
-Deletes the person at `personIndex` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the key employees list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+* Deletes the person at `PERSON_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the key employees list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+* Click on the startup card that contains your edited person to see the changes.
 
-Format: `delete-p INDEX PersonIndex`
+Format: `delete-p INDEX PERSON_INDEX`
 
 Examples:
 - `delete-p 1 1` Deletes the 1st person of the 1st startup.
@@ -372,20 +375,20 @@ Furthermore, certain edits can cause CapitalConnect to behave in unexpected ways
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                                                 |
-|---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                   | `add n/NAME p/PHONE_NUMBER f/FUNDING_STAGE v/VALUATION i/INDUSTRY e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Google p/22224444 e/larrypage@example.com a/123, menlo park, 1234665 t/SV-based i/Tech f/A`  |
-| **Clear**                 | `clear`                                                                                                                                                                                                          |
-| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                              |
-| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [v/VALUATION] [i/INDUSTRY] [f/FUNDING_STAGE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                      |
-| **Find by Name**          | `find n/NAME [MORE_NAMES]`<br> e.g., `find n/apple`                                                                                                                                                              |
-| **Find by Funding Stage** | `find f/FUNDING_STAGE [MORE_FUNDING_STAGES]`<br> e.g., `find f/A`, `find f/A B`                                                                                                                                  |
-| **Find by Industry**      | `find i/INDUSTRY [MORE_INDUSTRIES]`<br> e.g., `find i/AI`, `find i/AI Robotics`                                                                                                                                  |
-| **List**                  | `list`                                                                                                                                                                                                           |
-| **Help**                  | `help`                                                                                                                                                                                                           |
-| **Add Note**              | `addnote INDEX NOTE` <br> e.g., `addnote 1 Secured Series A funding`                                                                                                                                             |
-| **Edit Note**             | `editnote INDEX noteIndex NOTE` <br> e.g., `editnote 1 1 Revised Series A valuation`                                                                                                                             |
-| **Delete Note**           | `deletenote INDEX noteIndex` <br> e.g., `deletenote 1 1`                                                                                                                                                         |
-| **Add Person**            | `add-p INDEX pn/NAME pe/EMAIL pd/DESCRIPTION` <br> e.g., `add-p 1 pn/name pe/email pd/founder`                                                                                                                   |
-| **Edit Person**           | `edit-p INDEX personIndex pn/NAME pe/EMAIL pd/DESCRIPTION` <br> e.g., `edit-p 1 1 pn/name pe/email pd/founder`                                                                                                   |
-| **Delete Person**         | `edit-p INDEX personIndex` <br> e.g., `delete-p 1 1`                                                                                                                                                             |   
+| Action                    | Format, Examples                                                                                                                                                                                             |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME p/PHONE_NUMBER f/FUNDING_STAGE v/VALUATION i/INDUSTRY e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Google p/22224444 e/larrypage@example.com a/123, menlo park, 1234665 t/SV-based i/Tech f/A` |
+| **Clear**                 | `clear`                                                                                                                                                                                                      |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                          |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [v/VALUATION] [i/INDUSTRY] [f/FUNDING_STAGE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                     |
+| **Find by Name**          | `find n/NAME [MORE_NAMES]`<br> e.g., `find n/apple`                                                                                                                                                          |
+| **Find by Funding Stage** | `find f/FUNDING_STAGE [MORE_FUNDING_STAGES]`<br> e.g., `find f/A`, `find f/A B`                                                                                                                              |
+| **Find by Industry**      | `find i/INDUSTRY [MORE_INDUSTRIES]`<br> e.g., `find i/AI`, `find i/AI Robotics`                                                                                                                              |
+| **List**                  | `list`                                                                                                                                                                                                       |
+| **Help**                  | `help`                                                                                                                                                                                                       |
+| **Add Note**              | `addnote INDEX NOTE` <br> e.g., `addnote 1 Secured Series A funding`                                                                                                                                         |
+| **Edit Note**             | `editnote INDEX NOTE_INDEX NOTE` <br> e.g., `editnote 1 1 Revised Series A valuation`                                                                                                                        |
+| **Delete Note**           | `deletenote INDEX NOTE_INDEX` <br> e.g., `deletenote 1 1`                                                                                                                                                    |
+| **Add Person**            | `add-p INDEX pn/NAME pe/EMAIL [pd/DESCRIPTION]…​` <br> e.g., `add-p 1 pn/name pe/email pd/founder`                                                                                                           |
+| **Edit Person**           | `edit-p INDEX PERSON_INDEX [pn/NAME] [pe/EMAIL] [pd/DESCRIPTION]…​` <br> e.g., `edit-p 1 1 pn/name pe/email pd/founder`                                                                                      |
+| **Delete Person**         | `edit-p INDEX PERSON_INDEX` <br> e.g., `delete-p 1 1`                                                                                                                                                        |   
