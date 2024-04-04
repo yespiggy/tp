@@ -30,20 +30,20 @@ public class PersonTest {
 
         // same name, all other attributes different -> returns true
         Person editedAlice = new PersonBuilder(ALICE)
-                .withName(CommandTestUtil.VALID_NAME_BOB)
-                .withDescriptions(CommandTestUtil.VALID_TAG_HUSBAND).build();
+                .withName(CommandTestUtil.VALID_NAME_B)
+                .withDescriptions(CommandTestUtil.VALID_TAG_NEW).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
         // different email, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withEmail(CommandTestUtil.VALID_EMAIL_B).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // email differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withEmail(CommandTestUtil.VALID_EMAIL_BOB.toUpperCase()).build();
+        Person editedBob = new PersonBuilder(BOB).withEmail(CommandTestUtil.VALID_EMAIL_B.toUpperCase()).build();
         assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns true
-        String nameWithTrailingSpaces = CommandTestUtil.VALID_NAME_BOB + " ";
+        String nameWithTrailingSpaces = CommandTestUtil.VALID_NAME_B + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertTrue(BOB.isSamePerson(editedBob));
     }
@@ -67,11 +67,11 @@ public class PersonTest {
         assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(CommandTestUtil.VALID_NAME_BOB).build();
+        Person editedAlice = new PersonBuilder(ALICE).withName(CommandTestUtil.VALID_NAME_B).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withEmail(CommandTestUtil.VALID_EMAIL_B).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different descriptions -> returns false

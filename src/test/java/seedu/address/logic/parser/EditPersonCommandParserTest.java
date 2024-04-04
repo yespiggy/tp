@@ -21,7 +21,7 @@ public class EditPersonCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, CommandTestUtil.VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, CommandTestUtil.VALID_NAME_A, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1 1", EditPersonCommand.MESSAGE_NOT_EDITED);
@@ -33,10 +33,10 @@ public class EditPersonCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + CommandTestUtil.NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + CommandTestUtil.NAME_DESC_A, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + CommandTestUtil.NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + CommandTestUtil.NAME_DESC_A, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -57,7 +57,7 @@ public class EditPersonCommandParserTest {
         // invalid phone followed by valid email
         assertParseFailure(parser, "1 1"
             + CommandTestUtil.INVALID_PERSONNAME_DESC
-            + CommandTestUtil.EMAIL_DESC_AMY, PersonName.MESSAGE_CONSTRAINTS);
+            + CommandTestUtil.EMAIL_DESC_A, PersonName.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1 1"

@@ -1,6 +1,6 @@
 {
   "startups": [ {
-    "name": "Startup with invalid name field: Ha!ns Mu@ster",
+    "name": "Startup with invalid name field: a!s M@ster",
     "phone": "9482424",
     "industry": "finance",
     "fundingStage": "A",
