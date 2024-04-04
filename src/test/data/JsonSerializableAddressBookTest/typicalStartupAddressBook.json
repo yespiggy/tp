@@ -9,7 +9,12 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "notes": [ "Innovative project ideas", "Looking into Series A funding" ],
     "valuation": "1000",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "persons" : [ {
+      "name" : "Amy Bee",
+      "email" : "amy@example.com",
+      "descriptions" : [ "founder" ]
+    }]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
