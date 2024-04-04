@@ -3,10 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStartups.ALICE;
+import static seedu.address.testutil.TypicalStartups.STARTUP1;
 import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -46,9 +46,9 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateStartups_throwsDuplicateStartupException() {
         // Two startups with the same identity fields
-        Startup editedAlice = new StartupBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Startup editedAlice = new StartupBuilder(STARTUP1).withAddress(VALID_ADDRESS_B).withTags(VALID_TAG_NEW)
                 .build();
-        List<Startup> newStartups = Arrays.asList(ALICE, editedAlice);
+        List<Startup> newStartups = Arrays.asList(STARTUP1, editedAlice);
         AddressBookStub newData = new AddressBookStub(newStartups);
 
         assertThrows(DuplicateStartupException.class, () -> addressBook.resetData(newData));
@@ -61,19 +61,19 @@ public class AddressBookTest {
 
     @Test
     public void hasStartup_startupNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasStartup(ALICE));
+        assertFalse(addressBook.hasStartup(STARTUP1));
     }
 
     @Test
     public void hasStartup_startupInAddressBook_returnsTrue() {
-        addressBook.addStartup(ALICE);
-        assertTrue(addressBook.hasStartup(ALICE));
+        addressBook.addStartup(STARTUP1);
+        assertTrue(addressBook.hasStartup(STARTUP1));
     }
 
     @Test
     public void hasStartup_startupWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addStartup(ALICE);
-        Startup editedAlice = new StartupBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        addressBook.addStartup(STARTUP1);
+        Startup editedAlice = new StartupBuilder(STARTUP1).withAddress(VALID_ADDRESS_B).withTags(VALID_TAG_NEW)
                 .build();
         assertTrue(addressBook.hasStartup(editedAlice));
     }

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_STARTUPS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStartups.CARL;
-import static seedu.address.testutil.TypicalStartups.ELLE;
-import static seedu.address.testutil.TypicalStartups.FIONA;
+import static seedu.address.testutil.TypicalStartups.STARTUP3;
+import static seedu.address.testutil.TypicalStartups.STARTUP5;
+import static seedu.address.testutil.TypicalStartups.STARTUP6;
 import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -67,12 +67,12 @@ public class FindByNameCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleStartupsFound() {
-        String expectedMessage = String.format(MESSAGE_STARTUPS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        String expectedMessage = String.format(MESSAGE_STARTUPS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("StartupG");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredStartupList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStartupList());
+        assertEquals(Arrays.asList(STARTUP5, STARTUP6), model.getFilteredStartupList());
     }
 
     @Test

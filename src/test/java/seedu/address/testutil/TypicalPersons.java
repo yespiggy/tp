@@ -2,10 +2,10 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CTO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FOUNDER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_B;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,10 +40,10 @@ public class TypicalPersons {
             .withEmail("hans@example.com").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withEmail(VALID_EMAIL_AMY).withDescriptions(VALID_DESCRIPTION_FOUNDER).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
-            .withEmail(VALID_EMAIL_BOB).withDescriptions(VALID_DESCRIPTION_FOUNDER, VALID_DESCRIPTION_CTO)
+    public static final Person AMY = new PersonBuilder().withName(VALID_NAME_A)
+            .withEmail(VALID_EMAIL_A).withDescriptions(VALID_DESCRIPTION_FOUNDER).build();
+    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_B)
+            .withEmail(VALID_EMAIL_B).withDescriptions(VALID_DESCRIPTION_FOUNDER, VALID_DESCRIPTION_CTO)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -70,13 +70,13 @@ class AddPersonCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, "1 " + CommandTestUtil.VALID_NAME_BOB
+        assertParseFailure(parser, "1 " + CommandTestUtil.VALID_NAME_B
                         + CommandTestUtil.PERSONEMAIL_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, "1 " + CommandTestUtil.PERSONNAME_DESC_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB,
+                        + CommandTestUtil.VALID_EMAIL_B,
                 expectedMessage);
 
         // missing description prefix is not handled because there are cases
@@ -84,8 +84,8 @@ class AddPersonCommandParserTest {
         // might be considered within email
 
         // all prefixes missing
-        assertParseFailure(parser, "1 " + CommandTestUtil.VALID_NAME_BOB
-                        + CommandTestUtil.VALID_EMAIL_BOB,
+        assertParseFailure(parser, "1 " + CommandTestUtil.VALID_NAME_B
+                        + CommandTestUtil.VALID_EMAIL_B,
                 expectedMessage);
     }
 

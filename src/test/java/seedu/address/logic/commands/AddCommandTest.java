@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStartups.ALICE;
+import static seedu.address.testutil.TypicalStartups.STARTUP1;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -55,16 +55,16 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Startup alice = new StartupBuilder().withName("Alice").build();
-        Startup bob = new StartupBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Startup startupA = new StartupBuilder().withName("Startup A").build();
+        Startup startupB = new StartupBuilder().withName("Startup B").build();
+        AddCommand addAliceCommand = new AddCommand(startupA);
+        AddCommand addBobCommand = new AddCommand(startupB);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
+        AddCommand addAliceCommandCopy = new AddCommand(startupA);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -79,8 +79,8 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddCommand addCommand = new AddCommand(STARTUP1);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + STARTUP1 + "}";
         assertEquals(expected, addCommand.toString());
     }
 

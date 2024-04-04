@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_STARTUP_A;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_STARTUP_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStartupAtIndex;
@@ -56,11 +56,11 @@ public class EditCommandTest {
         Startup lastStartup = model.getFilteredStartupList().get(indexLastStartup.getZeroBased());
 
         StartupBuilder startupInList = new StartupBuilder(lastStartup);
-        Startup editedStartup = startupInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Startup editedStartup = startupInList.withName(VALID_NAME_B).withPhone(VALID_PHONE_B)
+                .withTags(VALID_TAG_NEW).build();
 
-        EditStartupDescriptor descriptor = new EditStartupDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        EditStartupDescriptor descriptor = new EditStartupDescriptorBuilder().withName(VALID_NAME_B)
+                .withPhone(VALID_PHONE_B).withTags(VALID_TAG_NEW).build();
         EditCommand editCommand = new EditCommand(indexLastStartup, descriptor);
 
         String expectedMessage = String.format(
@@ -90,9 +90,9 @@ public class EditCommandTest {
         showStartupAtIndex(model, INDEX_FIRST_STARTUP);
 
         Startup startupInFilteredList = model.getFilteredStartupList().get(INDEX_FIRST_STARTUP.getZeroBased());
-        Startup editedStartup = new StartupBuilder(startupInFilteredList).withName(VALID_NAME_BOB).build();
+        Startup editedStartup = new StartupBuilder(startupInFilteredList).withName(VALID_NAME_B).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STARTUP,
-                new EditStartupDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditStartupDescriptorBuilder().withName(VALID_NAME_B).build());
 
         String expectedMessage = String.format(
                 EditCommand.MESSAGE_EDIT_STARTUP_SUCCESS, Messages.format(editedStartup));
@@ -127,7 +127,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidStartupIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStartupList().size() + 1);
-        EditStartupDescriptor descriptor = new EditStartupDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditStartupDescriptor descriptor = new EditStartupDescriptorBuilder().withName(VALID_NAME_B).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STARTUP_DISPLAYED_INDEX);
@@ -145,17 +145,17 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStartupList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditStartupDescriptorBuilder().withName(VALID_NAME_BOB).build());
+                new EditStartupDescriptorBuilder().withName(VALID_NAME_B).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STARTUP_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_STARTUP, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_STARTUP, DESC_STARTUP_A);
 
         // same values -> returns true
-        EditStartupDescriptor copyDescriptor = new EditStartupDescriptor(DESC_AMY);
+        EditStartupDescriptor copyDescriptor = new EditStartupDescriptor(DESC_STARTUP_A);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_STARTUP, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -169,10 +169,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_STARTUP, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_STARTUP, DESC_STARTUP_A)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_STARTUP, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_STARTUP, DESC_STARTUP_B)));
     }
 
     @Test

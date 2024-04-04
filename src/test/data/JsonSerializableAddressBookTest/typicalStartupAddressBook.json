@@ -1,7 +1,7 @@
 {
   "_comment": "AddressBook save file which contains the same Startup values as in TypicalStartups#getTypicalAddressBook()",
   "startups" : [ {
-    "name" : "Alice Pauline",
+    "name" : "StartupC",
     "phone" : "94351253",
     "industry": "finance",
     "fundingStage": "A",
@@ -16,7 +16,7 @@
       "descriptions" : [ "founder" ]
     }]
   }, {
-    "name" : "Benson Meier",
+    "name" : "StartupD",
     "phone" : "98765432",
     "industry": "finance",
     "fundingStage": "A",
@@ -26,7 +26,7 @@
     "valuation": "1000",
     "tags" : [ "owesMoney", "friends" ]
   }, {
-    "name" : "Carl Kurz",
+    "name" : "StartupE",
     "phone" : "95352563",
     "industry": "web3",
     "fundingStage": "C",
@@ -36,7 +36,7 @@
     "valuation": "1000",
     "tags" : [ ]
   }, {
-    "name" : "Daniel Meier",
+    "name" : "StartupF",
     "phone" : "87652533",
     "industry": "finance",
     "fundingStage": "A",
@@ -46,7 +46,7 @@
     "valuation": "1000",
     "tags" : [ "friends" ]
   }, {
-    "name" : "Elle Meyer",
+    "name" : "StartupG",
     "phone" : "9482224",
     "industry": "web3",
     "fundingStage": "C",
@@ -56,7 +56,7 @@
     "valuation": "1000",
     "tags" : [ ]
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "StartupG G",
     "phone" : "9482427",
     "industry": "web3",
     "fundingStage": "C",
@@ -66,7 +66,7 @@
     "valuation": "1000",
     "tags" : [ ]
   }, {
-    "name" : "George Best",
+    "name" : "StartupI",
     "phone" : "9482442",
     "industry": "finance",
     "fundingStage": "A",

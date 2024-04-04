@@ -3,13 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_STARTUP_A;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_STARTUP_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,40 +21,40 @@ public class EditStartupDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditStartupDescriptor descriptorWithSameValues = new EditStartupDescriptor(DESC_AMY);
-        assertTrue(DESC_AMY.equals(descriptorWithSameValues));
+        EditStartupDescriptor descriptorWithSameValues = new EditStartupDescriptor(DESC_STARTUP_A);
+        assertTrue(DESC_STARTUP_A.equals(descriptorWithSameValues));
 
         // same object -> returns true
-        assertTrue(DESC_AMY.equals(DESC_AMY));
+        assertTrue(DESC_STARTUP_A.equals(DESC_STARTUP_A));
 
         // null -> returns false
-        assertFalse(DESC_AMY.equals(null));
+        assertFalse(DESC_STARTUP_A.equals(null));
 
         // different types -> returns false
-        assertFalse(DESC_AMY.equals(5));
+        assertFalse(DESC_STARTUP_A.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_AMY.equals(DESC_BOB));
+        assertFalse(DESC_STARTUP_A.equals(DESC_STARTUP_B));
 
         // different name -> returns false
-        EditStartupDescriptor editedAmy = new EditStartupDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        EditStartupDescriptor editedAmy = new EditStartupDescriptorBuilder(DESC_STARTUP_A).withName(VALID_NAME_B).build();
+        assertFalse(DESC_STARTUP_A.equals(editedAmy));
 
         // different phone -> returns false
-        editedAmy = new EditStartupDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditStartupDescriptorBuilder(DESC_STARTUP_A).withPhone(VALID_PHONE_B).build();
+        assertFalse(DESC_STARTUP_A.equals(editedAmy));
 
         // different email -> returns false
-        editedAmy = new EditStartupDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditStartupDescriptorBuilder(DESC_STARTUP_A).withEmail(VALID_EMAIL_B).build();
+        assertFalse(DESC_STARTUP_A.equals(editedAmy));
 
         // different address -> returns false
-        editedAmy = new EditStartupDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditStartupDescriptorBuilder(DESC_STARTUP_A).withAddress(VALID_ADDRESS_B).build();
+        assertFalse(DESC_STARTUP_A.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditStartupDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        editedAmy = new EditStartupDescriptorBuilder(DESC_STARTUP_A).withTags(VALID_TAG_NEW).build();
+        assertFalse(DESC_STARTUP_A.equals(editedAmy));
     }
 
     @Test
