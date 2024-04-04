@@ -53,7 +53,7 @@ public class TypicalStartups {
             .withEmail("anna@example.com").withIndustry("finance").withValuation("1000")
             .withFundingStage("A")
             .withNotes("Experienced management team", "Profitable quarter reported")
-            .withAddress("4th street").build();
+            .withAddress("4th street").withPersons(TypicalPersons.AMY, TypicalPersons.GEORGE).build();
 
     // Manually added
     public static final Startup HOON = new StartupBuilder().withName("Hoon Meier").withPhone("8482424")
