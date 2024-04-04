@@ -332,7 +332,7 @@ Examples:
 
 ### Deleting a person from a startup: `delete-p`
 
-- Deletes the person at `personIndex` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the key employees list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+Deletes the person at `personIndex` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the key employees list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 
 Format: `delete-p INDEX PersonIndex`
 
