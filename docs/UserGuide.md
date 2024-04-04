@@ -8,13 +8,11 @@
 
 **Welcome to CapitalConnect: Your Portfolio Powerhouse!**
 
-Do you ever feel like your startup portfolio is a tangled mess of spreadsheets and endless documents? You're not alone. 
-As a Venture Capital Portfolio Manager, juggling diverse investments across industries can be a complex challenge.
+Do you ever feel like your startup portfolio is a tangled mess of spreadsheets and endless documents? You're not alone. As a Venture Capital Portfolio Manager, juggling diverse investments across industries can be a complex challenge.
 
 **Who are you?**
 
-Our application is build for the aspiring venture capitalist! You are a professional on the lookout for the next Google. 
-You are passionate about innovative and new technologies. Most importantly, you want to **make your network your net-worth.**
+Our application is build for the aspiring venture capitalist! You are a professional on the lookout for the next Google. You are passionate about innovative and new technologies. Most importantly, you want to **make your network your net-worth.**
 
 **CapitalConnect is here to revolutionize your experience**.
 
@@ -30,13 +28,9 @@ We streamline and wrap **everything** in a sleek, easy to use platform. And by e
 
 and much, much, more!
 
-This user guide is your key to unlocking the full potential of the app.  We'll walk you through every step, from
-effortlessly adding new investments to categorizing them by industry and funding stage.  Forget the days of chasing
-down data – CapitalConnect empowers you to track your startup investments with ease.
+This user guide is your key to unlocking the full potential of the app.  We'll walk you through every step, from effortlessly adding new investments to categorizing them by industry and funding stage.  Forget the days of chasing down data – CapitalConnect empowers you to track your startup investments with ease.
 
-Throughout this guide, we'll use clear, step-by-step instructions and helpful screenshots to ensure you master 
-CapitalConnect in no time.  So, buckle up and get ready to experience a smoother, more efficient way to manage your 
-startup investments!
+Throughout this guide, we'll use clear, step-by-step instructions and helpful screenshots to ensure you master CapitalConnect in no time.  So, buckle up and get ready to experience a smoother, more efficient way to manage your startup investments!
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -378,6 +372,6 @@ _Details coming soon ..._
 | **Add Note**              | `addnote 1 Secured Series A funding`                                                                                                                                                                         |
 | **Edit Note**             | `editnote 1 1 Revised Series A valuation`                                                                                                                                                                    |
 | **Delete Note**           | `deletenote 1 1`                                                                                                                                                                                             |
-| **Add Person**            | `add-p 1 pn/name pe/email pd/founder`                                                                                                                                                                        |
-| **Edit Person**           | `edit-p 1 1 pn/name pe/email pd/founder`                                                                                                                                                                     |
+| **Add Person**            | `add-p 1 pn/name pe/email@com pd/founder`                                                                                                                                                                    |
+| **Edit Person**           | `edit-p 1 1 pn/name pe/email@com pd/founder`                                                                                                                                                                 |
 | **Delete Person**         | `delete-p 1 1`                                                                                                                                                                                               |
