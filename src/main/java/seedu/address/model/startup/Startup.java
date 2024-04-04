@@ -1,5 +1,6 @@
 package seedu.address.model.startup;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -9,8 +10,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,7 +35,19 @@ public class Startup {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private List<Note> notes = new ArrayList<>();
-    private Set<Person> persons = new HashSet<>();
+    //private List<Person> persons = new ArrayList<>();
+    private final UniquePersonList persons;
+
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
+    {
+        persons = new UniquePersonList();
+    }
 
     /**
      * Every field must be present and not null.
@@ -53,7 +68,7 @@ public class Startup {
     }
 
     /**
-     * Constructor for notes.
+     * Constructor for Startup with notes.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
@@ -71,11 +86,11 @@ public class Startup {
     }
 
     /**
-     * Constructor for persons.
+     * Constructor for Startup with persons.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
                    Phone phone, Email email, Address address, Valuation valuation,
-                   Set<Tag> tags, List<Note> notes, Set<Person> persons) {
+                   Set<Tag> tags, List<Note> notes, List<Person> persons) {
         requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
         this.name = name;
         this.fundingStage = fundingStage;
@@ -86,7 +101,7 @@ public class Startup {
         this.address = address;
         this.tags.addAll(tags);
         this.notes = new ArrayList<>(notes); // Defensive copy
-        this.persons.addAll(persons);
+        this.persons.setPersons(persons);
     }
 
     public FundingStage getFundingStage() {
@@ -134,8 +149,8 @@ public class Startup {
      * Returns an immutable person set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getPersons() {
-        return Collections.unmodifiableSet(persons);
+    public ObservableList<Person> getPersons() {
+        return persons.asUnmodifiableObservableList();
     }
 
     /**
@@ -206,4 +221,12 @@ public class Startup {
         return builder.toString();
     }
 
+
+    /**
+     * Returns true if a startup with the same identity as {@code startup} exists in the address book.
+     */
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return persons.contains(person);
+    }
 }

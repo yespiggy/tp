@@ -3,9 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_EMAIL;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -14,10 +13,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.startup.Startup;
 
 /**
- * Adds a startup to the address book.
+ * Adds a startup to CapitalConnect.
  */
 public class AddPersonCommand extends Command {
 
@@ -65,23 +65,30 @@ public class AddPersonCommand extends Command {
 
         Startup startupToEdit = lastShownList.get(index.getZeroBased());
 
-        // Creates a new Set from the existing persons and adds the new person
-        Set<Person> updatedPersons = new HashSet<>(startupToEdit.getPersons());
+        // Creates a new list from the existing persons and adds the new person
+        ArrayList<Person> updatedPersons = new ArrayList<>(startupToEdit.getPersons());
         updatedPersons.add(toAdd);
 
+
         // Now directly use the updated constructor
-        Startup editedStartup = new Startup(
-                startupToEdit.getName(),
-                startupToEdit.getFundingStage(),
-                startupToEdit.getIndustry(),
-                startupToEdit.getPhone(),
-                startupToEdit.getEmail(),
-                startupToEdit.getAddress(),
-                startupToEdit.getValuation(),
-                startupToEdit.getTags(),
-                startupToEdit.getNotes(),
-                updatedPersons
-        );
+        Startup editedStartup;
+        try {
+            editedStartup = new Startup(
+                    startupToEdit.getName(),
+                    startupToEdit.getFundingStage(),
+                    startupToEdit.getIndustry(),
+                    startupToEdit.getPhone(),
+                    startupToEdit.getEmail(),
+                    startupToEdit.getAddress(),
+                    startupToEdit.getValuation(),
+                    startupToEdit.getTags(),
+                    startupToEdit.getNotes(),
+                    updatedPersons
+            );
+        } catch (DuplicatePersonException exc) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
 
         model.setStartup(startupToEdit, editedStartup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedStartup.getName(), Messages.format(toAdd)));

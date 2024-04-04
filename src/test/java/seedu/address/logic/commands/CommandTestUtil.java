@@ -37,6 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_DESCRIPTION_FOUNDER = "founder";
+    public static final String VALID_DESCRIPTION_CTO = "Chief Technology Officer";
 
     public static final String VALID_INDUSTRY_BOB = "Finance";
     public static final String VALID_INDUSTRY_AMY = "Finance";
@@ -46,6 +48,17 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + CliSyntax.PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + CliSyntax.PREFIX_NAME + VALID_NAME_BOB;
+
+    public static final String PERSONNAME_DESC_AMY = " " + CliSyntax.PREFIX_PERSON_NAME + VALID_NAME_AMY;
+    public static final String PERSONNAME_DESC_BOB = " " + CliSyntax.PREFIX_PERSON_NAME + VALID_NAME_BOB;
+
+    public static final String PERSONEMAIL_DESC_AMY = " " + CliSyntax.PREFIX_PERSON_EMAIL + VALID_EMAIL_AMY;
+    public static final String PERSONEMAIL_DESC_BOB = " " + CliSyntax.PREFIX_PERSON_EMAIL + VALID_EMAIL_BOB;
+
+    public static final String PERSONDESC_DESC_CTO = " " + CliSyntax.PREFIX_PERSON_DESCRIPTION + VALID_DESCRIPTION_CTO;
+    public static final String PERSONDESC_DESC_FOUNDER = " "
+            + CliSyntax.PREFIX_PERSON_DESCRIPTION + VALID_DESCRIPTION_FOUNDER;
+
 
     public static final String INDUSTRY_DESC_AMY = " " + CliSyntax.PREFIX_INDUSTRY + VALID_INDUSTRY_AMY;
 
@@ -63,17 +76,28 @@ public class CommandTestUtil {
     public static final String VALUATION_DESC_BOB = " " + CliSyntax.PREFIX_VALUATION + VALID_VALUATION_BOB;
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String DESCRIPTION_DESC_BOB_CTO = " " + CliSyntax.PREFIX_PERSON_DESCRIPTION
+            + VALID_DESCRIPTION_CTO;
+    public static final String DESCRIPTION_DESC_BOB_FOUNDER = " " + CliSyntax.PREFIX_PERSON_DESCRIPTION
+            + VALID_DESCRIPTION_FOUNDER;
 
     public static final String INVALID_NAME_DESC = " "
         + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_PERSONNAME_DESC = " "
+            + CliSyntax.PREFIX_PERSON_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " "
         + CliSyntax.PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " "
         + CliSyntax.PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_PERSONEMAIL_DESC = " "
+            + CliSyntax.PREFIX_PERSON_EMAIL + "bob!yahoo"; // missing '@' symbol
+
     public static final String INVALID_ADDRESS_DESC = " "
         + CliSyntax.PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " "
         + CliSyntax.PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_PERSONDESC_DESC = " "
+            + CliSyntax.PREFIX_PERSON_DESCRIPTION + "hubby*"; // '*' not allowed in descriptions
 
     public static final String INVALID_VALUATION_DESC = " " + CliSyntax.PREFIX_VALUATION + "-1";
 

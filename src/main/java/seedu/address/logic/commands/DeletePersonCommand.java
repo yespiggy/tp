@@ -9,37 +9,33 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.startup.Note;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Startup;
 
 /**
- * Edits a Note of a startup in the address book!
+ * Delete a Person of a startup in the address book!
  */
-public class EditNoteCommand extends Command {
-    public static final String COMMAND_WORD = "editnote";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a note of the startup identified "
+public class DeletePersonCommand extends Command {
+    public static final String COMMAND_WORD = "delete-p";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a key employee from the startup identified "
             + "by the index number used in the displayed startup list. "
-            + "Parameters: INDEX (must be a positive integer) noteIndex (must be a positive integer) n/NOTE\n"
-            + "Example: " + COMMAND_WORD + " 1 1 n/Updated note";
+            + "Parameters: INDEX (must be a positive integer) personIndex (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 1";
 
-    public static final String MESSAGE_SUCCESS = "Note edited for Startup: %1$s";
+    public static final String MESSAGE_SUCCESS = "Employee deleted from Startup: %1$s";
 
     private final Index index;
-    private final int noteIndex;
-    private final Note newNote;
+    private final int personIndex;
 
     /**
-     * @param index of the startup in the filtered startup list to edit
-     * @param noteIndex of the note to be edited
-     * @param newNote new note object to be stored in the notes list
+     * Deletes a command for a startup.
+     * @param index Index of the startup
+     * @param personIndex Index of the person within the startup
      */
-
-    public EditNoteCommand(Index index, int noteIndex, Note newNote) {
+    public DeletePersonCommand(Index index, int personIndex) {
         requireNonNull(index);
-        requireNonNull(newNote);
         this.index = index;
-        this.noteIndex = noteIndex - 1; // User input is 1-based, internal storage is 0-based.
-        this.newNote = newNote;
+        this.personIndex = personIndex - 1; // User input is 1-based, internal storage is 0-based.
     }
 
     @Override
@@ -52,12 +48,12 @@ public class EditNoteCommand extends Command {
         }
 
         Startup startupToEdit = lastShownList.get(index.getZeroBased());
-        if (noteIndex >= startupToEdit.getNotes().size()) {
-            throw new CommandException("The note index provided is invalid.");
+        if (personIndex >= startupToEdit.getPersons().size()) {
+            throw new CommandException("The person index provided is invalid.");
         }
 
-        ArrayList<Note> updatedNotes = new ArrayList<>(startupToEdit.getNotes());
-        updatedNotes.set(noteIndex, newNote);
+        List<Person> updatedPersons = new ArrayList<>(startupToEdit.getPersons());
+        updatedPersons.remove(personIndex);
         Startup editedStartup = new Startup(
                 startupToEdit.getName(),
                 startupToEdit.getFundingStage(),
@@ -67,8 +63,8 @@ public class EditNoteCommand extends Command {
                 startupToEdit.getAddress(),
                 startupToEdit.getValuation(),
                 startupToEdit.getTags(),
-                updatedNotes,
-                startupToEdit.getPersons()
+                startupToEdit.getNotes(),
+                updatedPersons
         );
 
         model.setStartup(startupToEdit, editedStartup);
@@ -81,14 +77,16 @@ public class EditNoteCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof EditNoteCommand)) { // not the same type
+        if (!(other instanceof DeletePersonCommand)) { // not the same type
             return false;
         }
 
-        EditNoteCommand e = (EditNoteCommand) other;
+        DeletePersonCommand e = (DeletePersonCommand) other;
+        // Compare both the startup index and the note index within that startup
         return index.equals(e.index)
-                && noteIndex == e.noteIndex
-                && newNote.equals(e.newNote);
+                && personIndex == e.personIndex;
     }
+
 }
+
 

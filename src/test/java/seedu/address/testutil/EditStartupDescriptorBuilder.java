@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditStartupDescriptor;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
@@ -47,6 +48,7 @@ public class EditStartupDescriptorBuilder {
         descriptor.setValuation(startup.getValuation());
         descriptor.setTags(startup.getTags());
         descriptor.setNotes(startup.getNotes());
+        descriptor.setPersons(startup.getPersons());
     }
 
     /**
@@ -114,6 +116,16 @@ public class EditStartupDescriptorBuilder {
     public EditStartupDescriptorBuilder withNotes(String... notes) {
         List<Note> noteList = Arrays.stream(notes).map(Note::new).collect(Collectors.toList());
         descriptor.setNotes(noteList);
+        return this;
+    }
+
+    /**
+     * Parses the {@code persons} into a {@code List<Person>} and set it to the {@code EditStartupDescriptor}
+     * that we are building.
+     */
+    public EditStartupDescriptorBuilder withPersons(Person... persons) {
+        List<Person> personList = Arrays.stream(persons).collect(Collectors.toList());
+        descriptor.setPersons(personList);
         return this;
     }
 

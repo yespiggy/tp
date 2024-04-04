@@ -51,7 +51,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_NAME,
-                PREFIX_PERSON_EMAIL, PREFIX_PERSON_DESCRIPTION);
+                PREFIX_PERSON_EMAIL);
         PersonName personName = ParserUtil.parsePersonName(argMultimap.getValue(PREFIX_PERSON_NAME).get());
         PersonEmail personEmail = ParserUtil.parsePersonEmail(argMultimap.getValue(PREFIX_PERSON_EMAIL).get());
         Set<Description> descriptions =
