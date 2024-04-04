@@ -309,6 +309,25 @@ Exits the program.
 
 Format: `exit`
 
+### Adding a person: `add-p`
+
+Adds a person to the address book.
+
+Format: `add-p INDEX pn/NAME pe/EMAIL pd/DESCRIPTION`
+
+### Editing a person: `edit-p`
+
+Edit a person.
+
+Format: `edit-p INDEX INDEX pn/NAME pe/EMAIL pd/DESCRIPTION`
+
+### Deleting a person: `delete-p`
+
+Deletes a person.
+
+Format: `delete-p StartupIndex Index`
+
+
 ### Saving the data
 
 CapitalConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -359,3 +378,6 @@ _Details coming soon ..._
 | **Add Note**              | `addnote 1 Secured Series A funding`                                                                                                                                                                         |
 | **Edit Note**             | `editnote 1 1 Revised Series A valuation`                                                                                                                                                                    |
 | **Delete Note**           | `deletenote 1 1`                                                                                                                                                                                             |
+| **Add Person**            | `add-p 1 pn/name pe/email pd/founder`                                                                                                                                                                        |
+| **Edit Person**           | `edit-p 1 1 pn/name pe/email pd/founder`                                                                                                                                                                     |
+| **Delete Person**         | `delete-p 1 1`                                                                                                                                                                                               |
