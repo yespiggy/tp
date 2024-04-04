@@ -76,6 +76,12 @@ public class CommandTestUtil {
     public static final String VALUATION_DESC_BOB = " " + CliSyntax.PREFIX_VALUATION + VALID_VALUATION_BOB;
     public static final String TAG_DESC_FRIEND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + CliSyntax.PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String PERSONNAME_DESC_BOB = " " + CliSyntax.PREFIX_PERSON_NAME + VALID_NAME_BOB;
+    public static final String PERSONEMAIL_DESC_BOB = " " + CliSyntax.PREFIX_PERSON_EMAIL + VALID_EMAIL_BOB;
+    public static final String DESCRIPTION_DESC_BOB_CTO = " " + CliSyntax.PREFIX_PERSON_DESCRIPTION
+            + VALID_DESCRIPTION_CTO;
+    public static final String DESCRIPTION_DESC_BOB_FOUNDER = " " + CliSyntax.PREFIX_PERSON_DESCRIPTION
+            + VALID_DESCRIPTION_FOUNDER;
 
     public static final String INVALID_NAME_DESC = " "
         + CliSyntax.PREFIX_NAME + "James&"; // '&' not allowed in names
