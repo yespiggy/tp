@@ -28,7 +28,8 @@ public class TypicalStartups {
     public static final Startup ALICE = new StartupBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withIndustry("finance").withFundingStage("A")
-            .withNotes("Innovative project ideas", "Looking into Series A funding").withTags("friends").build();
+            .withNotes("Innovative project ideas", "Looking into Series A funding").withTags("friends")
+            .withPersons(TypicalPersons.AMY).build();
     public static final Startup BENSON = new StartupBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withIndustry("finance").withFundingStage("A")
             .withEmail("johnd@example.com").withPhone("98765432")
