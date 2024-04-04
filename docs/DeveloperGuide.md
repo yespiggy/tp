@@ -281,9 +281,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Venture capital firms manage diverse portfolios of startup 
+**Value proposition**: Venture capital firms manage diverse portfolios of startup
 investments across various industries. The app streamlines the management of startup
-investments, enabling VC firms to easily add, categorize, and track a diverse 
+investments, enabling VC firms to easily add, categorize, and track a diverse
 portfolio of investments in various industries and funding stages.
 
 
