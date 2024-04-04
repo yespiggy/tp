@@ -66,7 +66,7 @@ startup investments!
 
    * `list` : Lists all contacts.
 
-   * `add n/Pichu p/98765432 i/finance f/B e/pichuhr@example.com a/pichu street, block 123, #01-01` : Adds a start up called `Pichu` to CapitalConnect.
+   * `add n/Pichu p/98765432 i/finance v/10 f/B e/pichuhr@example.com a/pichu street, block 123, #01-01` : Adds a start up called `Pichu` to CapitalConnect.
 
    * `delete 3` : Deletes the 3rd startup shown in the current list.
 
@@ -115,7 +115,7 @@ Format: `help`
 
 Adds a startup to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER i/INDUSTRY f/FUNDING_STAGE e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER i/INDUSTRY f/FUNDING_STAGE e/EMAIL a/ADDRESS v/VALUATION [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -142,8 +142,8 @@ We let **you** decide how specific you want to define your startup categories by
 </box>
 
 Examples:
-* `add n/Google p/98765432 e/sundarpichal@example.com a/Menlo Park, block 123, #01-01 f/A i/tech`
-* `add n/FTX t/bankrupted e/sbf@example.com a/Newgate Prison p/1234567 t/criminal f/A i/web 3`
+* `add n/Google p/98765432 e/sundarpichal@example.com v/100000 a/Menlo Park, block 123, #01-01 f/A i/tech`
+* `add n/FTX t/bankrupted e/sbf@example.com v/100 a/Newgate Prison p/1234567 t/criminal f/A i/web 3`
 
 ### Listing all startups : `list`
 
@@ -155,7 +155,7 @@ Format: `list`
 
 Edits an existing startup in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [f/FUNDING_STAGE] [i/INDUSTRY] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [v/VALUATION] [f/FUNDING_STAGE] [i/INDUSTRY] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the startup at the specified `INDEX`. The index refers to the index number shown in the displayed startup list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -345,17 +345,17 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action                    | Format, Examples                                                                                                                                                                                 |
-|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**                   | `add n/NAME p/PHONE_NUMBER f/FUNDING_STAGE i/INDUSTRY e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Google p/22224444 e/larrypage@example.com a/123, menlo park, 1234665 t/SV-based i/Tech f/A` |
-| **Clear**                 | `clear`                                                                                                                                                                                          |
-| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                              |
-| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [i/INDUSTRY] [f/FUNDING_STAGE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                       |
-| **Find by Name**          | `find n/NAME [MORE_NAMES]`<br> e.g., `find n/apple`                                                                                                                                              |
-| **Find by Funding Stage** | `find f/FUNDING_STAGE [MORE_FUNDING_STAGES]`<br> e.g., `find f/A`, `find f/A B`                                                                                                                  |
-| **Find by Industry**      | `find i/INDUSTRY [MORE_INDUSTRIES]`<br> e.g., `find i/AI`, `find i/AI Robotics`                                                                                                                  |
-| **List**                  | `list`                                                                                                                                                                                           |
-| **Help**                  | `help`                                                                                                                                                                                           |
-| **Add Note**              | `addnote 1 Secured Series A funding`                                                                                                                                                             |
-| **Edit Note**             | `editnote 1 1 Revised Series A valuation`                                                                                                                                                        |
-| **Delete Note**           | `deletenote 1 1`                                                                                                                                                                                 |
+| Action                    | Format, Examples                                                                                                                                                                                             |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**                   | `add n/NAME p/PHONE_NUMBER f/FUNDING_STAGE v/VALUATION i/INDUSTRY e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Google p/22224444 e/larrypage@example.com a/123, menlo park, 1234665 t/SV-based i/Tech f/A` |
+| **Clear**                 | `clear`                                                                                                                                                                                                      |
+| **Delete**                | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                          |
+| **Edit**                  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [v/VALUATION] [i/INDUSTRY] [f/FUNDING_STAGE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                     |
+| **Find by Name**          | `find n/NAME [MORE_NAMES]`<br> e.g., `find n/apple`                                                                                                                                                          |
+| **Find by Funding Stage** | `find f/FUNDING_STAGE [MORE_FUNDING_STAGES]`<br> e.g., `find f/A`, `find f/A B`                                                                                                                              |
+| **Find by Industry**      | `find i/INDUSTRY [MORE_INDUSTRIES]`<br> e.g., `find i/AI`, `find i/AI Robotics`                                                                                                                              |
+| **List**                  | `list`                                                                                                                                                                                                       |
+| **Help**                  | `help`                                                                                                                                                                                                       |
+| **Add Note**              | `addnote 1 Secured Series A funding`                                                                                                                                                                         |
+| **Edit Note**             | `editnote 1 1 Revised Series A valuation`                                                                                                                                                                    |
+| **Delete Note**           | `deletenote 1 1`                                                                                                                                                                                             |
