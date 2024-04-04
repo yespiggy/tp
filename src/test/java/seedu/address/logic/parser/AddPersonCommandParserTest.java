@@ -1,23 +1,21 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddPersonCommand;
-import seedu.address.logic.commands.CommandTestUtil;
-import seedu.address.model.person.Person;
-import seedu.address.model.startup.*;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.StartupBuilder;
-import seedu.address.testutil.TypicalPersons;
-
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STARTUP;
-import static seedu.address.testutil.TypicalStartups.AMY;
-import static seedu.address.testutil.TypicalStartups.BOB;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.CommandTestUtil;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonEmail;
+import seedu.address.model.person.PersonName;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
+
 
 class AddPersonCommandParserTest {
 
@@ -30,8 +28,8 @@ class AddPersonCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, CommandTestUtil.PREAMBLE_WHITESPACE
                 + "1 " + CommandTestUtil.PERSONNAME_DESC_BOB
-                + CommandTestUtil.PERSONEMAIL_DESC_BOB
-                , new AddPersonCommand(INDEX_FIRST_STARTUP, expectedPerson));
+                + CommandTestUtil.PERSONEMAIL_DESC_BOB,
+                new AddPersonCommand(INDEX_FIRST_STARTUP, expectedPerson));
 
 
         // multiple descriptions - all accepted
@@ -45,15 +43,17 @@ class AddPersonCommandParserTest {
 
     @Test
     public void parse_repeatedNonDescriptionValue_failure() {
-        String validExpectedPersonString = "1 " + CommandTestUtil.PERSONNAME_DESC_BOB
+        String validExpectedPersonString = CommandTestUtil.PERSONNAME_DESC_BOB
                 + CommandTestUtil.PERSONEMAIL_DESC_BOB
                 + CommandTestUtil.DESCRIPTION_DESC_BOB_CTO;
 
         //multiple names
-        //assertParseFailure(parser, );
+        assertParseFailure(parser, "1 " + CommandTestUtil.PERSONNAME_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PERSON_NAME));
 
         //multiple emails
-
+        assertParseFailure(parser, "1 " + CommandTestUtil.PERSONEMAIL_DESC_AMY + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(CliSyntax.PREFIX_PERSON_EMAIL));
     }
 
     @Test
@@ -92,38 +92,24 @@ class AddPersonCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC
-                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.EMAIL_DESC_BOB
-                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
-                + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-                + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + CommandTestUtil.INVALID_PERSONNAME_DESC
+                + CommandTestUtil.PERSONEMAIL_DESC_BOB, PersonName.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, CommandTestUtil.NAME_DESC_BOB
-                + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.INVALID_EMAIL_DESC
-                + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
-                + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-                + CommandTestUtil.TAG_DESC_HUSBAND
-                + CommandTestUtil.TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
-
+        assertParseFailure(parser, "1 " + CommandTestUtil.PERSONNAME_DESC_BOB
+                + CommandTestUtil.INVALID_PERSONEMAIL_DESC, PersonEmail.MESSAGE_CONSTRAINTS);
 
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, CommandTestUtil.INVALID_NAME_DESC
-                        + CommandTestUtil.PHONE_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
-                        + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + CommandTestUtil.INVALID_PERSONNAME_DESC
+                        + CommandTestUtil.INVALID_PERSONEMAIL_DESC,
+                PersonName.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, CommandTestUtil.PREAMBLE_NON_EMPTY
-                        + CommandTestUtil.NAME_DESC_BOB + CommandTestUtil.PHONE_DESC_BOB
-                        + CommandTestUtil.EMAIL_DESC_BOB + CommandTestUtil.VALUATION_DESC_BOB
-                        + CommandTestUtil.FUNDING_DESC_BOB + CommandTestUtil.INDUSTRY_DESC_BOB
-                        + CommandTestUtil.ADDRESS_DESC_BOB + CommandTestUtil.TAG_DESC_HUSBAND
-                        + CommandTestUtil.TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "1 " + CommandTestUtil.PREAMBLE_NON_EMPTY
+                        + CommandTestUtil.PERSONNAME_DESC_BOB
+                        + CommandTestUtil.PERSONEMAIL_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
     }
 
 }

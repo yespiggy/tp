@@ -1,14 +1,16 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STARTUP;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STARTUP;
-import static seedu.address.testutil.TypicalStartups.ALICE;
 import static seedu.address.testutil.TypicalStartups.getTypicalAddressBook;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +29,6 @@ import seedu.address.model.startup.Startup;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StartupBuilder;
 import seedu.address.testutil.TypicalPersons;
-
-import java.util.HashSet;
-import java.util.Set;
 
 class AddPersonCommandTest {
 
@@ -69,8 +68,8 @@ class AddPersonCommandTest {
     public void execute_duplicatePerson_throwsCommandException() {
         AddPersonCommand addPersonCommand = new AddPersonCommand(INDEX_FIRST_STARTUP, TypicalPersons.AMY);
 
-        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON,
-                () -> addPersonCommand.execute(model));
+        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand
+                .execute(model));
     }
 
 
