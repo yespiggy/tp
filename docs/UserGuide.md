@@ -8,12 +8,12 @@
 
 **Welcome to CapitalConnect: Your Portfolio Powerhouse!**
 
-Do you ever feel like your startup portfolio is a tangled mess of spreadsheets and endless documents? You're not alone. 
+Do you ever feel like your startup portfolio is a tangled mess of spreadsheets and endless documents? You're not alone.
 As a Venture Capital Portfolio Manager, juggling diverse investments across industries can be a complex challenge.
 
 **Who are you?**
 
-Our application is build for the aspiring venture capitalist! You are a professional on the lookout for the next Google. 
+Our application is build for the aspiring venture capitalist! You are a professional on the lookout for the next Google.
 You are passionate about innovative and new technologies. Most importantly, you want to **make your network your net-worth.**
 
 **CapitalConnect is here to revolutionize your experience**.
@@ -34,8 +34,8 @@ This user guide is your key to unlocking the full potential of the app.  We'll w
 effortlessly adding new investments to categorizing them by industry and funding stage.  Forget the days of chasing
 down data – CapitalConnect empowers you to track your startup investments with ease.
 
-Throughout this guide, we'll use clear, step-by-step instructions and helpful screenshots to ensure you master 
-CapitalConnect in no time.  So, buckle up and get ready to experience a smoother, more efficient way to manage your 
+Throughout this guide, we'll use clear, step-by-step instructions and helpful screenshots to ensure you master
+CapitalConnect in no time.  So, buckle up and get ready to experience a smoother, more efficient way to manage your
 startup investments!
 
 
@@ -64,9 +64,9 @@ startup investments!
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all startups.
 
-   * `add n/Pichu p/98765432 i/finance v/10 f/B e/pichuhr@example.com a/pichu street, block 123, #01-01` : Adds a start up called `Pichu` to CapitalConnect.
+   * `add n/Pichu p/98765432 i/finance v/10 f/B e/pichuhr@example.com a/pichu street, block 123, #01-01` : Adds a startup called `Pichu` to CapitalConnect.
 
    * `delete 3` : Deletes the 3rd startup shown in the current list.
 
@@ -165,7 +165,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [v/VALUATION] [f/FUNDING_STAGE] [i/INDUST
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/stripe@example.com` Edits the phone number and email address of the 1st startup to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/stripe@example.com` Edits the phone number and email address of the 1st startup to be `91234567` and `stripe@example.com` respectively.
 *  `edit 2 n/Stripe t/` Edits the name of the 2nd startup to be `Stripe` and clears all existing tags.
 
 
@@ -265,9 +265,9 @@ Examples:
 
 Edits an existing note of a startup in the address book.
 
-Format: `editnote INDEX noteIndex NOTE`
+Format: `editnote INDEX NOTE_INDEX NOTE`
 
-- Edits the note at `noteIndex` of the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+- Edits the note at `NOTE_INDEX` of the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 - The `NOTE` field must be provided and cannot be empty.
 
 Examples:
@@ -284,9 +284,9 @@ Examples:
 
 Deletes a note from an existing startup in the address book.
 
-Format: `deletenote INDEX noteIndex`
+Format: `deletenote INDEX NOTE_INDEX`
 
-- Deletes the note at `noteIndex` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+- Deletes the note at `NOTE_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 
 Examples:
 - `deletenote 1 1` Deletes the first note of the 1st startup.
@@ -309,24 +309,39 @@ Exits the program.
 
 Format: `exit`
 
-### Adding a person: `add-p`
+### Adding a person to a startup: `add-p`
 
-Adds a person to the address book.
+* Adds a person to the specified startup in CapitalConnect.
+* Click on the startup card that contains your new person to see the changes.
 
-Format: `add-p INDEX pn/NAME pe/EMAIL pd/DESCRIPTION`
+Format: `add-p INDEX pn/NAME pe/EMAIL [pd/DESCRIPTION]…​`
 
-### Editing a person: `edit-p`
+### Editing a person from a startup: `edit-p`
 
-Edit a person.
+* Edits the person at the specified `PERSON_INDEX` of startup at index `INDEX`. The index refers to the index number shown in the displayed key employees and startup list respectively. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing descriptions, the existing descriptions of the startup will be removed i.e adding of descriptions is not cumulative.
+* You can remove all the person’s descriptions by typing `pd/` without
+  specifying any descriptions after it.
+* Click on the startup card that contains your edited person to see the changes.
 
-Format: `edit-p INDEX INDEX pn/NAME pe/EMAIL pd/DESCRIPTION`
+Format: `edit-p INDEX PERSON_INDEX [pn/NAME] [pe/EMAIL] [pd/DESCRIPTION]…​`
 
-### Deleting a person: `delete-p`
+Examples:
+*  `edit-p 1 1 pn/John pe/johndoe@example.com` Edits the name and email address of the 1st person in the 1st startup to be `John` and `johndoe@example.com` respectively.
+*  `edit-p 2 1 n/Amy pd/` Edits the name of the 1st person of the 2nd startup to be `Amy` and clears all existing descriptions.
 
-Deletes a person.
+### Deleting a person from a startup: `delete-p`
 
-Format: `delete-p StartupIndex Index`
+* Deletes the person at `PERSON_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed in the key employees list and startup list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+* Click on the startup card that contained your deleted person to see the changes.
 
+Format: `delete-p INDEX PERSON_INDEX`
+
+Examples:
+- `delete-p 1 1` Deletes the 1st person of the 1st startup.
+- `delete-p 2 3` Deletes the 3rd person of the 2nd startup.
 
 ### Saving the data
 
@@ -342,10 +357,6 @@ CapitalConnect data are saved automatically as a JSON file `[JAR file location]/
 If your changes to the data file makes its format invalid, CapitalConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause CapitalConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -375,9 +386,9 @@ _Details coming soon ..._
 | **Find by Industry**      | `find i/INDUSTRY [MORE_INDUSTRIES]`<br> e.g., `find i/AI`, `find i/AI Robotics`                                                                                                                              |
 | **List**                  | `list`                                                                                                                                                                                                       |
 | **Help**                  | `help`                                                                                                                                                                                                       |
-| **Add Note**              | `addnote 1 Secured Series A funding`                                                                                                                                                                         |
-| **Edit Note**             | `editnote 1 1 Revised Series A valuation`                                                                                                                                                                    |
-| **Delete Note**           | `deletenote 1 1`                                                                                                                                                                                             |
-| **Add Person**            | `add-p 1 pn/name pe/email pd/founder`                                                                                                                                                                        |
-| **Edit Person**           | `edit-p 1 1 pn/name pe/email pd/founder`                                                                                                                                                                     |
-| **Delete Person**         | `delete-p 1 1`                                                                                                                                                                                               |
+| **Add Note**              | `addnote INDEX NOTE` <br> e.g., `addnote 1 Secured Series A funding`                                                                                                                                         |
+| **Edit Note**             | `editnote INDEX NOTE_INDEX NOTE` <br> e.g., `editnote 1 1 Revised Series A valuation`                                                                                                                        |
+| **Delete Note**           | `deletenote INDEX NOTE_INDEX` <br> e.g., `deletenote 1 1`                                                                                                                                                    |
+| **Add Person**            | `add-p INDEX pn/NAME pe/EMAIL [pd/DESCRIPTION]…​` <br> e.g., `add-p 1 pn/name pe/email pd/founder`                                                                                                           |
+| **Edit Person**           | `edit-p INDEX PERSON_INDEX [pn/NAME] [pe/EMAIL] [pd/DESCRIPTION]…​` <br> e.g., `edit-p 1 1 pn/name pe/email pd/founder`                                                                                      |
+| **Delete Person**         | `delete-p INDEX PERSON_INDEX` <br> e.g., `delete-p 1 1`                                                                                                                                                      |   
