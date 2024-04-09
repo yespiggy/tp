@@ -117,21 +117,48 @@ Adds a startup to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER i/INDUSTRY f/FUNDING_STAGE e/EMAIL a/ADDRESS v/VALUATION [t/TAG]…​`
 
+<box type="info" seamless>
+
+* `n/NAME` can have numbers! Additionally, we do not limit the length of your input for your flexibility!
+
+  * `p/PHONE_NUMBER` does not support non-numerical characters. We also do not limit the length of your input number too. We understand that this makes it difficult to add international numbers that require characters like 
+  "-" to differentiate between country codes. We are working on it and will roll it out in a future release.
+
+* We only support traditional funding stages, hence inputs for `FUNDING_STAGE` must be either `S`, `PS`, `A`, `B` or `C`.
+  `A`, `B`, `C` represents the respective funding series whilst `PS` refers to pre-seed and `S` refers to the seed stage. For more information about funding stages, see [here](https://www.indeed.com/career-advice/career-development/startup-funding-stages)!
+
+* `[t/TAG]` variables are not length-limited. We also do not allow duplicate `[t/TAG]`!
+
+* Note that inputs like `n/NAME`, `e/EMAIL`, `a/ADDRESS` are currently case-insensitive in CapitalConnect, however `i/INDUSTRY` is kept case-sensitive.
+
+**Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/capital connect`.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/capital connect t/stealth startup` or as `n/capital connect`.
+
+* Items with `…`​ after them can be used multiple times including zero times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/stealth startup`, `t/steath startup t/mvp` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+  </box>
+
+<box type="tip" seamless>
+
+**Tip:** Use `t/TAG` to store information that you need to easily view!
+</box>
+
 <box type="tip" seamless>
 
 **Tip:** A startup can have any number of tags (including 0)
-</box>
-
-<box type="tip" seamless>
-
-**Tip:** We only support traditional funding stages, hence inputs for `FUNDING_STAGE` must be either `S`, `PS`, `A`, `B` or `C`!
-`A`, `B`, `C` represents the respective funding series whilst `PS` refers to pre-seed and `S` refers to the seed stage.
-</box>
-
-<box type="tip" seamless>
-
-**Tip:** You can't give us blank inputs! We need you to give us a valid input for mandatory fields! Check that phone number again,
-did you accidentally add a digit?
 </box>
 
 <box type="tip" seamless>
@@ -183,9 +210,9 @@ Format: `find n/NAME [MORE_NAME]`
 * The search is case-insensitive. e.g `apple` will match `Apple`
 * The order of the keywords does not matter. e.g. `Jane Street` will match `Street Jane`
 * Only the name is searched.
-* Only full words will be matched e.g. `Microsoft` will not match `Microsofts`
+* Only full words will be matched e.g. `Microsoft` will not match `Microsofts`.
 * Startups matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Jane Street` will return `Jane Technologies`, `State Street`
+  e.g. `Jane Street` will return `Jane Technologies`, `State Street`.
 
 Examples:
 * `find n/Google` returns `google` and `Google Deepmind`
@@ -204,11 +231,11 @@ Format: `find f/FUNDING_STAGE [MORE_FUNDING_STAGES]`
 
 * The search is case-insensitive. e.g `a` will match `A`
 * Multiple funding stages can be looked up in a single search.
-* The order of the keywords does not matter. e.g. `A B` will match `B A`
+* The order of the keywords does not matter. e.g. `A B` will match `B A`.
 * Only the funding stage is searched.
 
 Examples:
-* `find f/C` returns startups that are currently in Series C funding
+* `find f/C` returns startups that are currently in Series C funding.
 
   ![result for 'find by fundingStage C'](images/findByFundingStage.png)
 
@@ -216,11 +243,11 @@ Examples:
 
 Finds startups with industries that match any of the given keywords.
 
-Format: `find f/INDUSTRY [MORE_INDUSTRIES]`
+Format: `find i/INDUSTRY [MORE_INDUSTRIES]`
 
-* The search is case-insensitive. e.g `ai` will match `AI`
+* The search is case-insensitive. e.g `ai` will match `AI`.
 * Startups from multiple industries can be looked up in a single search.
-* The order of the keywords does not matter. e.g. `AI WEB3` will match `WEB3 AI`
+* The order of the keywords does not matter. e.g. `AI WEB3` will match `WEB3 AI`.
 * Only the industry is searched.
 
 Examples:
@@ -236,7 +263,7 @@ Format: `delete INDEX`
 
 * Deletes the startup at the specified `INDEX`.
 * The index refers to the index number shown in the displayed startup list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd startup in the address book.
@@ -255,10 +282,25 @@ Examples:
 - `addnote 1 Secured Series A funding` Adds a note about securing Series A funding to the 1st startup.
 - `addnote 2 Launching new product in Q2` Adds a note about a product launch in Q2 to the 2nd startup.
 
+<box type="info" seamless>
+
+What's the difference between a `NOTE` and a `t/TAG`?
+
+We aim for `NOTE` to be used to store longer, more verbose details! Whereas `t/TAG` should be used to store 
+information that needs to be easy to reach and accessible!
+
+Consider the storing the following: "The startup founder seems very passionate in his speech", storing this with `t/TAG`
+may not be the best idea as it is verbose, and it might be information you don't need on hand.
+
+However, if the founder's passion is something important to you, and you want the ability to know this about a startup
+without clicking into it, you could tag the startup with `t/passionate`.
+""
+</box>
+
 ![result for 'addnote 1 Secured Series A funding'](images/tracing/AddNoteCommand.png)
-
+<box type="tip" seamless>
 **Tip:** Use specific and concise notes to effectively capture important information about each startup.
-
+</box>
 ---
 
 ### Editing a Note of a Startup: `editnote`
@@ -276,7 +318,9 @@ Examples:
 
 ![result for 'editnote 1 1 Revised Series A valuation'](images/tracing/EditNoteCommand.png)
 
+<box type="tip" seamless>
 **Tip:** Editing notes allows you to keep information about startups up to date with the latest developments.
+</box>
 
 ---
 
@@ -294,8 +338,9 @@ Examples:
 
 ![result for 'deletenote 1 1'](images/tracing/DeleteNoteCommand.png)
 
+<box type="tip" seamless>
 **Tip:** Use the `deletenote` command cautiously to ensure important notes are not accidentally removed.
-
+</box>
 
 ### Clearing all entries : `clear`
 
@@ -363,7 +408,7 @@ Furthermore, certain edits can cause CapitalConnect to behave in unexpected ways
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous CapitalConnect home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
