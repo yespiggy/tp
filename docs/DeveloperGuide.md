@@ -499,7 +499,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CapitalConnect dashboard**: The user interface of the CapitalConnect application where users can manage their startup investments, perform searches, and view their portfolio.
 * **Startup investment**: An investment made by a user in a startup company, typically including details such as the startup name, industry, funding stage, address, and contact information.
 * **Industry**: The sector or field in which a startup operates, such as Tech, Biotech, or Finance.
-* **Funding stage**: The development stage of a startup at which it has received a certain level of investment, such as Seed, Series A, or Series B.
+* **Funding stage**: The development stage of a startup at which it has received a certain level of investment, such as Pre-Seed, Seed, Series A, Series B or Series C.
+* **Valuation**: The valuation of the company.
 * **Dashboard state**: The current configuration and data displayed in the CapitalConnect dashboard, including startup investments and any applied filters or search results.
 * **Index**: A numeric value representing the position of an item within a list, used in commands to reference specific startup investments in the portfolio.
 * **Confirmation message**: A notification displayed to the user indicating the successful completion of an action, such as adding or deleting a startup investment.
