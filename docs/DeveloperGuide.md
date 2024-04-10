@@ -180,7 +180,7 @@ Step 2. The user executes `delete 5` command to delete the 5th startup in the ad
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new startup. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/CapitalConnect …​` to add a new startup. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -318,9 +318,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Funding stage
     * Address
     * Contact information
+    * Valuation of Startup
 3.  User provides the necessary details.
 4.  CapitalConnect verifies the input for validity.
-5.  CapitalConnect adds the new startup investment to the user's portfolio in the dashboard.
+5.  CapitalConnect adds the new startup's profile to the user's portfolio in the dashboard.
 
     Use case ends.
 
@@ -343,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to search for startup investments by industry and funding stage.
+1.  User requests to search for startup investments by either industry and funding stage.
 2.  CapitalConnect dashboard prompts the user to input the industry and funding stage.
 3.  User provides the industry and funding stage.
 4.  CapitalConnect verifies the input for validity.
@@ -436,6 +437,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 5a. Specified index is out of range or no startup investments at the specified index.
 
     * 5a1. CapitalConnect shows an error message indicating the issue.
+
+      Use case ends.
+
+**Use case: Edit a startup investment from the portfolio**
+
+**MSS**
+
+1.  User requests to edit a specific startup investment from their portfolio.
+2.  CapitalConnect dashboard prompts the user to input the index of the startup investment to be deleted.
+3.  User provides the index of the startup investment.
+4.  CapitalConnect verifies the input for validity.
+5. CapitalConnect dashboard prompts the user to provide details to update, where details could be:
+    * Startup name
+    * Industry
+    * Funding stage
+    * Address
+    * Contact information
+    * Valuation of Startup
+6. User provides the necessary details.
+7. CapitalConnect verifies the input for validity.
+8. CapitalConnect edits the startup investment at the specified index from the user's portfolio.
+9. CapitalConnect displays a confirmation message indicating successful edit of the startup investment.
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. Invalid input or missing parameters.
+
+    * 4a1. CapitalConnect shows an error message.
+
+      Use case resumes at step 2.
+  
+* 7a. Invalid input or missing parameters.
+
+    * 7a1. CapitalConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 8a. Specified index is out of range or no startup investments.
+
+    * 8a1. CapitalConnect shows an error message indicating the issue.
 
       Use case ends.
 
