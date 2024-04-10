@@ -121,8 +121,11 @@ Format: `add n/NAME p/PHONE_NUMBER i/INDUSTRY f/FUNDING_STAGE e/EMAIL a/ADDRESS 
 
 * `n/NAME` can have numbers! Additionally, we do not limit the length of your input for your flexibility!
 
-  * `p/PHONE_NUMBER` does not support non-numerical characters. We also do not limit the length of your input number too. We understand that this makes it difficult to add international numbers that require characters like 
-  "-" to differentiate between country codes. We are working on it and will roll it out in a future release.
+* `p/PHONE_NUMBER` does not support non-numerical characters. We also do not limit the length of your input number too. We understand that this makes it difficult to add international numbers that require characters like 
+"-" to differentiate between country codes. We are working on it and will roll it out in a future release.
+
+* We restrict `v/VALUATION` to be a value between 0 and 5 trillion. (Note that the most expensive company is only valued at around 3 Trillion as of April 10, 2024) For now, there is no way to specify currency denomination and values have to be input in integer form, I.e. To reflect a valuation of `10k`, the user must input `10000`.
+Additionally, the input value is truncated to 4 characters to allow for a clean display. I.e. A input of `101800` will be displayed as a 4 character `101k`, `123200010` to `123m`. 
 
 * We only support traditional funding stages, hence inputs for `FUNDING_STAGE` must be either `S`, `PS`, `A`, `B` or `C`.
   `A`, `B`, `C` represents the respective funding series whilst `PS` refers to pre-seed and `S` refers to the seed stage. For more information about funding stages, see [here](https://www.indeed.com/career-advice/career-development/startup-funding-stages)!
