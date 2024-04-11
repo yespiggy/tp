@@ -397,6 +397,7 @@ Format: `clear`
 <box type="warning" seamless>
 
 **Caution: Irreversible Data Loss**
+
 The `clear` command will permanently removes all startup entries from CapitalConnect and this action is **irreversible**.
 Before using the clear command, always double-check to make sure that you absolutely intend to erase all data.
 </box>
