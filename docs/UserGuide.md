@@ -82,7 +82,7 @@ startup investments!
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/capital connect`.
@@ -99,7 +99,9 @@ startup investments!
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* Currently selected startup card will appear blue!
+* Currently selected startup card will appear blue.<br>
+  e.g. in the image below, the currently selected startup is `Allium`.
+  ![Currently selected startup](images/currentlySelectedStartup.png)
 
 * The key employees and notes displayed in the key employee box and note box belongs to the currently selected startup.
 
@@ -359,13 +361,14 @@ Examples:
 <box type="info" seamless>
 
 **Why am I not seeing the changes in the key employee box immediately?**
+
 If you do not see the changes immediately after editing a key employee in your startup, it means that the startup card containing your
 edited key employee is currently not selected.
-<br>
+
 The currently selected startup card will automatically get deselected after you are doing `find` operations, however the information of the last selected startup will
 still be displayed in the key employee box, which is why if you are performing person related operations afterward,
 it may appear like the information in the key employee box are not being updated.
-<br>
+
 Rest assured, the information is updated. To ensure you see the updated information, simply click on your startup card after any person-related operation, i.e., `add-p`, `edit-p`, and `delete-p`.
 </box>
 
@@ -391,6 +394,18 @@ Clears all entries from CapitalConnect.
 
 Format: `clear`
 
+<box type="warning" seamless>
+
+**Caution: Irreversible Data Loss**
+The `clear` command will permanently removes all startup entries from CapitalConnect and this action is **irreversible**.
+Before using the clear command, always double-check to make sure that you absolutely intend to erase all data.
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** Use `clear` command to clear up the sample data.
+</box>
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -407,7 +422,6 @@ CapitalConnect data are saved automatically as a JSON file `[JAR file location]/
 
 <box type="warning" seamless>
 
-**Caution:**
 If your changes to the data file makes its format invalid, CapitalConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause CapitalConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
