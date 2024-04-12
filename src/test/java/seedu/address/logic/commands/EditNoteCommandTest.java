@@ -34,7 +34,7 @@ public class EditNoteCommandTest {
         Startup expectedStartup = new StartupBuilder(startupToEdit).withNotes(editedNote.toString(),
                 "Looking into Series A funding").build();
         expectedModel.setStartup(startupToEdit, expectedStartup);
-        String expectedMessage = String.format(EditNoteCommand.MESSAGE_SUCCESS, expectedStartup);
+        String expectedMessage = String.format(EditNoteCommand.MESSAGE_SUCCESS, Messages.format(expectedStartup));
 
         assertCommandSuccess(editNoteCommand, model, expectedMessage, expectedModel);
     }
