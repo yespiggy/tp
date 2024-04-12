@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
@@ -11,6 +14,7 @@ import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,7 +23,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class StartupBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_NAME = "Startup A";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
@@ -28,8 +32,7 @@ public class StartupBuilder {
 
     public static final String DEFAULT_FUNDING = "A";
 
-    public static final String DEFAULT_NOTE = "Add a note!";
-
+    public static final String DEFAULT_VALUATION = "1000";
     private Name name;
     private Phone phone;
 
@@ -40,8 +43,11 @@ public class StartupBuilder {
     private Email email;
     private Address address;
 
-    private Note note;
+    private List<Note> notes;
+    private Valuation valuation;
+
     private Set<Tag> tags;
+    private List<Person> persons;
 
     /**
      * Creates a {@code StartupBuilder} with the default details.
@@ -54,7 +60,9 @@ public class StartupBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        note = new Note(DEFAULT_NOTE);
+        notes = new ArrayList<>();
+        persons = new ArrayList<>();
+        valuation = new Valuation(DEFAULT_VALUATION);
     }
 
     /**
@@ -67,8 +75,10 @@ public class StartupBuilder {
         phone = startupToCopy.getPhone();
         email = startupToCopy.getEmail();
         address = startupToCopy.getAddress();
-        note = startupToCopy.getNote();
+        notes = startupToCopy.getNotes();
         tags = new HashSet<>(startupToCopy.getTags());
+        persons = startupToCopy.getPersons();
+        valuation = startupToCopy.getValuation();
     }
 
     /**
@@ -84,6 +94,14 @@ public class StartupBuilder {
      */
     public StartupBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code persons} into a {@code Set<Person>} and set it to the {@code Startup} that we are building.
+     */
+    public StartupBuilder withPersons(Person ... persons) {
+        this.persons = SampleDataUtil.getPersonList(persons);
         return this;
     }
 
@@ -114,8 +132,8 @@ public class StartupBuilder {
     /**
      * Sets the {@code Note} of the {@code Startup} that we are building.
      */
-    public StartupBuilder withNote(String note) {
-        this.note = new Note(note);
+    public StartupBuilder withNotes(String ... notes) {
+        this.notes = SampleDataUtil.getNoteList(notes);
         return this;
     }
 
@@ -135,9 +153,17 @@ public class StartupBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code valuation} of the {@code Startup} that we are building.
+     */
+    public StartupBuilder withValuation(String valuation) {
+        this.valuation = new Valuation(valuation);
+        return this;
+    }
+
 
     public Startup build() {
-        return new Startup(name, fundingStage, industry, phone, email, address, tags);
+        return new Startup(name, fundingStage, industry, phone, email, address, valuation, tags, notes, persons);
     }
 
 }

@@ -1,15 +1,17 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_B;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POTENTIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VALUATION_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VALUATION_B;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,43 +25,51 @@ import seedu.address.model.startup.Startup;
  */
 public class TypicalStartups {
 
-    public static final Startup ALICE = new StartupBuilder().withName("Alice Pauline")
+    public static final Startup STARTUP1 = new StartupBuilder().withName("StartupC")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withIndustry("finance").withFundingStage("A")
-            .withNote("Add a note!").withTags("friends").build();
-    public static final Startup BENSON = new StartupBuilder().withName("Benson Meier")
+            .withNotes("Innovative project ideas", "Looking into Series A funding").withTags("friends")
+            .withPersons(TypicalPersons.AMY).build();
+    public static final Startup STARTUP2 = new StartupBuilder().withName("StartupD")
             .withAddress("311, Clementi Ave 2, #02-25").withIndustry("finance").withFundingStage("A")
-            .withEmail("johnd@example.com").withPhone("98765432").withNote("Smelly guy")
+            .withEmail("johnd@example.com").withPhone("98765432")
+            .withNotes("Strong technical team", "Consider for next investment round")
             .withTags("owesMoney", "friends").build();
-    public static final Startup CARL = new StartupBuilder().withName("Carl Kurz").withPhone("95352563")
+    public static final Startup STARTUP3 = new StartupBuilder().withName("StartupE").withPhone("95352563")
             .withEmail("heinz@example.com").withIndustry("web3").withFundingStage("C")
             .withAddress("wall street").build();
-    public static final Startup DANIEL = new StartupBuilder().withName("Daniel Meier").withPhone("87652533")
+    public static final Startup STARTUP4 = new StartupBuilder().withName("StartupF").withPhone("87652533")
             .withEmail("cornelia@example.com").withIndustry("finance").withFundingStage("A")
+            .withNotes("Solid business model", "Expansion into new markets")
             .withAddress("10th street").withTags("friends").build();
-    public static final Startup ELLE = new StartupBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Startup STARTUP5 = new StartupBuilder().withName("StartupG").withPhone("9482224")
             .withEmail("werner@example.com").withIndustry("web3").withFundingStage("C")
-            .withAddress("michegan ave").build();
-    public static final Startup FIONA = new StartupBuilder().withName("Fiona Kunz").withPhone("9482427")
+            .withNotes("Revolutionary technology", "Needs additional funding").withAddress("michegan ave").build();
+    public static final Startup STARTUP6 = new StartupBuilder().withName("StartupG G").withPhone("9482427")
             .withEmail("lydia@example.com").withIndustry("web3").withFundingStage("C")
+            .withNotes("High user engagement", "Exploring partnership opportunities")
             .withAddress("little tokyo").build();
-    public static final Startup GEORGE = new StartupBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withIndustry("finance").withFundingStage("A")
-            .withAddress("4th street").build();
+    public static final Startup STARTUP7 = new StartupBuilder().withName("StartupI").withPhone("9482442")
+            .withEmail("anna@example.com").withIndustry("finance").withValuation("1000")
+            .withFundingStage("A")
+            .withNotes("Experienced management team", "Profitable quarter reported")
+            .withAddress("4th street").withPersons(TypicalPersons.AMY, TypicalPersons.GEORGE).build();
 
     // Manually added
-    public static final Startup HOON = new StartupBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Startup STARTUP8 = new StartupBuilder().withName("StartupJ").withPhone("8482424")
             .withEmail("stefan@example.com").withIndustry("finance").withFundingStage("A")
-            .withAddress("little india").build();
-    public static final Startup IDA = new StartupBuilder().withName("Ida Mueller").withPhone("8482131")
+            .withAddress("little india").withValuation("1000").build();
+    public static final Startup STARTUP9 = new StartupBuilder().withName("StartupK").withPhone("8482131")
             .withEmail("hans@example.com").withIndustry("finance").withFundingStage("A")
-            .withAddress("chicago ave").build();
+            .withAddress("chicago ave").withValuation("1000").build();
 
     // Manually added - Startup's details found in {@code CommandTestUtil}
-    public static final Startup AMY = new StartupBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
-    public static final Startup BOB = new StartupBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+    public static final Startup STARTUP_A = new StartupBuilder().withName(VALID_NAME_A).withPhone(VALID_PHONE_A)
+            .withEmail(VALID_EMAIL_A).withValuation(VALID_VALUATION_A)
+            .withAddress(VALID_ADDRESS_A).withTags(VALID_TAG_POTENTIAL).build();
+    public static final Startup STARTUP_B = new StartupBuilder().withName(VALID_NAME_B).withPhone(VALID_PHONE_B)
+            .withEmail(VALID_EMAIL_B).withValuation(VALID_VALUATION_B)
+            .withAddress(VALID_ADDRESS_B).withTags(VALID_TAG_NEW, VALID_TAG_POTENTIAL)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -78,6 +88,6 @@ public class TypicalStartups {
     }
 
     public static List<Startup> getTypicalStartups() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(STARTUP1, STARTUP2, STARTUP3, STARTUP4, STARTUP5, STARTUP6, STARTUP7));
     }
 }

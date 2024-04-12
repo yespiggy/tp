@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_STARTUP_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStartups.AMY;
+import static seedu.address.testutil.TypicalStartups.STARTUP_A;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -162,10 +162,12 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.FUNDING_DESC_AMY
-                + CommandTestUtil.INDUSTRY_DESC_AMY + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
-                + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY;
-        Startup expectedStartup = new StartupBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + CommandTestUtil.FUNDING_DESC_A
+                + CommandTestUtil.VALUATION_DESC_A
+                + CommandTestUtil.INDUSTRY_DESC_A + CommandTestUtil.NAME_DESC_A
+                + CommandTestUtil.PHONE_DESC_A
+                + CommandTestUtil.EMAIL_DESC_A + CommandTestUtil.ADDRESS_DESC_A;
+        Startup expectedStartup = new StartupBuilder(STARTUP_A).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStartup(expectedStartup);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -9,12 +9,16 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Description;
+import seedu.address.model.person.PersonEmail;
+import seedu.address.model.person.PersonName;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Phone;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,6 +103,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String valuation} into a {@code Valuation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Valuation} is invalid.
+     */
+    public static Valuation parseValuation(String valuation) throws ParseException {
+        requireNonNull(valuation);
+        String trimmedValuation = valuation.trim();
+        if (!Valuation.isValidValuation(trimmedValuation)) {
+            throw new ParseException(Valuation.MESSAGE_CONSTRAINTS);
+        }
+        return new Valuation(valuation);
+    }
+
+    /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -153,5 +172,62 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String personName} into a {@code PersonName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code personName} is invalid.
+     */
+    public static PersonName parsePersonName(String personName) throws ParseException {
+        requireNonNull(personName);
+        String trimmedPersonName = personName.trim();
+        if (!PersonName.isValidName(trimmedPersonName)) {
+            throw new ParseException(PersonName.MESSAGE_CONSTRAINTS);
+        }
+        return new PersonName(trimmedPersonName);
+    }
+
+    /**
+     * Parses a {@code String personEmail} into an {@code PersonEmail}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code personEmail} is invalid.
+     */
+    public static PersonEmail parsePersonEmail(String personEmail) throws ParseException {
+        requireNonNull(personEmail);
+        String trimmedPersonEmail = personEmail.trim();
+        if (!Email.isValidEmail(trimmedPersonEmail)) {
+            throw new ParseException(PersonEmail.MESSAGE_CONSTRAINTS);
+        }
+        return new PersonEmail(trimmedPersonEmail);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescriptionName(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses {@code Collection<String> descriptions} into a {@code Set<Description>}.
+     */
+    public static Set<Description> parseDescriptions(Collection<String> descriptions) throws ParseException {
+        requireNonNull(descriptions);
+        final Set<Description> descriptionSet = new HashSet<>();
+        for (String descriptionContent : descriptions) {
+            descriptionSet.add(parseDescription(descriptionContent));
+        }
+        return descriptionSet;
     }
 }

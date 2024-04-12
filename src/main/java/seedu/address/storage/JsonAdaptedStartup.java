@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
@@ -18,6 +19,7 @@ import seedu.address.model.startup.Name;
 import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,9 +38,11 @@ class JsonAdaptedStartup {
     private final String phone;
     private final String email;
     private final String address;
+    private final String valuation;
 
-    private final String note;
+    private final List<String> notes;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStartup} with the given startup details.
@@ -47,17 +51,23 @@ class JsonAdaptedStartup {
     public JsonAdaptedStartup(@JsonProperty("name") String name, @JsonProperty("industry") String industry,
                               @JsonProperty("fundingStage") String fundingStage, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
-                              @JsonProperty("note") String note,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("valuation") String valuation,
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                              @JsonProperty("notes") List<String> notes,
+                              @JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         this.name = name;
-        this.fundingStage = fundingStage;
         this.industry = industry;
+        this.fundingStage = fundingStage;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.note = note;
+        this.notes = notes != null ? new ArrayList<>(notes) : new ArrayList<>();
+        this.valuation = valuation;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (persons != null) {
+            this.persons.addAll(persons);
         }
     }
 
@@ -66,14 +76,20 @@ class JsonAdaptedStartup {
      */
     public JsonAdaptedStartup(Startup source) {
         name = source.getName().fullName;
+        industry = source.getIndustry().value;
+        fundingStage = source.getFundingStage().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        note = source.getNote().value;
-        industry = source.getIndustry().value;
-        fundingStage = source.getFundingStage().value;
+        notes = source.getNotes().stream() // Assuming getNotes() returns List<Note>
+                .map(Note::toString) // Assuming Note class has a toString that returns the note content
+                .collect(Collectors.toList());
+        valuation = source.getValuation().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        persons.addAll(source.getPersons().stream()
+                .map(JsonAdaptedPerson::new)
                 .collect(Collectors.toList()));
     }
 
@@ -114,6 +130,15 @@ class JsonAdaptedStartup {
         }
         final FundingStage modelFundingStage = new FundingStage(fundingStage);
 
+        if (valuation == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Valuation.class.getSimpleName()));
+        }
+        if (!Valuation.isValidValuation(valuation)) {
+            throw new IllegalValueException(Valuation.MESSAGE_CONSTRAINTS);
+        }
+        final Valuation modelValuation = new Valuation(valuation);
+
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -138,17 +163,25 @@ class JsonAdaptedStartup {
         }
         final Address modelAddress = new Address(address);
 
-        if (note == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        final List<Note> modelNotes = new ArrayList<>();
+        for (String noteString : notes) {
+            if (!Note.isValidNote(noteString)) {
+                throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+            }
+            modelNotes.add(new Note(noteString));
         }
-        if (!Note.isValidNote(note)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+
+        final List<Person> startupPersons = new ArrayList<>();
+        for (JsonAdaptedPerson person : persons) {
+            startupPersons.add(person.toModelType());
         }
-        final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(startupTags);
+        final ArrayList<Person> modelPersons = new ArrayList<>(startupPersons);
+
         return new Startup(modelName, modelFundingStage, modelIndustry,
-                modelPhone, modelEmail, modelAddress, modelTags, modelNote);
+                modelPhone, modelEmail, modelAddress, modelValuation, modelTags, modelNotes,
+                modelPersons);
     }
 
 }

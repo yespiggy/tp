@@ -1,13 +1,19 @@
 package seedu.address.model.startup;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,44 +31,85 @@ public class Startup {
 
     private final FundingStage fundingStage;
     private final Industry industry;
+    private final Valuation valuation;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Note note;
+    private List<Note> notes = new ArrayList<>();
+    //private List<Person> persons = new ArrayList<>();
+    private final UniquePersonList persons;
 
-    /**
-     * Every field must be present and not null.
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
      */
-    public Startup(Name name, FundingStage fundingStage, Industry industry,
-                   Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags);
-        this.name = name;
-        this.fundingStage = fundingStage;
-        this.industry = industry;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
-        this.note = new Note("Add a Note!");
+    {
+        persons = new UniquePersonList();
     }
 
     /**
      * Every field must be present and not null.
      */
     public Startup(Name name, FundingStage fundingStage, Industry industry,
-                   Phone phone, Email email, Address address, Set<Tag> tags, Note note) {
-        requireAllNonNull(name, fundingStage, industry, phone, email, address, tags);
+                   Phone phone, Email email, Address address, Valuation valuation,
+                   Set<Tag> tags) {
+        requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
         this.name = name;
         this.fundingStage = fundingStage;
+        this.valuation = valuation;
         this.industry = industry;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.note = note;
+        this.notes = new ArrayList<>();
+    }
+
+    /**
+     * Constructor for Startup with notes.
+     */
+    public Startup(Name name, FundingStage fundingStage, Industry industry,
+                   Phone phone, Email email, Address address, Valuation valuation,
+                   Set<Tag> tags, List<Note> notes) {
+        requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
+        this.name = name;
+        this.fundingStage = fundingStage;
+        this.industry = industry;
+        this.phone = phone;
+        this.valuation = valuation;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.notes = new ArrayList<>(notes); // Defensive copy
+    }
+
+    /**
+     * Constructor for Startup with persons.
+     */
+    public Startup(Name name, FundingStage fundingStage, Industry industry,
+                   Phone phone, Email email, Address address, Valuation valuation,
+                   Set<Tag> tags, List<Note> notes, List<Person> persons) {
+        requireAllNonNull(name, fundingStage, industry, valuation, phone, email, address, tags);
+        this.name = name;
+        this.fundingStage = fundingStage;
+        this.industry = industry;
+        this.phone = phone;
+        this.valuation = valuation;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.notes = new ArrayList<>(notes); // Defensive copy
+        this.persons.setPersons(persons);
     }
 
     public FundingStage getFundingStage() {
         return this.fundingStage;
+    }
+
+    public Valuation getValuation() {
+        return this.valuation;
     }
 
     public Industry getIndustry() {
@@ -85,8 +132,9 @@ public class Startup {
         return address;
     }
 
-    public Note getNote() {
-        return note;
+    // Getters and setters
+    public List<Note> getNotes() {
+        return notes;
     }
 
     /**
@@ -95,6 +143,14 @@ public class Startup {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable person set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public ObservableList<Person> getPersons() {
+        return persons.asUnmodifiableObservableList();
     }
 
     /**
@@ -132,27 +188,45 @@ public class Startup {
                 && phone.equals(otherStartup.phone)
                 && email.equals(otherStartup.email)
                 && address.equals(otherStartup.address)
-                && tags.equals(otherStartup.tags);
+                && tags.equals(otherStartup.tags)
+                && notes.equals(otherStartup.notes)
+                && valuation.equals(otherStartup.valuation)
+                && persons.equals(otherStartup.persons);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, notes, persons);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
+        ToStringBuilder builder = new ToStringBuilder(this)
                 .add("name", name)
                 .add("industry", industry)
                 .add("funding stage", fundingStage)
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("note", note)
+                .add("valuation", valuation)
                 .add("tags", tags)
-                .toString();
+                .add("persons", persons);
+
+        if (notes.isEmpty()) {
+            builder.add("notes", "No notes added");
+        } else {
+            builder.add("notes", notes);
+        }
+        return builder.toString();
     }
 
+
+    /**
+     * Returns true if a startup with the same identity as {@code startup} exists in the address book.
+     */
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return persons.contains(person);
+    }
 }

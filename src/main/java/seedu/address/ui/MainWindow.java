@@ -2,9 +2,13 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Orientation;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +20,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+import seedu.address.model.startup.Note;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -32,6 +38,10 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StartupListPanel startupListPanel;
+
+    private NoteListPanel noteListPanel;
+    private PersonListPanel personListPanel;
+
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -45,10 +55,19 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane startupListPanelPlaceholder;
 
     @FXML
+    private StackPane noteListPanelPlaceholder;
+
+    @FXML
+    private StackPane personListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private SplitPane startupSplitPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -62,6 +81,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        startupSplitPane.setOrientation(Orientation.VERTICAL);
 
         setAccelerators();
 
@@ -110,8 +130,28 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        startupListPanel = new StartupListPanel(logic.getFilteredStartupList());
+        noteListPanelPlaceholder.setStyle("-fx-background-color: #333;");
+        startupListPanel = new StartupListPanel(logic.getFilteredStartupList(), selectedStartup -> {
+            // When a startup is selected, update NoteListPanel with its notes
+            if (selectedStartup != null) {
+                ObservableList<Note> notes = FXCollections.observableArrayList(selectedStartup.getNotes());
+                ObservableList<Person> persons = FXCollections.observableArrayList(selectedStartup.getPersons());
+                noteListPanel.displayNotes(notes);
+                personListPanel.displayPersons(persons);
+            } else {
+                // Clear the NoteListPanel if no startup is selected
+                noteListPanel.displayNotes(FXCollections.observableArrayList());
+                personListPanel.displayPersons(FXCollections.observableArrayList());
+            }
+        });
         startupListPanelPlaceholder.getChildren().add(startupListPanel.getRoot());
+
+        // Initialize NoteListPanel with an empty list (until a startup is selected)
+        noteListPanel = new NoteListPanel(FXCollections.observableArrayList());
+        noteListPanelPlaceholder.getChildren().add(noteListPanel.getRoot());
+
+        personListPanel = new PersonListPanel(FXCollections.observableArrayList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

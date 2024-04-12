@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VALUATION;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -22,7 +23,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a startup to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a startup to CapitalConnect. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_INDUSTRY + "INDUSTRY "
@@ -30,6 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_VALUATION + "VALUATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Allium "
@@ -38,11 +40,12 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "allium@gmail.com "
             + PREFIX_ADDRESS + "420, 23rd Street, #02-25 "
+            + PREFIX_VALUATION + "100000 "
             + PREFIX_TAG + "competitive "
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New startup added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STARTUP = "This startup already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STARTUP = "This startup already exists in CapitalConnect";
 
     private final Startup toAdd;
 

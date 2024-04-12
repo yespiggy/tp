@@ -1,67 +1,91 @@
 {
   "_comment": "AddressBook save file which contains the same Startup values as in TypicalStartups#getTypicalAddressBook()",
   "startups" : [ {
-    "name" : "Alice Pauline",
+    "name" : "StartupC",
     "phone" : "94351253",
     "industry": "finance",
     "fundingStage": "A",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "note": "Add a note!",
-    "tags" : [ "friends" ]
+    "notes": [ "Innovative project ideas", "Looking into Series A funding" ],
+    "valuation": "1000",
+    "tags" : [ "friends" ],
+    "persons" : [ {
+      "name" : "Amy Bee",
+      "email" : "amy@example.com",
+      "descriptions" : [ "founder" ]
+    }]
   }, {
-    "name" : "Benson Meier",
+    "name" : "StartupD",
     "phone" : "98765432",
     "industry": "finance",
     "fundingStage": "A",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "note": "Add a note!",
+    "notes": [ "Strong technical team", "Consider for next investment round" ],
+    "valuation": "1000",
     "tags" : [ "owesMoney", "friends" ]
   }, {
-    "name" : "Carl Kurz",
+    "name" : "StartupE",
     "phone" : "95352563",
     "industry": "web3",
     "fundingStage": "C",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "note": "Add a note!",
+    "notes": [],
+    "valuation": "1000",
     "tags" : [ ]
   }, {
-    "name" : "Daniel Meier",
+    "name" : "StartupF",
     "phone" : "87652533",
     "industry": "finance",
     "fundingStage": "A",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "note": "Add a note!",
+    "notes": [ "Solid business model", "Expansion into new markets" ],
+    "valuation": "1000",
     "tags" : [ "friends" ]
   }, {
-    "name" : "Elle Meyer",
+    "name" : "StartupG",
     "phone" : "9482224",
     "industry": "web3",
     "fundingStage": "C",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "note": "Add a note!",
+    "notes": [ "Revolutionary technology", "Needs additional funding" ],
+    "valuation": "1000",
     "tags" : [ ]
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "StartupG G",
     "phone" : "9482427",
     "industry": "web3",
     "fundingStage": "C",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "note": "Add a note!",
+    "notes": [ "High user engagement", "Exploring partnership opportunities" ],
+    "valuation": "1000",
     "tags" : [ ]
   }, {
-    "name" : "George Best",
+    "name" : "StartupI",
     "phone" : "9482442",
     "industry": "finance",
     "fundingStage": "A",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "note": "Add a note!",
-    "tags" : [ ]
+    "notes": [ "Experienced management team", "Profitable quarter reported" ],
+    "valuation": "1000",
+    "tags" : [ ],
+    "persons" : [
+      {
+        "name" : "Amy Bee",
+        "email" : "amy@example.com",
+        "descriptions" : [ "founder" ]
+      }, {
+        "name" : "George Best",
+        "email" : "george@example.com",
+        "descriptions" : [ ]
+      }
+    ]
   } ]
 }
+

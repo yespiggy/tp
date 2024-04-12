@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StartupListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Startup` object residing in the `Model`.
 
 ### Logic component
 
@@ -103,7 +103,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a startup).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -123,14 +123,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Startup` objects (which are contained in a `UniqueStartupList` object).
+* stores the currently 'selected' `Startup` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Startup>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Startup` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Startup` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -176,11 +176,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 <puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th startup in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 <puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/CapitalConnect …​` to add a new startup. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 <puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
 
@@ -190,7 +190,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the startup was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 <puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
 
@@ -246,7 +246,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the startup being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -281,9 +281,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Venture capital firms manage diverse portfolios of startup 
+**Value proposition**: Venture capital firms manage diverse portfolios of startup
 investments across various industries. The app streamlines the management of startup
-investments, enabling VC firms to easily add, categorize, and track a diverse 
+investments, enabling VC firms to easily add, categorize, and track a diverse
 portfolio of investments in various industries and funding stages.
 
 
@@ -318,9 +318,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Funding stage
     * Address
     * Contact information
+    * Valuation of Startup
 3.  User provides the necessary details.
 4.  CapitalConnect verifies the input for validity.
-5.  CapitalConnect adds the new startup investment to the user's portfolio in the dashboard.
+5.  CapitalConnect adds the new startup's profile to the user's portfolio in the dashboard.
 
     Use case ends.
 
@@ -343,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to search for startup investments by industry and funding stage.
+1.  User requests to search for startup investments by either industry and funding stage.
 2.  CapitalConnect dashboard prompts the user to input the industry and funding stage.
 3.  User provides the industry and funding stage.
 4.  CapitalConnect verifies the input for validity.
@@ -439,6 +440,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: Edit a startup investment from the portfolio**
+
+**MSS**
+
+1.  User requests to edit a specific startup investment from their portfolio.
+2.  CapitalConnect dashboard prompts the user to input the index of the startup investment to be deleted.
+3.  User provides the index of the startup investment.
+4.  CapitalConnect verifies the input for validity.
+5. CapitalConnect dashboard prompts the user to provide details to update, where details could be:
+    * Startup name
+    * Industry
+    * Funding stage
+    * Address
+    * Contact information
+    * Valuation of Startup
+6. User provides the necessary details.
+7. CapitalConnect verifies the input for validity.
+8. CapitalConnect edits the startup investment at the specified index from the user's portfolio.
+9. CapitalConnect displays a confirmation message indicating successful edit of the startup investment.
+
+    Use case ends.
+
+**Extensions**
+
+* 4a. Invalid input or missing parameters.
+
+    * 4a1. CapitalConnect shows an error message.
+
+      Use case resumes at step 2.
+  
+* 7a. Invalid input or missing parameters.
+
+    * 7a1. CapitalConnect shows an error message.
+
+      Use case resumes at step 2.
+
+* 8a. Specified index is out of range or no startup investments.
+
+    * 8a1. CapitalConnect shows an error message indicating the issue.
+
+      Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -456,7 +499,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CapitalConnect dashboard**: The user interface of the CapitalConnect application where users can manage their startup investments, perform searches, and view their portfolio.
 * **Startup investment**: An investment made by a user in a startup company, typically including details such as the startup name, industry, funding stage, address, and contact information.
 * **Industry**: The sector or field in which a startup operates, such as Tech, Biotech, or Finance.
-* **Funding stage**: The development stage of a startup at which it has received a certain level of investment, such as Seed, Series A, or Series B.
+* **Funding stage**: The development stage of a startup at which it has received a certain level of investment, such as Pre-Seed, Seed, Series A, Series B or Series C.
+* **Valuation**: The valuation of the company.
 * **Dashboard state**: The current configuration and data displayed in the CapitalConnect dashboard, including startup investments and any applied filters or search results.
 * **Index**: A numeric value representing the position of an item within a list, used in commands to reference specific startup investments in the portfolio.
 * **Confirmation message**: A notification displayed to the user indicating the successful completion of an action, such as adding or deleting a startup investment.
@@ -491,17 +535,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a startup
 
-1. Deleting a person while all persons are being shown
+1. Deleting a startup while all startups are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all startups using the `list` command. Multiple startups in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No startup is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

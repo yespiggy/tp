@@ -1,20 +1,22 @@
 {
   "startups": [ {
-    "name": "Alice Pauline",
+    "name": "Startup 1",
     "phone": "94351253",
     "industry": "finance",
     "fundingStage": "A",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "valuation": "1000",
     "note": "Add a note!",
     "tags": [ "friends" ]
   }, {
-    "name": "Alice Pauline",
+    "name": "Startup 1",
     "phone": "94351253",
     "industry": "finance",
     "fundingStage": "A",
     "email": "pauline@example.com",
     "address": "4th street",
+    "valuation": "1000",
     "note": "Add a note!"
   } ]
 }

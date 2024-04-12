@@ -1,17 +1,22 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditStartupDescriptor;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,7 +45,10 @@ public class EditStartupDescriptorBuilder {
         descriptor.setPhone(startup.getPhone());
         descriptor.setEmail(startup.getEmail());
         descriptor.setAddress(startup.getAddress());
+        descriptor.setValuation(startup.getValuation());
         descriptor.setTags(startup.getTags());
+        descriptor.setNotes(startup.getNotes());
+        descriptor.setPersons(startup.getPersons());
     }
 
     /**
@@ -101,7 +109,35 @@ public class EditStartupDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code notes} into a {@code List<Note>} and set it to the {@code EditStartupDescriptor}
+     * that we are building.
+     */
+    public EditStartupDescriptorBuilder withNotes(String... notes) {
+        List<Note> noteList = Arrays.stream(notes).map(Note::new).collect(Collectors.toList());
+        descriptor.setNotes(noteList);
+        return this;
+    }
+
+    /**
+     * Parses the {@code persons} into a {@code List<Person>} and set it to the {@code EditStartupDescriptor}
+     * that we are building.
+     */
+    public EditStartupDescriptorBuilder withPersons(Person... persons) {
+        List<Person> personList = Arrays.stream(persons).collect(Collectors.toList());
+        descriptor.setPersons(personList);
+        return this;
+    }
+
     public EditStartupDescriptor build() {
         return descriptor;
+    }
+
+    /**
+     * Sets the {@code Valuation} of the {@code EditStartupDescriptor} that we are building.
+     */
+    public EditStartupDescriptorBuilder withValuation(String valuation) {
+        descriptor.setValuation(new Valuation(valuation));
+        return this;
     }
 }

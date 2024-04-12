@@ -3,14 +3,12 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 
 /**
  * An UI component that displays information of a {@code Startup}.
@@ -45,7 +43,8 @@ public class StartupCard extends UiPart<Region> {
     private FlowPane industryAndFundingStage;
 
     @FXML
-    private Label note; // Add this field for note
+    private FlowPane valuationDisplay;
+
     @FXML
     private FlowPane tags;
 
@@ -72,34 +71,13 @@ public class StartupCard extends UiPart<Region> {
         industryAndFundingStage.getChildren().addAll(
                 new Label(startup.getIndustry().value),
                 new Label(fundingLevel));
-        createNoteSection();
+        valuationDisplay.getChildren().addAll(
+                new Label("Valuation: " + Valuation.reformatValuation(startup.getValuation().value))
+        );
         startup.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    private void createNoteSection() {
-        // Create note label
-        note = new Label(startup.getNote().value);
-        note.setVisible(true); // Note is always visible
-        note.setWrapText(true); // Allow text wrapping if too long
-
-        // Layout note section
-        VBox noteSection = new VBox();
-        noteSection.setAlignment(Pos.TOP_LEFT); // Align content to the top left
-        noteSection.setPadding(new Insets(10)); // Add padding around the note section
-        noteSection.setPrefWidth(200); // Set preferred width for the note section
-        noteSection.setStyle("-fx-border-color: Transparent;"
-                + "-fx-border-width: 1px;"); // Add border around the note section
-
-        // Add note label to the note section
-        noteSection.getChildren().addAll(new Label(""), note);
-
-        // Add some padding between note section and startup card box
-        VBox.setMargin(noteSection, new Insets(10));
-
-        // Add note section to cardPane
-        cardPane.getChildren().add(noteSection);
-    }
 
 }

@@ -33,25 +33,46 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+        <SplitPane fx:id="mainSplitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
+          <VBox styleClass="pane-with-border" minWidth="340" prefWidth="340">
+            <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
-          <padding>
-            <Insets top="5" right="10" bottom="5" left="10" />
-          </padding>
-        </StackPane>
+            <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                       minHeight="100" prefHeight="100" maxHeight="100">
+              <padding>
+                <Insets top="5" right="10" bottom="5" left="10" />
+              </padding>
+            </StackPane>
 
-        <VBox fx:id="startupList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="startupListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+              </padding>
+              <StackPane fx:id="startupListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+
+          <SplitPane  fx:id="startupSplitPane" dividerPositions="0.3" VBox.vgrow="ALWAYS">
+            <StackPane fx:id="personListPanelPlaceholder" styleClass="pane-with-border"
+                       style="-fx-padding: 0 10 0 0;">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+              </padding>
+            </StackPane>
+
+            <StackPane fx:id="noteListPanelPlaceholder" styleClass="pane-with-border"
+                       style="-fx-padding: 0 10 0 0;">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+              </padding>
+            </StackPane>
+          </SplitPane>
+
+        </SplitPane>
+
+
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

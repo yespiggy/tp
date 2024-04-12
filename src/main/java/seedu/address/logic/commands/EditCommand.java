@@ -1,15 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FUNDING_STAGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STARTUPS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -22,14 +16,18 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.startup.Address;
 import seedu.address.model.startup.Email;
 import seedu.address.model.startup.FundingStage;
 import seedu.address.model.startup.Industry;
 import seedu.address.model.startup.Name;
+import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Phone;
 import seedu.address.model.startup.Startup;
+import seedu.address.model.startup.Valuation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,16 +41,17 @@ public class EditCommand extends Command {
             + "by the index number used in the displayed startup list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_INDUSTRY + "INDUSTRY" + "] "
-            + "[" + PREFIX_FUNDING_STAGE + "FUNDING STAGE] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + CliSyntax.PREFIX_NAME + "NAME] "
+            + "[" + CliSyntax.PREFIX_INDUSTRY + "INDUSTRY" + "] "
+            + "[" + CliSyntax.PREFIX_FUNDING_STAGE + "FUNDING STAGE] "
+            + "[" + CliSyntax.PREFIX_PHONE + "PHONE] "
+            + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
+            + "[" + CliSyntax.PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + CliSyntax.PREFIX_VALUATION + "VALUATION] "
+            + "[" + CliSyntax.PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + CliSyntax.PREFIX_PHONE + "91234567 "
+            + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_STARTUP_SUCCESS = "Edited Startup: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -108,10 +107,12 @@ public class EditCommand extends Command {
         Industry updatedIndustry = editStartupDescriptor.getIndustry().orElse(startupToEdit.getIndustry());
         Email updatedEmail = editStartupDescriptor.getEmail().orElse(startupToEdit.getEmail());
         Address updatedAddress = editStartupDescriptor.getAddress().orElse(startupToEdit.getAddress());
+        Valuation updatedValuation = editStartupDescriptor.getValuation().orElse(startupToEdit.getValuation());
         Set<Tag> updatedTags = editStartupDescriptor.getTags().orElse(startupToEdit.getTags());
-
+        List<Note> updatedNotes = editStartupDescriptor.getNotes().orElse(startupToEdit.getNotes());
+        List<Person> updatedPersons = editStartupDescriptor.getPersons().orElse(startupToEdit.getPersons());
         return new Startup(updatedName, updatedFundingStage, updatedIndustry,
-            updatedPhone, updatedEmail, updatedAddress, updatedTags);
+            updatedPhone, updatedEmail, updatedAddress, updatedValuation, updatedTags, updatedNotes, updatedPersons);
     }
 
     @Override
@@ -152,7 +153,11 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Valuation valuation;
         private Set<Tag> tags;
+
+        private List<Note> notes;
+        private List<Person> persons;
 
         public EditStartupDescriptor() {}
 
@@ -167,18 +172,30 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setValuation(toCopy.valuation);
             setTags(toCopy.tags);
+            setNotes(toCopy.notes);
+            setPersons(toCopy.persons);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, industry, fundingStage, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, industry, fundingStage,
+                    phone, email, address, tags, valuation);
         }
 
         public void setIndustry(Industry industry) {
             this.industry = industry;
+        }
+
+        public void setValuation(Valuation valuation) {
+            this.valuation = valuation;
+        }
+
+        public Optional<Valuation> getValuation() {
+            return Optional.ofNullable(valuation);
         }
 
         public void setFundingStage(FundingStage fundingStage) {
@@ -242,6 +259,26 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code notes} to this object's {@code notes}.
+         * A defensive copy of {@code notes} is used internally.
+         */
+        public void setNotes(List<Note> notes) {
+            this.notes = (notes != null) ? new ArrayList<>(notes) : null;
+        }
+
+        public Optional<List<Note>> getNotes() {
+            return (notes != null) ? Optional.of(Collections.unmodifiableList(notes)) : Optional.empty();
+        }
+
+        public void setPersons(List<Person> persons) {
+            this.persons = (persons != null) ? new ArrayList<>(persons) : null;
+        }
+
+        public Optional<List<Person>> getPersons() {
+            return (persons != null) ? Optional.of(Collections.unmodifiableList(persons)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -260,7 +297,8 @@ public class EditCommand extends Command {
                     && Objects.equals(industry, otherEditStartupDescriptor.industry)
                     && Objects.equals(email, otherEditStartupDescriptor.email)
                     && Objects.equals(address, otherEditStartupDescriptor.address)
-                    && Objects.equals(tags, otherEditStartupDescriptor.tags);
+                    && Objects.equals(tags, otherEditStartupDescriptor.tags)
+                    && Objects.equals(valuation, otherEditStartupDescriptor.valuation);
         }
 
         @Override
@@ -272,6 +310,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("valuation", valuation)
                     .add("tags", tags)
                     .toString();
         }
