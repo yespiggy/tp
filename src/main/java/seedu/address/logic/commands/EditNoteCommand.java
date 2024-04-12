@@ -20,7 +20,7 @@ public class EditNoteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a note of the startup identified "
             + "by the index number used in the displayed startup list. "
             + "Parameters: INDEX (must be a positive integer) noteIndex (must be a positive integer) n/NOTE\n"
-            + "Example: " + COMMAND_WORD + " 1 1 n/Updated note";
+            + "Example: " + COMMAND_WORD + " 1 1 Updated note";
 
     public static final String MESSAGE_SUCCESS = "Note edited for Startup: %1$s";
 
