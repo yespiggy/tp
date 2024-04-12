@@ -263,6 +263,10 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd startup in the address book.
 * `find n/apple` followed by `delete 1` deletes the 1st startup in the results of the `find` command.
 
+## Notes
+
+Notes are useful in tracking additional information about your startup when making your investment decisions!
+
 ### Adding a Note to a Startup: `addnote`
 
 Adds a note to an existing startup in the address book.
@@ -296,6 +300,11 @@ without clicking into it, you could tag the startup with `t/passionate`.
 
 **Tip:** Use specific and concise notes to effectively capture important information about each startup.
 </box>
+
+**Why are there no indexes beside each note?**
+
+This was a design feature made by our engineers to keep the UI as clean as possible! However, we understand that note numberings may become difficult to track, especially since we allow unlimited notes! In a future iteration, we will include indexes to help our users keep better track of their notes!
+
 ---
 
 ### Editing a Note of a Startup: `editnote`
@@ -338,6 +347,12 @@ Examples:
 
 **Tip:** Use the `deletenote` command cautiously to ensure important notes are not accidentally removed.
 </box>
+
+**Is there any better way to delete all notes quickly?**
+
+Currently, we do not support a feature allowing users to delete all their notes with a single command. However, we understand that this may be useful especially for keeping user storage clean. This will be a feature for a future iteration!
+
+
 
 ### Adding a person to a startup: `add-p`
 
