@@ -82,7 +82,7 @@ startup investments!
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format:**
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/capital connect`.
@@ -98,6 +98,12 @@ startup investments!
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* Currently selected startup card will appear blue.<br>
+  e.g. in the image below, the currently selected startup is `Allium`.
+  ![Currently selected startup](images/currentlySelectedStartup.png)
+
+* The key employees and notes displayed in the key employee box and note box belongs to the currently selected startup.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
@@ -251,7 +257,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd startup in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st startup in the results of the `find` command.
+* `find n/apple` followed by `delete 1` deletes the 1st startup in the results of the `find` command.
 
 ### Adding a Note to a Startup: `addnote`
 
@@ -283,6 +289,7 @@ without clicking into it, you could tag the startup with `t/passionate`.
 
 ![result for 'addnote 1 Secured Series A funding'](images/tracing/AddNoteCommand.png)
 <box type="tip" seamless>
+
 **Tip:** Use specific and concise notes to effectively capture important information about each startup.
 </box>
 ---
@@ -303,6 +310,7 @@ Examples:
 ![result for 'editnote 1 1 Revised Series A valuation'](images/tracing/EditNoteCommand.png)
 
 <box type="tip" seamless>
+
 **Tip:** Editing notes allows you to keep information about startups up to date with the latest developments.
 </box>
 
@@ -323,20 +331,9 @@ Examples:
 ![result for 'deletenote 1 1'](images/tracing/DeleteNoteCommand.png)
 
 <box type="tip" seamless>
+
 **Tip:** Use the `deletenote` command cautiously to ensure important notes are not accidentally removed.
 </box>
-
-### Clearing all entries : `clear`
-
-Clears all entries from CapitalConnect.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Adding a person to a startup: `add-p`
 
@@ -359,7 +356,21 @@ Format: `edit-p INDEX PERSON_INDEX [pn/NAME] [pe/EMAIL] [pd/DESCRIPTION]…​`
 
 Examples:
 *  `edit-p 1 1 pn/John pe/johndoe@example.com` Edits the name and email address of the 1st person in the 1st startup to be `John` and `johndoe@example.com` respectively.
-*  `edit-p 2 1 n/Amy pd/` Edits the name of the 1st person of the 2nd startup to be `Amy` and clears all existing descriptions.
+*  `edit-p 2 1 pn/Amy pd/` Edits the name of the 1st person of the 2nd startup to be `Amy` and clears all existing descriptions.
+
+<box type="info" seamless>
+
+**Why am I not seeing the changes in the key employee box immediately?**
+
+If you do not see the changes immediately after editing a key employee in your startup, it means that the startup card containing your
+edited key employee is currently not selected.
+
+The currently selected startup card will automatically get deselected after you are doing `find` operations, however the information of the last selected startup will
+still be displayed in the key employee box, which is why if you are performing person related operations afterward,
+it may appear like the information in the key employee box are not being updated.
+
+Rest assured, the information is updated. To ensure you see the updated information, simply click on your startup card after any person-related operation, i.e., `add-p`, `edit-p`, and `delete-p`.
+</box>
 
 ### Deleting a person from a startup: `delete-p`
 
@@ -372,6 +383,36 @@ Examples:
 - `delete-p 1 1` Deletes the 1st person of the 1st startup.
 - `delete-p 2 3` Deletes the 3rd person of the 2nd startup.
 
+<box type="tip" seamless>
+
+**Tip:** Always click on the startup card after performing person-related operations to ensure you see the updated information.
+</box>
+
+### Clearing all entries : `clear`
+
+Clears all entries from CapitalConnect.
+
+Format: `clear`
+
+<box type="warning" seamless>
+
+**Caution: Irreversible Data Loss**
+
+The `clear` command will permanently removes all startup entries from CapitalConnect and this action is **irreversible**.
+Before using the clear command, always double-check to make sure that you absolutely intend to erase all data.
+</box>
+
+<box type="tip" seamless>
+
+**Tip:** Use `clear` command to clear up the sample data.
+</box>
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
 ### Saving the data
 
 CapitalConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -382,7 +423,6 @@ CapitalConnect data are saved automatically as a JSON file `[JAR file location]/
 
 <box type="warning" seamless>
 
-**Caution:**
 If your changes to the data file makes its format invalid, CapitalConnect will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause CapitalConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
