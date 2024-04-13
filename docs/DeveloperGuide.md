@@ -469,7 +469,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. CapitalConnect shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 7a. Invalid input or missing parameters.
 
     * 7a1. CapitalConnect shows an error message.
@@ -560,7 +560,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `add n/ p/98765432 e/sundarpichal@example.com v/100000 a/Menlo Park, block 123, #01-01 f/A i/tech`<br>
         Expected: No startup is added, message sent to user that name should not be blank.
-    
+
     2. Test case: `add n/Google p/1 e/sundarpichal@example.com v/100000 a/Menlo Park, block 123, #01-01 f/A i/tech`<br>
         Expected: No startup is added, message sent to user that phone number should be at least 3 digits long.
 
@@ -578,7 +578,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `edit 1 n/test` <br>
         Expected: The startup at position 1 has its name changed. Details of the edited startup is shown.
-   
+
     2. Test case: `edit 1 v/9999` <br>
         Expected: The startup at position 1 has its valuation changed, details of the edited startup is shown. The new valuation is displayed as `9.9k`.
 
@@ -586,11 +586,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Test case: `edit 1 f/H` <br>
         Expected: No edits made to any startups, users are informed on valid input for funding stages.
-   
+
     2. Test case: `edit 1 i/`
-       Expected: No edits made to any startups, users are informed on valid industry inputs.
-   
-   
+       Expected: No edits made to any startups, users are informed on valid industry inputs. 
+
 ## **Appendix: Planned Enhancement**
 
 Team size: 4
@@ -602,13 +601,11 @@ results in overflow. We plan to address this in the future by limiting length of
 international numbers. We plan to allow for the user to add an optional country code field alongside the phone number in further iterations.
 
 3. Limit phone numbers: Currently we do not limit the length of phone numbers users can input. This may result in a UI overflow.
-We plan to address this in the future by limiting the length of the phone number to 8 digits for the number and 3 digits for the country code after 
-planned enhancement 2 has been completed.
+We plan to address this in the future by limiting the length of the phone number to 8 digits for the number and 3 digits for the country code after planned enhancement 2 has been completed.
 
 4. Supporting non-alphanumerical characters in startup names: Some company names may contain non-alphanumerical characters. We plan to address this in the future by allowing for such characters to be in the name,
 but also changing the current regular expression rules to ensure that the input remains valid.
 
-5. Supporting non-alphanumerical characters in tags: Currently tags must be in alphanumerical characters without spacings. 
-This forces users to find alternative means to add tags, such as using camel case within their tags instead. For example,
+5. Supporting non-alphanumerical characters in tags: Currently tags must be in alphanumerical characters without spacings. This forces users to find alternative means to add tags, such as using camel case within their tags instead. For example,
 `US based` would not be an allowed tag, resorting in users tagging the startup as `USBased` instead. We plan to address this in the future by allowing for such characters to be in the tag,
 but also changing the current regular expression rules to ensure that the input remains valid.

@@ -125,8 +125,7 @@ Format: `add n/NAME p/PHONE_NUMBER i/INDUSTRY f/FUNDING_STAGE e/EMAIL a/ADDRESS 
 
 <box type="info" seamless>
 
-* We restrict `v/VALUATION` to be a value between 0 and 5 Trillion. (Note that the most expensive company is only valued at around 3 Trillion as of April 10, 2024) For now, there is no way to specify currency denomination and values have to be input in integer form, I.e. To reflect a valuation of `10k`, the user must input `10000`.
-Additionally, the input value is truncated to 4 characters to allow for a clean display. I.e. A input of `101800` will be displayed as a 4 character `101k`, `123200010` to `123m`. 
+* We restrict `v/VALUATION` to be a value between 0 and 5 Trillion. (Note that the most expensive company is only valued at around 3 Trillion as of April 10, 2024) For now, there is no way to specify currency denomination and values have to be input in integer form, I.e. To reflect a valuation of `10k`, the user must input `10000`. Additionally, the input value is truncated to 4 characters to allow for a clean display. I.e. A input of `101800` will be displayed as a 4 character `101k`, `123200010` to `123m`. 
 
 * We only support traditional funding stages, hence inputs for `FUNDING_STAGE` must be either `S`, `PS`, `A`, `B` or `C`.
   `A`, `B`, `C` represents the respective funding series whilst `PS` refers to pre-seed and `S` refers to the seed stage. For more information about funding stages, see [here](https://www.indeed.com/career-advice/career-development/startup-funding-stages)!
@@ -279,8 +278,7 @@ Examples:
 
 What's the difference between a `NOTE` and a `t/TAG`?
 
-We aim for `NOTE` to be used to store longer, more verbose details! Whereas `t/TAG` should be used to store 
-information that needs to be easy to reach and accessible!
+We aim for `NOTE` to be used to store longer, more verbose details! Whereas `t/TAG` should be used to store information that needs to be easy to reach and accessible!
 
 Consider the storing the following: "The startup founder seems very passionate in his speech", storing this with `t/TAG`
 may not be the best idea as it is verbose, and it might be information you don't need on hand.
@@ -363,8 +361,7 @@ Format: `add-p INDEX pn/NAME pe/EMAIL [pd/DESCRIPTION]…​`
 **Caution: Detection of Duplicated Persons**
 
 Note that duplicated persons in one startup are detected by `email`. We assume that `email` is unique for every person. 
-In other words, we assume that it is possible to have 3 Johns in one company, and they all have different emails.
-Before adding a new person to the startup, always double-check their `email` to make sure that the person is not added already.
+In other words, we assume that it is possible to have 3 Johns in one company, and they all have different emails. Before adding a new person to the startup, always double-check their `email` to make sure that the person is not added already.
 Also take note that we allow one person to work in multiple startups.
 </box>
 
