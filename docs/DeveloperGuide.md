@@ -588,7 +588,7 @@ testers are expected to do more *exploratory* testing.
         Expected: No edits made to any startups, users are informed on valid input for funding stages.
 
     2. Test case: `edit 1 i/`
-       Expected: No edits made to any startups, users are informed on valid industry inputs. 
+        Expected: No edits made to any startups, users are informed on valid industry inputs. 
 
 ## **Appendix: Planned Enhancement**
 
