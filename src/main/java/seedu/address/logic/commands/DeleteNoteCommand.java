@@ -13,7 +13,7 @@ import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Startup;
 
 /**
- * Edits a Note of a startup in the address book!
+ * Deletes a Note of a startup in the address book!
  */
 public class DeleteNoteCommand extends Command {
     public static final String COMMAND_WORD = "deletenote";
@@ -28,7 +28,7 @@ public class DeleteNoteCommand extends Command {
     private final int noteIndex;
 
     /**
-     * Deletes a command for a startup.
+     * Deletes a note of a startup based on index.
      * @param index Index of the startup
      * @param noteIndex Index of the note within the startup
      */

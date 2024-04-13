@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.startup.Note;
 
 /**
- * Parses input arguments and creates a new NoteCommand object
+ * Parses input arguments and creates a new EditNoteCommand object
  */
 public class EditNoteCommandParser implements Parser<EditNoteCommand> {
 

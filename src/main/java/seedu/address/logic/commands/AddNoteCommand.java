@@ -13,7 +13,7 @@ import seedu.address.model.startup.Note;
 import seedu.address.model.startup.Startup;
 
 /**
- * Adds a Note of a startup in the address book!
+ * Adds a Note to a startup in the address book!
  */
 public class AddNoteCommand extends Command {
     public static final String COMMAND_WORD = "addnote";
