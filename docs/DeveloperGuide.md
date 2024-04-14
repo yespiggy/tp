@@ -656,3 +656,9 @@ but also changing the current regular expression rules to ensure that the input 
 5. Supporting non-alphanumerical characters in tags: Currently tags must be in alphanumerical characters without spacings. This forces users to find alternative means to add tags, such as using camel case within their tags instead. For example,
 `US based` would not be an allowed tag, resorting in users tagging the startup as `USBased` instead. We plan to address this in the future by allowing for such characters to be in the tag,
 but also changing the current regular expression rules to ensure that the input remains valid.
+
+6. Limited types of funding stage: Currently, we only support traditional funding stages, so inputs for `FUNDING_STAGE` should be either `S`, `PS`, `A`, `B` or `C` in order to find a matching startup. `A`, `B`, `C` represents the respective funding series whilst `PS` refers to pre-seed and `S` refers to the seed stage. Please take note that inputs other than the ones mentioned above will also be accepted, but zero matching startups will be listed.
+
+7. Supporting partial matching in find commands: We understand that you might want to use partial matching to find matching startups, but this feature is currently under development. This feature will be dropped soon!
+
+8. Potential limitation in detecting duplicated persons: Note that duplicated persons in one startup are detected by `pe/EMAIL`. We assume that email is unique for every person. In other words, we assume that it is possible to have 3 Johns in one company, and they all have different emails. Before adding a new person to the startup, always double-check their email to make sure that the person is not added already. Also take note that we allow one person to work in multiple startups.
