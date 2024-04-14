@@ -81,8 +81,8 @@ class JsonAdaptedStartup {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        notes = source.getNotes().stream() // Assuming getNotes() returns List<Note>
-                .map(Note::toString) // Assuming Note class has a toString that returns the note content
+        notes = source.getNotes().stream()
+                .map(Note::toString)
                 .collect(Collectors.toList());
         valuation = source.getValuation().value;
         tags.addAll(source.getTags().stream()
