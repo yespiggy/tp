@@ -53,15 +53,15 @@ startup investments!
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `capitalconnect.jar` from [here](https://github.com/AY2324S2-CS2103T-W09-2/tp).
+2. Download the latest `capitalconnect.jar` from [here](https://github.com/AY2324S2-CS2103T-W09-2/tp).
 
-1. Copy the file to the folder you want to use as the _home folder_ for CapitalConnect.
+3. Copy the file to the folder you want to use as the _home folder_ for CapitalConnect.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar capitalconnect.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar capitalconnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all startups.
@@ -74,7 +74,7 @@ startup investments!
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -407,7 +407,7 @@ Rest assured, the information is updated. To ensure you see the updated informat
 
 ### Deleting a person from a startup: `delete-p`
 
-* Deletes the person at `PERSON_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed in the key employees list and startup list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+* Deletes the person at `PERSON_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the key employees list and startup list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 * Click on the startup card that contained your deleted person to see the changes.
 
 Format: `delete-p INDEX PERSON_INDEX`
