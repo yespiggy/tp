@@ -160,7 +160,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Find Commands
 The find commands allows users to find the startups with matching names, funding stages, or industries.
-There are three find commands in CapitalConnect: `find n/`, `find i/`, `find f`. The implementation of these three commands are similar. Here we use the `find n/` command to illustrate how they are executed. 
+There are three find commands in CapitalConnect: `find n/`, `find i/`, `find f`. The implementation of these three commands are similar. Here we use the `find n/` command to illustrate how they are executed.
 
 #### Find by Name
 The `find n/` function allows users to find the startups that contain the names that users are interested in.
@@ -173,9 +173,9 @@ A typical program flow is as follows:
 
 1. User enters a command to find startups by names, e.g. `find n/Apple`.
 2. The input is passed to the `AddressbookParser` class which calls `FindCommandParser`. `FindCommandParser` attempts to parse the flags present, and in this case is `n/`. Note that `FindCommandParser` does not check invalid inputs like partial keywords. `FindCommandParser` will only throw an exception if the keyword is empty.
-3. If the parse is successful, a `NamesContainsKeywordsPredicate` is created to find the startups that contain the name `Apple`. 
+3. If the parse is successful, a `NamesContainsKeywordsPredicate` is created to find the startups that contain the name `Apple`.
 4. A new `FindCommand` is created from the predicate and passed back to `LogicManager`.
-5. The command is executed. The `filteredStartups` is updated with the predicate passed into the command. 
+5. The command is executed. The `filteredStartups` is updated with the predicate passed into the command.
 6. The command result is created and passed back to the `LogicManager`
 
 The following sequence diagram illustrates the execution process of a find by name command.
