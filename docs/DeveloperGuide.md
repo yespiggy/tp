@@ -182,7 +182,6 @@ The following sequence diagram illustrates the execution process of a find by na
 
 <puml src="diagrams/FindByName.puml" alt="FindByName" />
 
-
 ### AddNote, EditNote, and DeleteNote Commands
 
 The `addnote`, `editnote`, and `deletenote` commands enhance the ability of users to manage detailed annotations for each startup in CapitalConnect. These commands allow users to append notes, modify existing ones, or remove them from startups respectively. This section will delve into the implementations of these commands.
@@ -197,7 +196,8 @@ The `addnote` command allows users to add a note to a specific startup.
 3. **Result Generation**: A success message is generated, indicating that the note has been successfully added.
 
 **Sequence Diagram for AddNote Command**:
-![AddNote Sequence Diagram](diagrams/AddNoteSequenceDiagram.puml)
+
+<puml src="diagrams/AddNoteSequenceDiagram.puml" alt="AddNote" />
 
 #### EditNote Command
 
@@ -209,7 +209,8 @@ The `editnote` command enables the modification of an existing note within a sta
 3. **Result Generation**: A success message is displayed to indicate the note was edited.
 
 **Sequence Diagram for EditNote Command**:
-![EditNote Sequence Diagram](diagrams/EditNoteSequenceDiagram.puml)
+
+<puml src="diagrams/EditNoteSequenceDiagram.puml" alt="EditNote" />
 
 #### DeleteNote Command
 
@@ -221,7 +222,8 @@ The `deletenote` command allows users to remove a note from a startup.
 3. **Result Generation**: A confirmation message is returned, indicating successful deletion.
 
 **Sequence Diagram for DeleteNote Command**:
-![DeleteNote Sequence Diagram](diagrams/DeleteNoteSequenceDiagram.puml)
+
+<puml src="diagrams/DeleteNoteSequenceDiagram.puml" alt="DeleteNote" />
 
 ### Common Features Across Note Commands
 
@@ -230,9 +232,7 @@ The `deletenote` command allows users to remove a note from a startup.
 
 These commands collectively provide robust functionality for managing detailed annotations on startups, facilitating better information management within CapitalConnect.
 
-
-
-### Add, Edit, and Delete Person Commands
+### Add and Edit Person Commands
 
 ### Add Person Command
 The add person command allows users to add key employees' information into a startup.
@@ -241,7 +241,7 @@ The key employee information will be displayed in the people pane, next to the s
 
 A typical program flow is as follows:
 1. User enters a command to add a key employee to the first startup, e.g. `add-p 1 pn/John pe/johndoe@example.com pd/founder`.
-2. The input is passed to the `AddressbookParser` class which calls `AdderPersonCommandParser`, and then the `AddPersonCommandParser` parses the keywords from the user's input.
+2. The input is passed to the `AddressbookParser` class which calls `AddPersonCommandParser`, and then the `AddPersonCommandParser` parses the keywords from the user's input.
 3. The `AddPersonCommandParser` checks whether all required fields are entered and whether the index is valid. If all checks are passed, the program will move onto `AddPersonCommand`.
 4. If the key employee does not exist in the startup, the startup's employee information will then be updated to include the new person.
 
@@ -249,7 +249,20 @@ The following sequence diagram illustrates the process of execution of an add pe
 
 <puml src="diagrams/AddPerson.puml" alt="AddPerson" />
 
+### Edit Person Command
+The edit person command allows users to edit key employees' information into a startup.
 
+The key employee information will be displayed in the people pane, next to the startup card view. Through this function, users can keep track of employees' name, email, and other related information.
+
+A typical program flow is as follows:
+1. User enters a command to edit a key employee of the first startup, e.g. `edit-p 1 1 pn/John pe/johndoe@example.com pd/founder`.
+2. The input is passed to the `AddressbookParser` class which calls `EditPersonCommandParser`, and then the `EditPersonCommandParser` parses the keywords from the user's input.
+3. The `EditPersonCommandParser` checks whether all required fields are entered and whether the both indexes are valid. If all checks are passed, the program will move onto `EditPersonCommand`.
+4. If the EditPersonCommand doesn't cause duplicate key employee to exist in the startup (a duplicate key employee is noted by having the same email as an existing key employee) the startup's employee information will then be updated.
+
+The following sequence diagram illustrates the process of execution of an add person command.
+
+<puml src="diagrams/EditPersonActivityDiagram.puml" alt="EditPerson" />
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -287,22 +300,22 @@ portfolio of investments in various industries and funding stages.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​           | I want to …​                                  | So that I can…​                                                                               |
-|-----------|-------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------|
-| `* * *`   | new user          | see usage instructions                        | refer to instructions when I forget how to use the App                                        |
-| `* * *`   | user              | view the startup investments in my portfolio  | see the list of startup investments that I'm interested in                                    |
-| `* * *`   | user              | add a new startup investment to my portfolio  | save the details of the new startup investment                                                |
-| `* * *`   | user              | delete a startup investment to my portfolio   | remove the startup investment that I am no longer interested in                               |
-| `* *`     | user              | find a startup investment by names            | locate a startup investment by its name without having to go through the entire list          |
-| `* *`     | user              | find a startup investment by industries       | locate a startup investment by its industry without having to go through the entire list      |
-| `* *`     | user              | find a startup investment by funding stages   | locate a startup investment by its funding stage without having to go through the entire list |
-| `* *`     | user              | edit a startup investment in my portfolio     | update a startup information in my portfolio                                                  |
-| `* *`     | intermediate user | add a note to the startups I'm interested in  | know more about the startup investment when checking it through the app                       |
-| `* *`     | intermediate user | edit a note to the startups I'm interested in | update the startup investment in the app                                                      |
-| `* *`     | intermediate user | delete a note to the startups                 | get rid off redundant information                                                             |
-| `* *`     | intermediate user | add key employee's information to startups    | know more about the startup through its people                                                |
-| `* *`     | intermediate user | edit key employee's information to startups   | update the startups' employees' information                                                   |
-| `* *`     | intermediate user | delete key employee's information to startups | remove redundant or outdated information                                                      |
+| Priority | As a …​           | I want to …​                                        | So that I can…​                                                                              |
+|----------|-------------------|-----------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `* * *`  | new user          | see usage instructions                              | refer to instructions when I forget how to use the App                                       |
+| `* * *`  | user              | view the startup investments in my portfolio        | see the list of startup investments that I'm interested in                                   |
+| `* * *`  | user              | add a new startup investment to my portfolio        | save the details of the new startup investment                                               |
+| `* * *`  | user              | delete a startup investment to my portfolio         | remove the startup investment that I am no longer interested in                              |
+| `* *`    | user              | find a startup investment by names                  | locate a startup investment by its name without having to go through the entire list         |
+| `* *`    | user              | find a startup investment by industries             | locate a startup investment by its industry without having to go through the entire list     |
+| `* *`    | user              | find a startup investment by funding stages         | locate a startup investment by its funding stage without having to go through the entire list |
+| `* *`    | user              | edit a startup investment in my portfolio           | update a startup information in my portfolio                                                 |
+| `* *`    | intermediate user | add a note to the startups I'm interested in        | know more about the startup investment when checking it through the app                      |
+| `* *`    | intermediate user | edit a note of the startups I'm interested in       | update the startup investment in the app                                                     |
+| `* *`    | intermediate user | delete a note of the startups I'm interested in     | get rid of redundant information                                                             |
+| `* *`    | intermediate user | add key employee's information to startups          | know more about the startup through its people                                               |
+| `* *`    | intermediate user | edit key employee's information from the startups   | update the startups' employees' information                                                  |
+| `* *`    | intermediate user | delete key employee's information form the startups | remove outdated employee information                                                         |
 
 
 
@@ -449,20 +462,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to edit a specific startup investment from their portfolio.
-2.  CapitalConnect dashboard prompts the user to input the index of the startup investment to be deleted.
-3.  User provides the index of the startup investment.
-4.  CapitalConnect verifies the input for validity.
-5. CapitalConnect dashboard prompts the user to provide details to update, where details could be:
+2.  CapitalConnect dashboard prompts the user to input the index of the startup investment to be edited and updated details.
+3.  User provides the index of the startup investment and the updated details, where updated details must be one or more from the following:
     * Startup name
     * Industry
     * Funding stage
     * Address
     * Contact information
     * Valuation of Startup
-6. User provides the necessary details.
-7. CapitalConnect verifies the input for validity.
-8. CapitalConnect edits the startup investment at the specified index from the user's portfolio.
-9. CapitalConnect displays a confirmation message indicating successful edit of the startup investment.
+4. CapitalConnect verifies the updated details for validity.
+5. CapitalConnect verifies the index for validity.
+6. CapitalConnect edits the startup investment at the specified index from the user's portfolio.
+7. CapitalConnect displays a confirmation message indicating successful edit of the startup investment.
 
     Use case ends.
 
@@ -472,17 +483,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 4a1. CapitalConnect shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-* 7a. Invalid input or missing parameters.
+* 5a. Specified index is out of range or no startup investments.
 
-    * 7a1. CapitalConnect shows an error message.
-
-      Use case resumes at step 2.
-
-* 8a. Specified index is out of range or no startup investments.
-
-    * 8a1. CapitalConnect shows an error message indicating the issue.
+    * 5a1. CapitalConnect shows an error message indicating the issue.
 
       Use case ends.
 
@@ -537,22 +542,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-
-### Deleting a startup
-
-1. Deleting a startup while all startups are being shown
-
-   1. Prerequisites: List all startups using the `list` command. Multiple startups in the list.
-
-   1. Test case: `delete 1`<br>
-      Expected: First startup is deleted from the list. Details of the deleted startup shown.
-
-   1. Test case: `delete 0`<br>
-      Expected: No startup is deleted. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
-
 ### Adding a startup
 
 1. Adding a startup with valid inputs.
@@ -574,11 +563,40 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `add n/Google p/98765432 e/sundarpichal@example.com v/-1 a/Menlo Park, block 123, #01-01 f/A i/tech` <br>
         Expected: No startup is added, message sent to user on the valid inputs for company valuation.
 
+### Deleting a startup
+
+1. Deleting a startup while all startups are being shown
+
+    1. Prerequisites: List all startups using the `list` command. Multiple startups in the list.
+
+    2. Test case: `delete 1`<br>
+       Expected: First startup is deleted from the list. Details of the deleted startup shown.
+
+    3. Test case: `delete 0`<br>
+       Expected: No startup is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+   
+1. Deleting a startup after `find` command is performed
+
+    1. Prerequisites: A startup with the name `Apple` exists. Find the startup using the `find n/apple` command.
+       Startups in the list are shown.
+
+    2. Test case: `delete 1`<br>
+       Expected: First startup displayed on the list is deleted. Details of the deleted startup shown.
+
+    3. Test case: `delete 0`<br>
+       Expected: No startup is deleted. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+
 ### Editing a startup
 
 1. Prerequisites: One startup in CapitalConnect at the first position.
 
-1. Editing startup with valid inputs
+2. Editing startup with valid inputs
 
     1. Test case: `edit 1 n/test` <br>
         Expected: The startup at position 1 has its name changed. Details of the edited startup is shown.
@@ -586,7 +604,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `edit 1 v/9999` <br>
         Expected: The startup at position 1 has its valuation changed, details of the edited startup is shown. The new valuation is displayed as `9.9k`.
 
-2. Editing a startup with invalid inputs
+3. Editing a startup with invalid inputs
 
     1. Test case: `edit 1 f/H` <br>
         Expected: No edits made to any startups, users are informed on valid input for funding stages.
@@ -594,6 +612,42 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `edit 1 i/`
         Expected: No edits made to any startups, users are informed on valid industry inputs.
 
+### Listing Startups
+1. Viewing all startups in CapitalConnect
+   1. Prerequisites: There are startups stored in CapitalConnect.
+   2. Test case: `list` <br>
+      Expected: all previously saved startups will be shown only in the startup list. Success message is displayed. 
+   3. Test case: `list 1234`<br>
+      Expected: all previously saved contacts will be shown only in the startup list. Success message is displayed.
+
+### Finding a startup
+
+1. Prerequisites: One startup named Apple in tech industry and with a funding stage A is presented in CapitalConnect.
+
+2. Finding a startup with valid inputs.
+
+    1. Test case: `find n/Apple`<br>
+       Expected: The startup with the respective name has been successfully displayed in CapitalConnect.
+
+    2. Test case: `find i/tech`<br>
+       Expected: The startup with the respective industry has been successfully displayed in CapitalConnect.
+
+    3. Test case: `find f/A`<br>
+       Expected: The startup with the respective funding stage has been successfully displayed in CapitalConnect.
+
+3. Finding a startup with missing / invalid inputs.
+
+    1. Test case: `find n/`<br>
+       Expected: No startup is displayed, message of invalid command format is sent to user as names should not be blank.
+
+    2. Test case: `find i/`<br>
+       Expected: No startup is displayed, message of invalid command format is sent to user as industries should not be blank.
+
+    3. Test case: `find f/`<br>
+       Expected: No startup is displayed, message of invalid command format is sent to user as funding stages should not be blank.
+
+    4. Test case: find <br>
+       Expected: No startup is displayed, message of invalid command format is sent to user as given keywords should not be blank.
 
 
 ### Adding a Note to a Startup
@@ -663,6 +717,93 @@ testers are expected to do more *exploratory* testing.
     4. Test case: `deletenote 99 1`
         - Expected: No note is deleted as the startup index is out of range. Error message about invalid startup index is shown.
 
+### Adding a Person to a Startup
+
+1. Adding a person to a startup with valid input
+   1. Prerequisites: There must be at least one startup stored in CapitalConnect.
+
+   2. Test case (compulsory fields only): `add-p 1 pn/John pe/johndoe@gmail.com` <br>
+      Expected: The startup at position 1 has a person added to it. Details of the `Person` is shown in the key employee
+      box if the startup card with index 1 is selected
+
+   3. Test case (all fields specified): `add-p 1 pn/Joe pe/joe@gmail.com pd/founder` <br>
+      Expected: The `Startup` at position 1 has a `Person` added to it. Details of the `Person` is shown in the key employee
+      box if the startup card with index 1 is selected.
+
+2. Adding a person to a startup with invalid input
+   1. Prerequisites: There must be at least one startup stored in CapitalConnect. For our example we assume there are
+      less than 50 startups stored in CapitalConnect and a person with the email `johndoe@gmail.com` is already stored inside
+      the startup with index 1.
+   2. Test case (missing compulsory field): `add-p 1 pe/jane@gmail.com pd/founder` <br>
+      Expected: No `Person` added to the `Startup`. Error details shown in the status message. The key employee box remains unchanged.
+   3. Test case (invalid index): `add-p 99 pn/Amy pe/amy@gmail.com pd/founder` <br>
+      Expected: No `Person` added to the `Startup`. Error details shown in the status message. The key employee box remains unchanged.
+   4. Test case (duplicate email): `add-p 1 pn/Jess pe/johndoe@gmail.com pd/founder` <br>
+      Expected: No `Person` added to the `Startup`. Error details shown in the status message. The key employee box remains unchanged.
+   5. Test case (repeated fields): `add-p 1 pn/Jess pn/James pe/johndoe@gmail.com pd/founder` <br>
+      Expected: No `Person` added to the `Startup`. Error details shown in the status message. The key employee box remains unchanged.
+   6. Test case (invalid format for one field): `add-p 1 pn/Amy* pe/johndoe@gmail.com pd/founder` <br>
+      Expected: No `Person` added to the `Startup`. Error details shown in the status message. The key employee box remains unchanged.
+   7. Other incorrect `add-p` commands to try: `add-p 1 pn/`, `add-p`
+      Expected: similar to previous
+
+
+### Editing a Person in a Startup
+
+1. Editing a person in a startup with valid input
+   1. Prerequisites: The startup at index 1 contains at least 1 person.
+      No person inside the startup at index 1 has the email `josh@gmail.com` and `jay@gmail.com`
+   2. Test case (name specified): `edit-p 1 1 pn/John` <br>
+      Expected: The name of the first person inside the startup at index 1 gets edited to `John`. Details of the updated `Person` is shown in the key employee
+      box if the startup card with index 1 is selected
+   3. Test case (email specified): `edit-p 1 1 pe/josh@gmail.com` <br>
+      Expected: The email of the first person inside the startup at index 1 gets edited to `josh@gmail.com`. Details of the updated `Person` is shown in the key employee
+      box if the startup card with index 1 is selected
+   4. Test case (description specified): `edit-p 1 1 pd/ceo` <br>
+      Expected: The description of the first person inside the startup at index 1 gets edited to `ceo`. Details of the updated `Person` is shown in the key employee
+      box if the startup card with index 1 is selected
+   5. Test case (empty description specified): `edit-p 1 1 pd/` <br>
+      Expected: The description of the first person inside the startup at index 1 is removed. Details of the updated `Person` is shown in the key employee
+      box if the startup card with index 1 is selected
+   4. Test case (all fields specified): `edit-p 1 1 pn/Jay pe/jay@gmail.com pd/founder` <br>
+      Expected: The details of the first person inside the startup at index 1 gets edited. Details of the updated `Person` is shown in the key employee
+      box if the startup card with index 1 is selected.
+
+2. Editing a person in a startup with invalid input
+    1. Prerequisites: For our example, we assume there are less than 10 startups stored in CapitalConnect and less
+       than 10 person stored in the startup at index 1. We also assume a person with the email `johndoe@gmail.com` is
+       already stored inside the startup with index 1.
+    2. Test case (missing person index): `edit-p 1 pn/name pd/founder` <br>
+       Expected: No `Person` gets edited. Error details shown in the status message.
+    3. Test case (invalid startup index): `edit-p 99 1 pn/Amy pe/amy@gmail.com pd/founder` <br>
+       Expected: No `Person` gets edited. Error details shown in the status message.
+    4. Test case (invalid person index): `edit-p 1 50 pn/Amy pe/amy@gmail.com pd/founder` <br>
+       Expected: No `Person` gets edited. Error details shown in the status message.
+    5. Test case (duplicate email): `edit-p 1 1 pn/Jess pe/johndoe@gmail.com pd/founder` <br>
+       Expected: No `Person` gets edited. Error details shown in the status message.
+    6. Test case (invalid format for one field): `edit-p 1 1 pn/Amy* pe/johndoe@gmail.com pd/founder` <br>
+       Expected: No `Person` gets edited. Error details shown in the status message.
+    7. Other incorrect `edit-p` commands to try: `edit-p 1 1 pn/`, `edit-p`, `edit-p 1 1 pe/email`
+       Expected: similar to previous
+
+### Deleting a Person from a Startup
+
+1. Deleting a person from a startup with valid input
+    1. Prerequisites: The startup at index 1 contains at least 1 person.
+    2. Test case : `delete-p 1 1` <br>
+       Expected: The first person inside the startup at index 1 gets deleted.
+       Details of the `Person` is removed from the key employee box if the startup card with index 1 is selected
+
+2. Deleting a person from a startup with invalid input
+   1. Prerequisites: For our example, we assume there are 50 startups stored in CapitalConnect and there are 10 person stored in the startup at index 1. 
+   2. Test case (invalid startup index): `delete-p 99 1` <br>
+     Expected: No `Person` gets deleted. Error details shown in the status message.
+   3. Test case (invalid person index): `delete-p 1 50` <br>
+     Expected: No `Person` gets deleted. Error details shown in the status message.
+   4. Test case (missing person index): `edit-p 1 pn/name pd/founder` <br>
+      Expected: No `Person` gets deleted. Error details shown in the status message.
+   5. Test case (no index specified): `delete-p` <br>
+      Expected: No `Person` gets deleted. Error details shown in the status message.
 
 ## **Appendix: Planned Enhancement**
 
