@@ -449,20 +449,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to edit a specific startup investment from their portfolio.
-2.  CapitalConnect dashboard prompts the user to input the index of the startup investment to be deleted.
-3.  User provides the index of the startup investment.
-4.  CapitalConnect verifies the input for validity.
-5. CapitalConnect dashboard prompts the user to provide details to update, where details could be:
+2.  CapitalConnect dashboard prompts the user to input the index of the startup investment to be edited and updated details.
+3.  User provides the index of the startup investment and the updated details, where updated details must be one or more from the following:
     * Startup name
     * Industry
     * Funding stage
     * Address
     * Contact information
     * Valuation of Startup
-6. User provides the necessary details.
-7. CapitalConnect verifies the input for validity.
-8. CapitalConnect edits the startup investment at the specified index from the user's portfolio.
-9. CapitalConnect displays a confirmation message indicating successful edit of the startup investment.
+4. CapitalConnect verifies the updated details for validity.
+5. CapitalConnect verifies the index for validity.
+6. CapitalConnect edits the startup investment at the specified index from the user's portfolio.
+7. CapitalConnect displays a confirmation message indicating successful edit of the startup investment.
 
     Use case ends.
 
@@ -472,17 +470,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 4a1. CapitalConnect shows an error message.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-* 7a. Invalid input or missing parameters.
+* 5a. Specified index is out of range or no startup investments.
 
-    * 7a1. CapitalConnect shows an error message.
-
-      Use case resumes at step 2.
-
-* 8a. Specified index is out of range or no startup investments.
-
-    * 8a1. CapitalConnect shows an error message indicating the issue.
+    * 5a1. CapitalConnect shows an error message indicating the issue.
 
       Use case ends.
 
