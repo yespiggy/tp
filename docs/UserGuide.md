@@ -125,20 +125,14 @@ Format: `add n/NAME p/PHONE_NUMBER i/INDUSTRY f/FUNDING_STAGE e/EMAIL a/ADDRESS 
 
 <box type="info" seamless>
 
-* `n/NAME` can have numbers! Additionally, we do not limit the length of your input for your flexibility!
-
-* `p/PHONE_NUMBER` does not support non-numerical characters. We also do not limit the length of your input number too. We understand that this makes it difficult to add international numbers that require characters like 
-"-" to differentiate between country codes. We are working on it and will roll it out in a future release.
-
-* We restrict `v/VALUATION` to be a value between 0 and 5 Trillion. (Note that the most expensive company is only valued at around 3 Trillion as of April 10, 2024) For now, there is no way to specify currency denomination and values have to be input in integer form, I.e. To reflect a valuation of `10k`, the user must input `10000`.
-Additionally, the input value is truncated to 4 characters to allow for a clean display. I.e. A input of `101800` will be displayed as a 4 character `101k`, `123200010` to `123m`. 
+* We restrict `v/VALUATION` to be a value between 0 and 5 Trillion. (Note that the most expensive company is only valued at around 3 Trillion as of April 10, 2024) For now, there is no way to specify currency denomination and values have to be input in integer form, I.e. To reflect a valuation of `10k`, the user must input `10000`. Additionally, the input value is truncated to 4 characters to allow for a clean display. I.e. A input of `101800` will be displayed as a 4 character `101k`, `123200010` to `123m`.
 
 * We only support traditional funding stages, hence inputs for `FUNDING_STAGE` must be either `S`, `PS`, `A`, `B` or `C`.
   `A`, `B`, `C` represents the respective funding series whilst `PS` refers to pre-seed and `S` refers to the seed stage. For more information about funding stages, see [here](https://www.indeed.com/career-advice/career-development/startup-funding-stages)!
 
-* `[t/TAG]` variables are not length-limited. We also do not allow duplicate `[t/TAG]`!
+* `[t/TAG]` variables are not length-limited. We also do not allow duplicate `[t/TAG]`, however `[t/TAG]` is case-sensitive, hence it is possible for a startup to have both the tags `inDebt` and `InDebt` at the same time.
 
-* Note that inputs like `n/NAME`, `e/EMAIL`, `a/ADDRESS` are currently case-insensitive in CapitalConnect, however `i/INDUSTRY` is kept case-sensitive.
+* Note that `n/NAME` is currently case-sensitive in CapitalConnect, hence it is possible to have a startup with the name `Google` and another with the name `google` on CapitalConnect at the same time.
 </box>
 
 <box type="tip" seamless>
@@ -206,11 +200,11 @@ Format: `find n/NAME [MORE_NAME]`
 * We understand that you might want to use partial matching to find the matching startup, but this feature is currently under development. This feature will be dropped soon!
 
 Examples:
-* `find n/Google` returns `google` and `Google Deepmind`.
+* `find n/Google` returns `google` and `Google Deepmind`
 
   ![result for 'find by name google'](images/findByNameGoogle.png)
 
-* `find n/apple` returns `apple pay`, `eat apple`.<br>
+* `find n/apple` returns `apple pay`, `eat apple`<br>
 
   ![result for 'find by name apple'](images/findByNameApple.png)
 
@@ -284,14 +278,13 @@ Examples:
 
 What's the difference between a `NOTE` and a `t/TAG`?
 
-We aim for `NOTE` to be used to store longer, more verbose details! Whereas `t/TAG` should be used to store 
-information that needs to be easy to reach and accessible!
+We aim for `NOTE` to be used to store longer, more verbose details! Whereas `t/TAG` should be used to store information that needs to be easy to reach and accessible!
 
 Consider the storing the following: "The startup founder seems very passionate in his speech", storing this with `t/TAG`
 may not be the best idea as it is verbose, and it might be information you don't need on hand.
 
-However, if the founder's passion is something important to you, and you want the ability to know this about a startup
-without clicking into it, you could tag the startup with `t/passionate`.
+However, if the founder's passion is something important to you, and you want the ability to know this detail about a startup
+without clicking into it on the user interface, you could tag the startup with `t/passionate`.
 ""
 </box>
 
@@ -367,9 +360,8 @@ Format: `add-p INDEX pn/NAME pe/EMAIL [pd/DESCRIPTION]…​`
 
 **Caution: Detection of Duplicated Persons**
 
-Note that duplicated persons in one startup are detected by `email`. We assume that `email` is unique for every person. 
-In other words, we assume that it is possible to have 3 Johns in one company, and they all have different emails.
-Before adding a new person to the startup, always double-check their `email` to make sure that the person is not added already.
+Note that duplicated persons in one startup are detected by `email`. We assume that `email` is unique for every person.
+In other words, we assume that it is possible to have 3 Johns in one company, and they all have different emails. Before adding a new person to the startup, always double-check their `email` to make sure that the person is not added already.
 Also take note that we allow one person to work in multiple startups.
 </box>
 
@@ -501,4 +493,4 @@ Furthermore, certain edits can cause CapitalConnect to behave in unexpected ways
 | **Delete Note**           | `deletenote INDEX NOTE_INDEX` <br> e.g., `deletenote 1 1`                                                                                                                                                    |
 | **Add Person**            | `add-p INDEX pn/NAME pe/EMAIL [pd/DESCRIPTION]…​` <br> e.g., `add-p 1 pn/John pe/johndoe@example.com pd/founder`                                                                                             |
 | **Edit Person**           | `edit-p INDEX PERSON_INDEX [pn/NAME] [pe/EMAIL] [pd/DESCRIPTION]…​` <br> e.g., `edit-p 1 1 pn/john pe/johndoe233@example.com pd/founder`                                                                     |
-| **Delete Person**         | `delete-p INDEX PERSON_INDEX` <br> e.g., `delete-p 1 1`                                                                                                                                                      |   
+| **Delete Person**         | `delete-p INDEX PERSON_INDEX` <br> e.g., `delete-p 1 1`                                                                                                                                                      |
