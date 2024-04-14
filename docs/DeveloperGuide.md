@@ -158,6 +158,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find Commands
+The find commands allows users to find the startups with matching names, funding stages, or industries.
+There are three find commands in CapitalConnect: `find n/`, `find i/`, `find f`. The implementation of these three commands are similar. Here we use the `find n/` command to illustrate how they are executed.
+
+#### Find by Name
+The `find n/` function allows users to find the startups that contain the names that users are interested in.
+
+This function will display startup cards that have the same name as users provide. The startup card contains information other than the startup names, such as addresses, emails, phone numbers, etc..
+
+To find the wanted startup, a `NamesContainsKeywordsPredicate` is created to test whether a startup has a name that matches the user's input keywords. Similarly, `find f/` and `find i/` will create `FundingStageContainsKeywordsPredicate` and `InudstryContainsKeywordsPredicate` respectively. These commands only change the displayed list of startups, stored as `filteredStartups` in `Model`, without affecting the data stored in CapitalConnect.
+
+A typical program flow is as follows:
+
+1. User enters a command to find startups by names, e.g. `find n/Apple`.
+2. The input is passed to the `AddressbookParser` class which calls `FindCommandParser`. `FindCommandParser` attempts to parse the flags present, and in this case is `n/`. Note that `FindCommandParser` does not check invalid inputs like partial keywords. `FindCommandParser` will only throw an exception if the keyword is empty.
+3. If the parse is successful, a `NamesContainsKeywordsPredicate` is created to find the startups that contain the name `Apple`.
+4. A new `FindCommand` is created from the predicate and passed back to `LogicManager`.
+5. The command is executed. The `filteredStartups` is updated with the predicate passed into the command.
+6. The command result is created and passed back to the `LogicManager`
+
+The following sequence diagram illustrates the execution process of a find by name command.
+
+<puml src="diagrams/FindByName.puml" alt="FindByName" />
+
+### Add Person Command
+The add person command allows users to add key employees' information into a startup.
+
+The key employee information will be displayed in the people pane, next to the startup card view. Through this function, users can keep track of employees' name, email, and other related information.
+
+A typical program flow is as follows:
+1. User enters a command to add a key employee to the first startup, e.g. `add-p 1 pn/John pe/johndoe@example.com pd/founder`.
+2. The input is passed to the `AddressbookParser` class which calls `AdderPersonCommandParser`, and then the `AddPersonCommandParser` parses the keywords from the user's input.
+3. The `AddPersonCommandParser` checks whether all required fields are entered and whether the index is valid. If all checks are passed, the program will move onto `AddPersonCommand`.
+4. If the key employee does not exist in the startup, the startup's employee information will then be updated to include the new person.
+
+The following sequence diagram illustrates the process of execution of an add person command.
+
+<puml src="diagrams/AddPerson.puml" alt="AddPerson" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -291,15 +330,23 @@ portfolio of investments in various industries and funding stages.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​           | I want to …​                                          | So that I can…​                                                          |
-|-----------|-------------------|-------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`   | new user          | see usage instructions                                | refer to instructions when I forget how to use the App                   |
-| `* * *`   | user              | view the startup investments in my portfolio          | see the list of startup investments that I'm interested in               |
-| `* * *`   | user              | add a new startup investment to my portfolio          | save the details of the new startup investment                           |
-| `* * *`   | user              | delete a startup investment to my portfolio           | remove the startup investment that I am no longer interested in          |
-| `* *`     | user              | find a startup investment by name                     | locate a startup investment without having to go through the entire list |
-| `* *`     | intermediate user | assign funding stages to startup investments          | know more about the startup investment when checking it through the app  |
-| `* *`     | intermediate user | find a startup investment by industry & funding stage | locate a startup investment without having to go through the entire list |
+| Priority  | As a …​           | I want to …​                                  | So that I can…​                                                                               |
+|-----------|-------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`   | new user          | see usage instructions                        | refer to instructions when I forget how to use the App                                        |
+| `* * *`   | user              | view the startup investments in my portfolio  | see the list of startup investments that I'm interested in                                    |
+| `* * *`   | user              | add a new startup investment to my portfolio  | save the details of the new startup investment                                                |
+| `* * *`   | user              | delete a startup investment to my portfolio   | remove the startup investment that I am no longer interested in                               |
+| `* *`     | user              | find a startup investment by names            | locate a startup investment by its name without having to go through the entire list          |
+| `* *`     | user              | find a startup investment by industries       | locate a startup investment by its industry without having to go through the entire list      |
+| `* *`     | user              | find a startup investment by funding stages   | locate a startup investment by its funding stage without having to go through the entire list |
+| `* *`     | user              | edit a startup investment in my portfolio     | update a startup information in my portfolio                                                  |
+| `* *`     | intermediate user | add a note to the startups I'm interested in  | know more about the startup investment when checking it through the app                       |
+| `* *`     | intermediate user | edit a note to the startups I'm interested in | update the startup investment in the app                                                      |
+| `* *`     | intermediate user | delete a note to the startups                 | get rid off redundant information                                                             |
+| `* *`     | intermediate user | add key employee's information to startups    | know more about the startup through its people                                                |
+| `* *`     | intermediate user | edit key employee's information to startups   | update the startups' employees' information                                                   |
+| `* *`     | intermediate user | delete key employee's information to startups | remove redundant or outdated information                                                      |
+
 
 
 
@@ -469,7 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. CapitalConnect shows an error message.
 
       Use case resumes at step 2.
-  
+
 * 7a. Invalid input or missing parameters.
 
     * 7a1. CapitalConnect shows an error message.
@@ -533,7 +580,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
 
 ### Deleting a startup
 
@@ -542,7 +588,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all startups using the `list` command. Multiple startups in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First startup is deleted from the list. Details of the deleted startup shown.
 
    1. Test case: `delete 0`<br>
       Expected: No startup is deleted. Error details shown in the status message. Status bar remains the same.
@@ -550,12 +596,69 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+### Adding a startup
 
-### Saving data
+1. Adding a startup with valid inputs.
 
-1. Dealing with missing/corrupted data files
+   1. Test case: `add n/Google p/999 e/sundarpichal@example.com v/100000 a/Menlo Park, block 123, #01-01 f/A i/tech`<br>
+        Expected: The startup with the respective details have been successfully added to CapitalConnect. Details of the added startup shown.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+2. Adding a startup with missing / invalid inputs.
 
-1. _{ more test cases …​ }_
+    1. Test case: `add n/ p/98765432 e/sundarpichal@example.com v/100000 a/Menlo Park, block 123, #01-01 f/A i/tech`<br>
+        Expected: No startup is added, message sent to user that name should not be blank.
+
+    2. Test case: `add n/Google p/1 e/sundarpichal@example.com v/100000 a/Menlo Park, block 123, #01-01 f/A i/tech`<br>
+        Expected: No startup is added, message sent to user that phone number should be at least 3 digits long.
+
+    3. Test case: `add n/Google p/98765432 e/sundarpichal@example.com v/100000 a/Menlo Park, block 123, #01-01 f/J i/tech`<br>
+        Expected: No startup is added, message sent to user on appropriate inputs for funding stages.
+
+    4. Test case: `add n/Google p/98765432 e/sundarpichal@example.com v/-1 a/Menlo Park, block 123, #01-01 f/A i/tech` <br>
+        Expected: No startup is added, message sent to user on the valid inputs for company valuation.
+
+### Editing a startup
+
+1. Prerequisites: One startup in CapitalConnect at the first position.
+
+1. Editing startup with valid inputs
+
+    1. Test case: `edit 1 n/test` <br>
+        Expected: The startup at position 1 has its name changed. Details of the edited startup is shown.
+
+    2. Test case: `edit 1 v/9999` <br>
+        Expected: The startup at position 1 has its valuation changed, details of the edited startup is shown. The new valuation is displayed as `9.9k`.
+
+2. Editing a startup with invalid inputs
+
+    1. Test case: `edit 1 f/H` <br>
+        Expected: No edits made to any startups, users are informed on valid input for funding stages.
+
+    2. Test case: `edit 1 i/`
+        Expected: No edits made to any startups, users are informed on valid industry inputs.
+
+## **Appendix: Planned Enhancement**
+
+Team size: 4
+
+1. Limit length of startup name: Currently we do not limit length of startup name user can input. This
+results in overflow. We plan to address this in the future by limiting length of startup names to 32 letters long.
+
+2. Supporting country codes: Currently we do not allow users to specify country codes using "-", this makes it hard to track
+international numbers. We plan to allow for the user to add an optional country code field alongside the phone number in further iterations.
+
+3. Limit phone numbers: Currently we do not limit the length of phone numbers users can input. This may result in a UI overflow.
+We plan to address this in the future by limiting the length of the phone number to 8 digits for the number and 3 digits for the country code after planned enhancement 2 has been completed.
+
+4. Supporting non-alphanumerical characters in startup names: Some company names may contain non-alphanumerical characters. We plan to address this in the future by allowing for such characters to be in the name,
+but also changing the current regular expression rules to ensure that the input remains valid.
+
+5. Supporting non-alphanumerical characters in tags: Currently tags must be in alphanumerical characters without spacings. This forces users to find alternative means to add tags, such as using camel case within their tags instead. For example,
+`US based` would not be an allowed tag, resorting in users tagging the startup as `USBased` instead. We plan to address this in the future by allowing for such characters to be in the tag,
+but also changing the current regular expression rules to ensure that the input remains valid.
+
+6. Limited types of funding stage: Currently, we only support traditional funding stages, so inputs for `FUNDING_STAGE` should be either `S`, `PS`, `A`, `B` or `C` in order to find a matching startup. `A`, `B`, `C` represents the respective funding series whilst `PS` refers to pre-seed and `S` refers to the seed stage. Please take note that inputs other than the ones mentioned above will also be accepted, but zero matching startups will be listed.
+
+7. Supporting partial matching in find commands: We understand that you might want to use partial matching to find matching startups, but this feature is currently under development. This feature will be dropped soon!
+
+8. Potential limitation in detecting duplicated persons: Note that duplicated persons in one startup are detected by `pe/EMAIL`. We assume that email is unique for every person. In other words, we assume that it is possible to have 3 Johns in one company, and they all have different emails. Before adding a new person to the startup, always double-check their email to make sure that the person is not added already. Also take note that we allow one person to work in multiple startups.
