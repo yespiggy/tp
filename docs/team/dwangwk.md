@@ -47,7 +47,8 @@ Given below are my contributions to the project.
 <br>
 
 * **Community**:
-  * To be added
+  * Identified potential issues regarding teammates implementation of Test Cases
+  * PRs reviewed with non-trivial comments:  [\#60](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/60)
 
 
 
