@@ -158,6 +158,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find Commands
+The find commands allows users to find the startups with matching names, funding stages, or industries.
+There are three find commands in CapitalConnect: `find n/`, `find i/`, `find f`. The implementation of these three commands are similar. Here we use the `find n/` command to illustrate how they are executed. 
+
+#### Find by Name
+The `find n/` function allows users to find the startups that contain the names that users are interested in.
+
+This function will display startup cards that have the same name as users provide. The startup card contains information other than the startup names, such as addresses, emails, phone numbers, etc..
+
+To find the wanted startup, a `NamesContainsKeywordsPredicate` is created to test whether a startup has a name that matches the user's input keywords. Similarly, `find f/` and `find i/` will create `FundingStageContainsKeywordsPredicate` and `InudstryContainsKeywordsPredicate` respectively. These commands only change the displayed list of startups, stored as `filteredStartups` in `Model`, without affecting the data stored in CapitalConnect.
+
+A typical program flow is as follows:
+
+1. User enters a command to find startups by names, e.g. `find n/Apple`.
+2. The input is passed to the `AddressbookParser` class which calls `FindCommandParser`. `FindCommandParser` attempts to parse the flags present, and in this case is `n/`. Note that `FindCommandParser` does not check invalid inputs like partial keywords. `FindCommandParser` will only throw an exception if the keyword is empty.
+3. If the parse is successful, a `NamesContainsKeywordsPredicate` is created to find the startups that contain the name `Apple`. 
+4. A new `FindCommand` is created from the predicate and passed back to `LogicManager`.
+5. The command is executed. The `filteredStartups` is updated with the predicate passed into the command. 
+6. The command result is created and passed back to the `LogicManager`
+
+The following sequence diagram illustrates the execution process of a find by name command.
+
+<puml src="diagrams/FindByName.puml" alt="FindByName" />
+
+### Add Person Command
+The add person command allows users to add key employees' information into a startup.
+
+The key employee information will be displayed in the people pane, next to the startup card view. Through this function, users can keep track of employees' name, email, and other related information.
+
+A typical program flow is as follows:
+1. User enters a command to add a key employee to the first startup, e.g. `add-p 1 pn/John pe/johndoe@example.com pd/founder`.
+2. The input is passed to the `AddressbookParser` class which calls `AdderPersonCommandParser`, and then the `AddPersonCommandParser` parses the keywords from the user's input.
+3. The `AddPersonCommandParser` checks whether all required fields are entered and whether the index is valid. If all checks are passed, the program will move onto `AddPersonCommand`.
+4. If the key employee does not exist in the startup, the startup's employee information will then be updated to include the new person.
+
+The following sequence diagram illustrates the process of execution of an add person command.
+
+<puml src="diagrams/AddPerson.puml" alt="AddPerson" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -291,15 +330,23 @@ portfolio of investments in various industries and funding stages.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority  | As a …​           | I want to …​                                          | So that I can…​                                                          |
-|-----------|-------------------|-------------------------------------------------------|--------------------------------------------------------------------------|
-| `* * *`   | new user          | see usage instructions                                | refer to instructions when I forget how to use the App                   |
-| `* * *`   | user              | view the startup investments in my portfolio          | see the list of startup investments that I'm interested in               |
-| `* * *`   | user              | add a new startup investment to my portfolio          | save the details of the new startup investment                           |
-| `* * *`   | user              | delete a startup investment to my portfolio           | remove the startup investment that I am no longer interested in          |
-| `* *`     | user              | find a startup investment by name                     | locate a startup investment without having to go through the entire list |
-| `* *`     | intermediate user | assign funding stages to startup investments          | know more about the startup investment when checking it through the app  |
-| `* *`     | intermediate user | find a startup investment by industry & funding stage | locate a startup investment without having to go through the entire list |
+| Priority  | As a …​           | I want to …​                                  | So that I can…​                                                                               |
+|-----------|-------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `* * *`   | new user          | see usage instructions                        | refer to instructions when I forget how to use the App                                        |
+| `* * *`   | user              | view the startup investments in my portfolio  | see the list of startup investments that I'm interested in                                    |
+| `* * *`   | user              | add a new startup investment to my portfolio  | save the details of the new startup investment                                                |
+| `* * *`   | user              | delete a startup investment to my portfolio   | remove the startup investment that I am no longer interested in                               |
+| `* *`     | user              | find a startup investment by names            | locate a startup investment by its name without having to go through the entire list          |
+| `* *`     | user              | find a startup investment by industries       | locate a startup investment by its industry without having to go through the entire list      |
+| `* *`     | user              | find a startup investment by funding stages   | locate a startup investment by its funding stage without having to go through the entire list |
+| `* *`     | user              | edit a startup investment in my portfolio     | update a startup information in my portfolio                                                  |
+| `* *`     | intermediate user | add a note to the startups I'm interested in  | know more about the startup investment when checking it through the app                       |
+| `* *`     | intermediate user | edit a note to the startups I'm interested in | update the startup investment in the app                                                      |
+| `* *`     | intermediate user | delete a note to the startups                 | get rid off redundant information                                                             |
+| `* *`     | intermediate user | add key employee's information to startups    | know more about the startup through its people                                                |
+| `* *`     | intermediate user | edit key employee's information to startups   | update the startups' employees' information                                                   |
+| `* *`     | intermediate user | delete key employee's information to startups | remove redundant or outdated information                                                      |
+
 
 
 
