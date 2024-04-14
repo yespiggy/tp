@@ -232,7 +232,7 @@ The `deletenote` command allows users to remove a note from a startup.
 
 These commands collectively provide robust functionality for managing detailed annotations on startups, facilitating better information management within CapitalConnect.
 
-### Add, Edit, and Delete Person Commands
+### Add and Edit Person Commands
 
 ### Add Person Command
 The add person command allows users to add key employees' information into a startup.
@@ -241,7 +241,7 @@ The key employee information will be displayed in the people pane, next to the s
 
 A typical program flow is as follows:
 1. User enters a command to add a key employee to the first startup, e.g. `add-p 1 pn/John pe/johndoe@example.com pd/founder`.
-2. The input is passed to the `AddressbookParser` class which calls `AdderPersonCommandParser`, and then the `AddPersonCommandParser` parses the keywords from the user's input.
+2. The input is passed to the `AddressbookParser` class which calls `AddPersonCommandParser`, and then the `AddPersonCommandParser` parses the keywords from the user's input.
 3. The `AddPersonCommandParser` checks whether all required fields are entered and whether the index is valid. If all checks are passed, the program will move onto `AddPersonCommand`.
 4. If the key employee does not exist in the startup, the startup's employee information will then be updated to include the new person.
 
@@ -249,7 +249,20 @@ The following sequence diagram illustrates the process of execution of an add pe
 
 <puml src="diagrams/AddPerson.puml" alt="AddPerson" />
 
+### Edit Person Command
+The edit person command allows users to edit key employees' information into a startup.
 
+The key employee information will be displayed in the people pane, next to the startup card view. Through this function, users can keep track of employees' name, email, and other related information.
+
+A typical program flow is as follows:
+1. User enters a command to edit a key employee of the first startup, e.g. `edit-p 1 1 pn/John pe/johndoe@example.com pd/founder`.
+2. The input is passed to the `AddressbookParser` class which calls `EditPersonCommandParser`, and then the `EditPersonCommandParser` parses the keywords from the user's input.
+3. The `EditPersonCommandParser` checks whether all required fields are entered and whether the both indexes are valid. If all checks are passed, the program will move onto `EditPersonCommand`.
+4. If the EditPersonCommand doesn't cause duplicate key employee to exist in the startup (a duplicate key employee is noted by having the same email as an existing key employee) the startup's employee information will then be updated.
+
+The following sequence diagram illustrates the process of execution of an add person command.
+
+<puml src="diagrams/EditPersonActivityDiagram.puml" alt="EditPerson" />
 
 
 --------------------------------------------------------------------------------------------------------------------
