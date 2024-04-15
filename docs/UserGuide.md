@@ -53,15 +53,15 @@ startup investments!
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `capitalconnect.jar` from [here](https://github.com/AY2324S2-CS2103T-W09-2/tp).
+2. Download the latest `capitalconnect.jar` from [here](https://github.com/AY2324S2-CS2103T-W09-2/tp).
 
-1. Copy the file to the folder you want to use as the _home folder_ for CapitalConnect.
+3. Copy the file to the folder you want to use as the _home folder_ for CapitalConnect.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar capitalconnect.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar capitalconnect.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all startups.
@@ -74,7 +74,7 @@ startup investments!
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -269,10 +269,16 @@ Format: `addnote INDEX NOTE`
 
 - Adds a note to the startup at the specified `INDEX`. The index refers to the index number shown in the displayed startup list. The index **must be a positive integer** 1, 2, 3, …​
 - The `NOTE` field must be provided and cannot be empty.
+- There was no limit set to the length of the note, but it is 2,147,483,647 characters theoretically!
+- The was also no limit set to the number of notes, so the likely limit is 2,147,483,647 Notes or the memory of your system, whichever comes first!
+- Duplicate notes are allowed! This is to give users freedom to decide how you'd like to organise and use the notes section.
+- We understand that you might want to have a number to know the index of the note you're looking at. This feature is currently a work in progress and will be dropped soon too!
 
 Examples:
 - `addnote 1 Secured Series A funding` Adds a note about securing Series A funding to the 1st startup.
 - `addnote 2 Launching new product in Q2` Adds a note about a product launch in Q2 to the 2nd startup.
+
+![result for 'addnote 2 Launching new product in Q2'](images/tracing/AddNoteCommand.png)
 
 <box type="info" seamless>
 
@@ -288,15 +294,10 @@ without clicking into it on the user interface, you could tag the startup with `
 ""
 </box>
 
-![result for 'addnote 1 Secured Series A funding'](images/tracing/AddNoteCommand.png)
 <box type="tip" seamless>
 
 **Tip:** Use specific and concise notes to effectively capture important information about each startup.
 </box>
-
-**Why are there no indexes beside each note?**
-
-This was a design feature made by our engineers to keep the UI as clean as possible! However, we understand that note numberings may become difficult to track, especially since we allow unlimited notes! In a future iteration, we will include indexes to help our users keep better track of their notes!
 
 ---
 
@@ -308,6 +309,7 @@ Format: `editnote INDEX NOTE_INDEX NOTE`
 
 - Edits the note at `NOTE_INDEX` of the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 - The `NOTE` field must be provided and cannot be empty.
+- We understand that you would need to know the index of the note you're looking at to edit. This feature is currently a work in progress and will be dropped as soon as possible! In the meantime, please count from the first note :)
 
 Examples:
 - `editnote 1 1 Revised Series A valuation` Edits the first note of the 1st startup to "Revised Series A valuation".
@@ -329,12 +331,14 @@ Deletes a note from an existing startup in the address book.
 Format: `deletenote INDEX NOTE_INDEX`
 
 - Deletes the note at `NOTE_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed startup list and the note list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+- We understand that you would need to know the index of the note you're looking at to delete. This feature is currently a work in progress and will be dropped as soon as possible! In the meantime, please count from the first note :)
+- We also understand that you may like to delete all your notes with a single command. Unfortunately, we do not support this yet. This will be a feature for a future iteration!
 
 Examples:
 - `deletenote 1 1` Deletes the first note of the 1st startup.
 - `deletenote 2 2` Deletes the second note of the 2nd startup.
 
-![result for 'deletenote 1 1'](images/tracing/DeleteNoteCommand.png)
+![result for 'deletenote 2 2'](images/tracing/DeleteNoteCommand.png)
 
 <box type="tip" seamless>
 
@@ -387,6 +391,8 @@ Examples:
 *  `edit-p 1 1 pn/John pe/johndoe@example.com` Edits the name and email address of the 1st person in the 1st startup to be `John` and `johndoe@example.com` respectively.
 *  `edit-p 2 1 pn/Amy pd/` Edits the name of the 1st person of the 2nd startup to be `Amy` and clears all existing descriptions.
 
+![result for 'edit_person_command'](images/EditPersonCommand.png)
+
 <box type="info" seamless>
 
 **Why am I not seeing the changes in the key employee box immediately?**
@@ -401,11 +407,9 @@ it may appear like the information in the key employee box are not being updated
 Rest assured, the information is updated. To ensure you see the updated information, simply click on your startup card after any person-related operation, i.e., `add-p`, `edit-p`, and `delete-p`.
 </box>
 
-![result for 'edit_person_command'](images/EditPersonCommand.png)
-
 ### Deleting a person from a startup: `delete-p`
 
-* Deletes the person at `PERSON_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the displayed in the key employees list and startup list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
+* Deletes the person at `PERSON_INDEX` from the startup at the specified `INDEX`. Both indexes refer to the index number shown in the key employees list and startup list respectively. Both indexes **must be positive integers** 1, 2, 3, …​
 * Click on the startup card that contained your deleted person to see the changes.
 
 Format: `delete-p INDEX PERSON_INDEX`
@@ -414,12 +418,13 @@ Examples:
 - `delete-p 1 1` Deletes the 1st person of the 1st startup.
 - `delete-p 2 3` Deletes the 3rd person of the 2nd startup.
 
+![result for 'delete_person_command'](images/DeletePersonCommand.png)
+
 <box type="tip" seamless>
 
 **Tip:** Always click on the startup card after performing person-related operations to ensure you see the updated information.
 </box>
 
-![result for 'delete_person_command'](images/DeletePersonCommand.png)
 
 ### Clearing all entries : `clear`
 

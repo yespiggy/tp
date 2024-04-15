@@ -1,44 +1,45 @@
 ---
   layout: default.md
-  title: "John Doe's Project Portfolio Page"
+  title: "Yeo Shu Heng's Portfolio Page"
 ---
 
-### Project: AddressBook Level 3
+### Project: CapitalConnect
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+CapitalConnect is an application for helping venture capitalists manage their investment information. The user interacts with it using a CLI, and it has a GUI created with JavaFX. The application is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the ability to add startups to the project.
-  * What it does: This allows users to add startups to Capital Connect alongside information such as funding stage.
-  * Justification: This is imperative for our users as they consist of key information they have to track.
+* **New Feature**: Enabled Tracking of Funding Stage & Industry
+  * What it does: This allows users to add the funding stage and industry of the startups into Capital Connect.
+  * Justification: This is imperative for our users as they consist of key information they need to track for investment decisions.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Enabled Tracking of Valuation
+  * What it does: This allows users to add the valuation of the startups into Capital Connect.
+  * Justification: This is imperative for our users as they consist of key information they need to track for investment decisions.
 
-* **Code contributed**: [RepoSense link]()
+* **New Feature**: Created Test Cases for Funding Stage, Industry & Valuation across other commands.
+    * **What it does**: The test cases were used to ensure that the existing functions perform as expected with these newly added features.
+    * **Justification**: This improves the test coverage of the application.
+
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-02-23&tabOpen=true&tabType=authorship&tabAuthor=yeoshuheng&tabRepo=AY2324S2-CS2103T-W09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
 
 * **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+  * Setup Team Repository & GitHub pages [\#1](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/1)
+  * Managed issue distribution for `v1.1` on GitHub.
 
 * **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
+  * Integrated Funding Stage and Industry to work with existing Commands [\#9](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/9)
+  * Integrated Valuation to work with existing Commands [\#55](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/55)
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
+    * Added documentation for the features `add`. [\#24](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/24)
+    * Updated UG introduction. [\#43](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/43)
   * Developer Guide:
-    * Added implementation details of the `delete` feature.
+    * Added MSS for `add`, `edit`.
+    * Implementation details for `add`.
+    * Added Manual Testing Instructions for `add`, `edit`.
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+  * PRs reviewed (with non-trivial review comments): [\#116](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/116), [\#56](https://github.com/AY2324S2-CS2103T-W09-2/tp/pull/56)
+  * Contributed to forum discussions. (examples: [1](https://github.com/nus-cs2103-AY2324S2/forum/issues/156), [2](https://github.com/nus-cs2103-AY2324S2/forum/issues/43))
