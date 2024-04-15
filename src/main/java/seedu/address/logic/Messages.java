@@ -48,6 +48,8 @@ public class Messages {
                 .append(startup.getEmail())
                 .append("; Address: ")
                 .append(startup.getAddress())
+                .append("; Valuation: ")
+                .append(startup.getValuation())
                 .append("; Notes: ");
 
         if (startup.getNotes().isEmpty()) {

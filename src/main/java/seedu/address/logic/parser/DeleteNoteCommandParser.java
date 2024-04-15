@@ -8,7 +8,7 @@ import seedu.address.logic.commands.DeleteNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new NoteCommand object
+ * Parses input arguments and creates a new DeleteNoteCommand object
  */
 public class DeleteNoteCommandParser implements Parser<DeleteNoteCommand> {
 

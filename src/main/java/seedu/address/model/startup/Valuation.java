@@ -47,10 +47,10 @@ public class Valuation {
     }
 
     /**
-     * This function helps us reformat the user's input into
-     * a short string representation (within 4 characters).
-     * Credit to Ilya Saunkin, SWE from AWS, shared in the following stackoverflow discussion:
+     * @@author Ilya Saunkin
+     * Reused from
      * https://stackoverflow.com/questions/4753251/how-to-go-about-formatting-1200-to-1-2k-in-java
+     * with minor modification.
      *
      * Recursive implementation,
      * invokes itself for each factor of a thousand,
@@ -74,7 +74,7 @@ public class Valuation {
              + Valuation.endOfNumber[iteration])
             : reformatString(d, iteration + 1));
     }
-
+    //@@author
 
     /**
      * Returns true if a given string is a valid valuation amount.
